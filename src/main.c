@@ -6,13 +6,13 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/02/04 20:07:16 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/02/23 10:00:55 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_file_extention(char *av, const char *ext)
+/*int	check_file_extention(char *av, const char *ext)
 {
 	int		i;
 	size_t	ext_len;
@@ -26,28 +26,35 @@ int	check_file_extention(char *av, const char *ext)
 	if (ft_strncmp(&av[i], ext, ext_len))
 		return (0);
 	return (1);
-}
+}*/
 
 int	main(int ac, char **av)
 {
-	t_parameters	params;
+	t_params		params;
+	t_player		player;
+	t_map			map;
 
-	params.age = 12;
+	params.res_x = 1900;
+	player.orientation = 'S';
+	map.height = 0;
+	map.width = 0;
 	if (ac == 2 || (ac == 3 && !ft_strncmp(av[2], "--save", 6)))
 	{
-		if (!check_file_extention(av[1], ".cub"))
+		if (!ft_check_file_extention(av[1], ".cub"))
 		{
 			ft_putstr_fd("Error : provide file must be a .cub file", 1);
 			return (-1);
 		}
-		printf("GREAT");
+		ft_putstr_fd("GREAT\n", 1);
+		init_param(&params, &map, &player, av[1]);
 	}
 	else
 	{
 		ft_putstr_fd("Error : Bad number of arguments\n\
-\tFirst must be .cub file\n\
-\tSecond (optional) must be --save\n", 1);
+\tFirst must be .cub file\n\tSecond (optional) must be --save\n", 1);
 		return (-1);
 	}
+	/*while(1)
+	;*/
 	return (1);
 }
