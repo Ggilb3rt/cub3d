@@ -35,6 +35,7 @@ $(NAME): $(OBJ)
 	# $^ reference to all the prerequisites of the rule here is $(OBJ)
 	# $@ reference to the name of the rule here is $(NAME)
 	#./$(NAME)
+	test
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))
@@ -50,3 +51,6 @@ fcleanlift:
 	make fclean -C lib/libft/
 
 fcleanall: fclean fcleanlift
+
+test:
+	./cub3d l.cub

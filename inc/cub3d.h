@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/02/23 10:14:31 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/10 10:50:18 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <string.h>
 # include "../lib/libft/libft.h"
 
+
+#define ERR_MALLOCCRASH "crash of malloc"
+
 typedef struct		s_color
 {
 	unsigned char	red;
@@ -24,13 +27,12 @@ typedef struct		s_color
 	unsigned char	blue;
 }					t_color;
 
-typedef struct 		s_player
+typedef struct		s_player
 {
 	float			pos_x;
 	float			pos_y;
 	char			orientation;
 }					t_player;
-
 
 typedef struct		s_params
 {
@@ -43,6 +45,7 @@ typedef struct		s_params
 	char			*path_texture_sp;
 	t_color			c_floor;
 	t_color			c_ceiling;
+	unsigned int	nb_valid_param;
 }					t_params;
 
 typedef struct		s_map
@@ -52,12 +55,25 @@ typedef struct		s_map
 	size_t			height;
 }					t_map;
 
-/*	Errors	*/
+typedef struct		s_parser_valid
+{
+	char			resolution;
+	char			floor;
+}					t_parser_valid;
+/*
+**	Errors
+*/
 void				error_init(char *context);
-/*	Initialisations and parsing	*/
-int					init_param(t_params *pa, t_map *m, t_player *pl, char *f);
+void				ft_exit(char *context);
+/*
+**	Initialisations and parsing
+*/
+int					init_param(t_params *pa, int *fd);
+int					init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
 void				parse_res(t_params *params, char *line);
 void				parse_color(t_params *params, char *line);
 void				parse_text_path(t_params *params, char *line);
-/*	Clean quit	*/
+/*
+**	Clean quit
+*/
 #endif

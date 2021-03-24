@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/02/23 10:00:55 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:52:14 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ int	main(int ac, char **av)
 	t_params		params;
 	t_player		player;
 	t_map			map;
+	//t_parser_valid	valid;
+	int				fd;
 
-	params.res_x = 1900;
-	player.orientation = 'S';
+	params.nb_valid_param = 0;
+	player.orientation = '0';
 	map.height = 0;
 	map.width = 0;
+	map.map = NULL;
 	if (ac == 2 || (ac == 3 && !ft_strncmp(av[2], "--save", 6)))
 	{
 		if (!ft_check_file_extention(av[1], ".cub"))
@@ -45,15 +48,26 @@ int	main(int ac, char **av)
 			ft_putstr_fd("Error : provide file must be a .cub file", 1);
 			return (-1);
 		}
-		ft_putstr_fd("GREAT\n", 1);
-		init_param(&params, &map, &player, av[1]);
+		fd = open(av[1], O_RDONLY);
+		printf("\nHELLO %s\nFD : %d\n", av[1], fd);
+		init_param(&params, &fd);
+		init_map(&params, &map, &player, &fd);
 	}
 	else
+		ft_exit("Bad number of arguments\nEx : file.cub --save (optional)");
+	printf("\nPlayer orientation %c, pos_x %f, pos_y %f\n", player.orientation, player.pos_x, player.pos_y);
+	printf("Map Width %zu\nMap Height %zu\n\nPrint map.map\n", map.width, map.height);
+	for (size_t i = 0; i < map.height; i++)
 	{
-		ft_putstr_fd("Error : Bad number of arguments\n\
-\tFirst must be .cub file\n\tSecond (optional) must be --save\n", 1);
-		return (-1);
+		if (i == player.pos_y)
+			printf("\033[0;31m");
+		printf("%s\n", map.map[i]);
+		if (i == player.pos_y)
+			printf("\033[0m");
+		free(map.map[i]);
 	}
+	free(map.map);
+	map.map = NULL;
 	/*while(1)
 	;*/
 	return (1);
