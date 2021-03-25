@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/25 11:21:13 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:26:44 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ int			parse_parameters(t_params *params, char *line)
 	return (1);
 }
 
+int			is_id_valid(char *line)
+{
+	if (line[0] == 'R' || line[0] == 'F' || line[0] == 'C'
+		|| line[0] == 'S'
+		|| (line[0] == 'N' && line[1] == 'O')
+		|| (line[0] == 'S' && line[1] == 'O')
+		|| (line[0] == 'W' && line[1] == 'E')
+		|| (line[0] == 'E' && line[1] == 'A'))
+		return (1);
+	else
+		return (0);
+}
+
 char		**reallocmap(char **map, size_t map_size, size_t new_size)
 {
 	char	**nmap;
@@ -56,39 +69,6 @@ char		**reallocmap(char **map, size_t map_size, size_t new_size)
 	if (map_size > 0)
 		free(map);
 	return (nmap);
-}
-
-void		parse_map(t_map *map, t_player *player)
-{
-	char	*find_orientation;
-	size_t	line_length;
-
-	line_length = ft_strlen(map->map[map->height]);
-	map->width < line_length ? map->width = line_length : map->width;
-	find_orientation = ft_strchr(map->map[map->height], 'N');
-	if (find_orientation && player->orientation == '0')
-	{
-		player->orientation = find_orientation[0];
-		player->pos_y = map->height;
-		player->pos_x = line_length - ft_strlen(find_orientation);
-		find_orientation[0] = '0';
-	}
-	else if (find_orientation && player->orientation != '0')
-		ft_exit("Find multiple players");
-	map->height++;
-}
-
-int			is_id_valid(char *line)
-{
-	if (line[0] == 'R' || line[0] == 'F' || line[0] == 'C'
-		|| line[0] == 'S'
-		|| (line[0] == 'N' && line[1] == 'O')
-		|| (line[0] == 'S' && line[1] == 'O')
-		|| (line[0] == 'W' && line[1] == 'E')
-		|| (line[0] == 'E' && line[1] == 'A'))
-		return (1);
-	else
-		return (0);
 }
 
 int			init_map(t_params *par, t_map *map, t_player *pl, int *fd)
