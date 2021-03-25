@@ -1,15 +1,15 @@
 R 1000           800
 
-NO ./assets/path_to_the_north_texture
-SO ./assets/path_to_the_south_texture
+NO ./assets/textures/north_texture
+SO ./assets/textures/south_texture
 
-C 225,30,0
+C 225,   30,   0
 
 
-WE ./assets/path_to_the_west_texture
+WE ./assets/textures/west_texture
 F 220,100,0
-EA ./assets/path_to_the_east_texture
-S ./assets/path_to_the_sprite_texture
+EA ./assets/textures/east_texture
+S ./assets/sprites/sprite_texture
 
 
 

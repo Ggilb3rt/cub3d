@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/10 10:50:18 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:02:37 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <string.h>
 # include "../lib/libft/libft.h"
 
-
-#define ERR_MALLOCCRASH "crash of malloc"
+#define ERR_MALLOCCRASH "Crash of malloc"
+#define ERR_GNL "Can't read next line"
 
 typedef struct		s_color
 {
@@ -43,8 +43,8 @@ typedef struct		s_params
 	char			*path_texture_we;
 	char			*path_texture_ea;
 	char			*path_texture_sp;
-	t_color			c_floor;
-	t_color			c_ceiling;
+	int				ceiling_color[3];
+	int				floor_color[3];
 	unsigned int	nb_valid_param;
 }					t_params;
 
@@ -71,8 +71,8 @@ void				ft_exit(char *context);
 int					init_param(t_params *pa, int *fd);
 int					init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
 void				parse_res(t_params *params, char *line);
-void				parse_color(t_params *params, char *line);
-void				parse_text_path(t_params *params, char *line);
+void				parse_color(t_params *params, char *line, int *color);
+void				split_parse_text_path(t_params *params, char *line);
 /*
 **	Clean quit
 */

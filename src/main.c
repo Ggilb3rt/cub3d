@@ -6,27 +6,11 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/24 16:52:14 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/25 12:01:10 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*int	check_file_extention(char *av, const char *ext)
-{
-	int		i;
-	size_t	ext_len;
-
-	i = 0;
-	ext_len = ft_strlen(ext);
-	while (av[i] != '\0')
-		i++;
-	while (av[i] != '.' || i == 0)
-		i--;
-	if (ft_strncmp(&av[i], ext, ext_len))
-		return (0);
-	return (1);
-}*/
 
 int	main(int ac, char **av)
 {
@@ -54,8 +38,16 @@ int	main(int ac, char **av)
 		init_map(&params, &map, &player, &fd);
 	}
 	else
-		ft_exit("Bad number of arguments\nEx : file.cub --save (optional)");
-	printf("\nPlayer orientation %c, pos_x %f, pos_y %f\n", player.orientation, player.pos_x, player.pos_y);
+		ft_exit("Bad number of arguments\n");
+
+	printf("\n\nREGLAGES INFORMATIONS\n*****\n");
+	printf("RESOLUTION :\nX:%d\tY:%d\n", params.res_x, params.res_y);
+	printf("CEILLING COLOR TAB : %d, %d, %d\n", params.ceiling_color[0], params.ceiling_color[1], params.ceiling_color[2]);
+	printf("FLOOR COLOR TAB : %d, %d, %d\n", params.floor_color[0], params.floor_color[1], params.floor_color[2]);
+	printf("PATHS :\n%s\n%s\n%s\n%s\n%s", params.path_texture_sp, params.path_texture_no, params.path_texture_so, params.path_texture_ea, params.path_texture_we);
+
+	printf("\n\nMAP INFORMATIONS\n******\n");
+	printf("Player orientation %c, pos_x %f, pos_y %f\n", player.orientation, player.pos_x, player.pos_y);
 	printf("Map Width %zu\nMap Height %zu\n\nPrint map.map\n", map.width, map.height);
 	for (size_t i = 0; i < map.height; i++)
 	{

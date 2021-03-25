@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 18:41:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/02/23 11:21:28 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/25 11:58:39 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_check_errors(t_params *params)
 {
 	(void)params;
 }
-
 
 void	error_init(char *context)
 {
