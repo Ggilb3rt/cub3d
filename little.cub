@@ -1,0 +1,16 @@
+R 1000 800
+
+NO ./assets/textures/north_texture
+SO ./assets/textures/south_texture
+
+C 225, 30, 0
+
+WE ./assets/textures/west_texture
+F 220,100,0
+EA ./assets/textures/east_texture
+S ./assets/sprites/sprite_texture
+
+
+1111
+1N0111
+1111 1

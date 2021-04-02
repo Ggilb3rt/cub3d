@@ -6,14 +6,14 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 17:36:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/25 11:56:29 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:35:38 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /**
- ** Je devrai parser l'ensemble et vérifier ensuite s'il y a des erreurs
+ * * Je devrai parser l'ensemble et vérifier ensuite s'il y a des erreurs
  **/
 
 int					ft_str_is_digitspace(char *str)

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/25 12:26:44 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/04/02 11:45:36 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			parse_parameters(t_params *params, char *line)
 {
-	// ajouter un système qui vérifie que le parametre n'est pas passer plusieurs fois ??
+	//? ajouter un système qui vérifie que le parametre n'est pas passer plusieurs fois ??
 	if (line[0] == 'R')
 		parse_res(params, line);
 	else if (line[0] == 'F' || line[0] == 'C')
@@ -83,7 +83,7 @@ int			init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 	while (res != 0)
 	{
 		res = get_next_line(*fd, &line);
-		printf("Line map : %s\n", line);
+		//printf("Line map : %s\n", line);
 		if (!line)
 			ft_exit(ERR_GNL);
 		if (line[0] == '\0' && map->map == NULL)
@@ -98,7 +98,7 @@ int			init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 		else
 		{
 			free(line);
-			ft_exit("Find somthing wrong in the map");
+			ft_exit("Find somthing wrong in the map.");
 		}
 		free(line);
 	}
@@ -115,7 +115,7 @@ int			init_param(t_params *params, int *fd)
 	while (res != 0 && params->nb_valid_param < 8)
 	{
 		res = get_next_line(*fd, &line);
-		printf("Line param : %s\n", line);
+		//printf("Line param : %s\n", line);
 		if (!line)
 			ft_exit(ERR_GNL);
 		if (is_id_valid(line) && params->nb_valid_param < 8)

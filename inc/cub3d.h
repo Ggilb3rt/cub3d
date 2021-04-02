@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/25 12:25:23 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/04/01 20:25:43 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 #define ERR_MALLOCCRASH "Crash of malloc"
 #define ERR_GNL "Can't read next line"
+#define PI 3.14159265
 
 typedef struct		s_color
 {
@@ -74,6 +75,7 @@ void				parse_res(t_params *params, char *line);
 void				parse_color(t_params *params, char *line, int *color);
 void				split_parse_text_path(t_params *params, char *line);
 void				parse_map(t_map *map, t_player *player);
+void				check_map_integrity(t_map *map);
 /*
 **	Clean quit
 */
