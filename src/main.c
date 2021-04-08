@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/01 15:21:53 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/04/07 19:44:53 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			main(int ac, char **av)
 	}
 	free(map.map);
 	map.map = NULL;
+	printf("\n");
 	/*while(1)
 	;*/
 	return (1);
