@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/07 19:44:53 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/04/09 11:44:16 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			main(int ac, char **av)
 	printf("PATHS :\n%s\n%s\n%s\n%s\n%s", params.path_texture_sp, params.path_texture_no, params.path_texture_so, params.path_texture_ea, params.path_texture_we);
 
 	printf("\n\nMAP INFORMATIONS\n******\n");
-	printf("Player orientation %c, pos_x %f, pos_y %f\n", player.orientation, player.pos_x, player.pos_y);
+	printf("Player orientation %c, angle : %f\ndeltaX %f, deltaY %f\npos_x %f, pos_y %f\n", player.orientation, player.angle, player.pos_delta_x, player.pos_delta_y, player.pos_x, player.pos_y);
 	printf("Map Width %zu\nMap Height %zu\n\nPrint map.map\n", map.width, map.height);
 	for (size_t i = 0; i < map.height; i++)
 	{
@@ -68,6 +68,11 @@ int			main(int ac, char **av)
 	free(map.map);
 	map.map = NULL;
 	printf("\n");
+	free(params.path_texture_ea);
+	free(params.path_texture_we);
+	free(params.path_texture_so);
+	free(params.path_texture_no);
+	free(params.path_texture_sp);
 	/*while(1)
 	;*/
 	return (1);
