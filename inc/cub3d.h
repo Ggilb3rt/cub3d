@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/01 20:25:43 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/04/08 10:13:25 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct		s_player
 	float			pos_x;
 	float			pos_y;
 	char			orientation;
+	float			angle;
+	float			pos_delta_x;
+	float			pos_delta_y;
 }					t_player;
 
 typedef struct		s_params
