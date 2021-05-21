@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/21 15:08:36 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/21 16:30:37 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int			is_id_valid(char *line)
 		return (0);
 }
 
-
 void		add_line_map(t_map *map, char *line, t_player *pl)
 {
 	map->map = reallocmap(map->map, map->height, (map->height) + 1);
@@ -85,26 +84,26 @@ int			init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 int			init_param(t_params *params, int *fd)
 {
 	char	*line;
+	int		ret;
 
+	ret = 1;
 	line = NULL;
-	while ((get_next_line(*fd, &line)) != 0 && params->nb_valid_param < 8)
+	while (ret != 0 && params->nb_valid_param < 8)
 	{
+		ret = get_next_line(*fd, &line);
 		if (!line)
 			ft_exit(ERR_GNL);
-		if (is_id_valid(line) && params->nb_valid_param < 8)
+		if (is_id_valid(line) || line[0] == '\0')
 		{
 			parse_parameters(params, line);
 			free(line);
 			continue;
 		}
-		else if (line[0] == '\0')
-			;
 		else
 		{
 			free(line);
-			ft_exit("1. Impossible to parse parameters");
+			ft_exit("Find invalid parameter");
 		}
-		free(line);
 	}
 	if (params->nb_valid_param != 8)
 		error_init("Invalid quantity of parameters in .cub file");
