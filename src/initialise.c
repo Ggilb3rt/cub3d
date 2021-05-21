@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/02 11:45:36 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:08:36 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,53 +48,30 @@ int			is_id_valid(char *line)
 		return (0);
 }
 
-char		**reallocmap(char **map, size_t map_size, size_t new_size)
-{
-	char	**nmap;
-	size_t	i;
 
-	i = 0;
-	if (new_size == 0)
-		return (map);
-	else if (new_size < map_size)
-		return (map);
-	if (!(nmap = malloc(sizeof(nmap) * new_size)))
-		ft_exit(ERR_MALLOCCRASH);
-	while (i < map_size)
-	{
-		*(nmap + i) = ft_strdup(*(map + i));
-		free(*(map + i));
-		i++;
-	}
-	if (map_size > 0)
-		free(map);
-	return (nmap);
+void		add_line_map(t_map *map, char *line, t_player *pl)
+{
+	map->map = reallocmap(map->map, map->height, (map->height) + 1);
+	map->map[map->height] = ft_strdup(line);
+	parse_map(map, pl);
 }
 
 int			init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 {
-	int		res;
 	char	*line;
-	int		i;
+	int		ret;
 
 	line = NULL;
-	res = 1;
-	i = 0;
-	while (res != 0)
+	ret = 1;
+	while (ret != 0)
 	{
-		res = get_next_line(*fd, &line);
-		//printf("Line map : %s\n", line);
+		ret = get_next_line(*fd, &line);
 		if (!line)
 			ft_exit(ERR_GNL);
 		if (line[0] == '\0' && map->map == NULL)
 			;
 		else if (par->nb_valid_param == 8 && (line[0] == ' ' || line[0] == '1'))
-		{
-			map->map = reallocmap(map->map, i, i + 1);
-			map->map[i] = ft_strdup(line);
-			parse_map(map, pl);
-			i++;
-		}
+			add_line_map(map, line, pl);
 		else
 		{
 			free(line);
@@ -107,15 +84,11 @@ int			init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 
 int			init_param(t_params *params, int *fd)
 {
-	int		res;
 	char	*line;
 
 	line = NULL;
-	res = 1;
-	while (res != 0 && params->nb_valid_param < 8)
+	while ((get_next_line(*fd, &line)) != 0 && params->nb_valid_param < 8)
 	{
-		res = get_next_line(*fd, &line);
-		//printf("Line param : %s\n", line);
 		if (!line)
 			ft_exit(ERR_GNL);
 		if (is_id_valid(line) && params->nb_valid_param < 8)

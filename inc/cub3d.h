@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/08 10:13:25 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:09:37 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int					init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
 void				parse_res(t_params *params, char *line);
 void				parse_color(t_params *params, char *line, int *color);
 void				split_parse_text_path(t_params *params, char *line);
+char				**reallocmap(char **map, size_t map_size, size_t new_size);
 void				parse_map(t_map *map, t_player *player);
 void				check_map_integrity(t_map *map);
 /*

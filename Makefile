@@ -53,4 +53,4 @@ fcleanlift:
 fcleanall: fclean fcleanlift
 
 test:
-	./cub3d l.cub
+	./cub3d assets/maps/l.cub

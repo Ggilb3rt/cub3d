@@ -6,11 +6,34 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:24:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/08 10:18:02 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:08:46 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char		**reallocmap(char **map, size_t map_size, size_t new_size)
+{
+	char	**nmap;
+	size_t	i;
+
+	i = 0;
+	if (new_size == 0)
+		return (map);
+	else if (new_size < map_size)
+		return (map);
+	if (!(nmap = malloc(sizeof(nmap) * new_size)))
+		ft_exit(ERR_MALLOCCRASH);
+	while (i < map_size)
+	{
+		*(nmap + i) = ft_strdup(*(map + i));
+		free(*(map + i));
+		i++;
+	}
+	if (map_size > 0)
+		free(map);
+	return (nmap);
+}
 
 char		*find_player_orientation(t_map *map)
 {

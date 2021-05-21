@@ -11,3 +11,7 @@ Makefile have some troubles with 'make re'
 - Invalid map
 
 - System can't allocate memory, try again
+
+
+#To check
+- same paramater define multiples times
