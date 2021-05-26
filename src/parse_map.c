@@ -6,13 +6,13 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:24:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/21 15:08:46 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 11:10:04 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char		**reallocmap(char **map, size_t map_size, size_t new_size)
+char	**reallocmap(char **map, size_t map_size, size_t new_size)
 {
 	char	**nmap;
 	size_t	i;
@@ -35,7 +35,7 @@ char		**reallocmap(char **map, size_t map_size, size_t new_size)
 	return (nmap);
 }
 
-char		*find_player_orientation(t_map *map)
+char	*find_player_orientation(t_map *map)
 {
 	char	valid_orientation[4];
 	char	*orientation;
@@ -56,7 +56,7 @@ char		*find_player_orientation(t_map *map)
 	return (0);
 }
 
-void		find_pos(t_map *map, t_player *player, size_t line_l, char *or)
+void	find_pos(t_map *map, t_player *player, size_t line_l, char *or)
 {
 	if (or && player->orientation == '0')
 	{
@@ -69,7 +69,7 @@ void		find_pos(t_map *map, t_player *player, size_t line_l, char *or)
 		ft_exit("Find multiple players");
 }
 
-void		convert_orientation(t_player *player)
+void	convert_orientation(t_player *player)
 {
 	if (player->orientation == 'N')
 		player->angle = PI / 2;
@@ -85,7 +85,7 @@ void		convert_orientation(t_player *player)
 	player->pos_delta_y = sin(player->angle);
 }
 
-void		parse_map(t_map *map, t_player *player)
+void	parse_map(t_map *map, t_player *player)
 {
 	char	*find_orientation;
 	size_t	line_length;

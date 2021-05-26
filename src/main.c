@@ -6,27 +6,34 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/09 11:44:16 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 11:40:09 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		set_zero(t_params *params, t_player *player, t_map *map)
+void	set_zero(t_params *params, t_player *player, t_map *map)
 {
 	params->nb_valid_param = 0;
+	params->unique.ceiling = 0;
+	params->unique.floor = 0;
+	params->unique.resolution = 0;
+	params->unique.texture_no = 0;
+	params->unique.texture_so = 0;
+	params->unique.texture_ea = 0;
+	params->unique.texture_we = 0;
+	params->unique.texture_sp = 0;
 	player->orientation = '0';
 	map->height = 0;
 	map->width = 0;
 	map->map = NULL;
 }
 
-int			main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_params		params;
 	t_player		player;
 	t_map			map;
-	//t_parser_valid	valid;
 	int				fd;
 
 	set_zero(&params, &player, &map);
@@ -42,10 +49,12 @@ int			main(int ac, char **av)
 		init_param(&params, &fd);
 		init_map(&params, &map, &player, &fd);
 		close(fd);
+		check_params_integrity(&params);
 		check_map_integrity(&map);
 	}
 	else
 		ft_exit("Bad number of arguments\n");
+
 
 	printf("\n\nREGLAGES INFORMATIONS\n*****\n");
 	printf("RESOLUTION : X:%d\tY:%d\n", params.res_x, params.res_y);

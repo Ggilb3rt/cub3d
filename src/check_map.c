@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 08:56:17 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/04/08 09:46:50 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:51:07 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define ERR_MAP_HOLE "Hole in the map"
 
-void		check_char(t_map *map)
+void	check_char(t_map *map)
 {
 	size_t	x;
 	size_t	y;
@@ -36,7 +36,7 @@ void		check_char(t_map *map)
 	}
 }
 
-int			find_first(t_map *map, size_t *x, size_t *y)
+int	find_first(t_map *map, size_t *x, size_t *y)
 {
 	while (map->map[*x][*y] != '1')
 	{
@@ -48,7 +48,7 @@ int			find_first(t_map *map, size_t *x, size_t *y)
 	return (1);
 }
 
-int			open_or_not(t_map *map, size_t *x, size_t *y)
+int	open_or_not(t_map *map, size_t *x, size_t *y)
 {
 	char	starter_open;
 
@@ -75,7 +75,7 @@ int			open_or_not(t_map *map, size_t *x, size_t *y)
 	return (0);
 }
 
-void		hole_finder(t_map *map)
+void	hole_finder(t_map *map)
 {
 	size_t	x;
 	size_t	y;
@@ -103,7 +103,7 @@ void		hole_finder(t_map *map)
 	}
 }
 
-void		pi_by_two_pivote_map(t_map *map, t_map *new)
+void	pi_by_two_pivote_map(t_map *map, t_map *new)
 {
 	int		x;
 	int		y;
@@ -111,7 +111,8 @@ void		pi_by_two_pivote_map(t_map *map, t_map *new)
 	x = -1;
 	new->width = map->height;
 	new->height = map->width;
-	if (!(new->map = malloc(sizeof(new->map) * new->height)))
+	new->map = malloc(sizeof(new->map) * new->height);
+	if (new->map == NULL)
 		ft_exit(ERR_MALLOCCRASH);
 	while (++x < (int)new->height)
 	{
@@ -132,7 +133,7 @@ void		pi_by_two_pivote_map(t_map *map, t_map *new)
 	}
 }
 
-void		check_map_integrity(t_map *map)
+void	check_map_integrity(t_map *map)
 {
 	size_t	x;
 	size_t	y;

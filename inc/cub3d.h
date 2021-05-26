@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/21 15:09:37 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 11:43:16 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 #define ERR_MALLOCCRASH "Crash of malloc"
 #define ERR_GNL "Can't read next line"
 #define PI 3.14159265
+#define MAX_X 1920
+#define MAX_Y 1080
 
 typedef struct		s_color
 {
@@ -38,6 +40,18 @@ typedef struct		s_player
 	float			pos_delta_y;
 }					t_player;
 
+typedef struct		s_parser_valid
+{
+	int				resolution;
+	int				floor;
+	int				ceiling;
+	int				texture_no;
+	int				texture_so;
+	int				texture_we;
+	int				texture_ea;
+	int				texture_sp;
+}					t_parser_valid;
+
 typedef struct		s_params
 {
 	unsigned int	res_x;
@@ -50,6 +64,7 @@ typedef struct		s_params
 	int				ceiling_color[3];
 	int				floor_color[3];
 	unsigned int	nb_valid_param;
+	t_parser_valid	unique;
 }					t_params;
 
 typedef struct		s_map
@@ -59,11 +74,6 @@ typedef struct		s_map
 	size_t			height;
 }					t_map;
 
-typedef struct		s_parser_valid
-{
-	char			resolution;
-	char			floor;
-}					t_parser_valid;
 /*
 **	Errors
 */
@@ -80,6 +90,7 @@ void				split_parse_text_path(t_params *params, char *line);
 char				**reallocmap(char **map, size_t map_size, size_t new_size);
 void				parse_map(t_map *map, t_player *player);
 void				check_map_integrity(t_map *map);
+void				check_params_integrity(t_params *params);
 /*
 **	Clean quit
 */
