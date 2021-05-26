@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 17:36:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 11:08:53 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 20:07:09 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	parse_text_path(char **dest, char *line, int remove_id)
 	if (line[0] == '.' && line[1] == '/')
 	{
 		line_len = ft_strlen(line);
-		if (!(*dest = malloc(sizeof(*dest) * line_len + 1)))
+		*dest = malloc(sizeof(*dest) * line_len + 1);
+		if (*dest == NULL)
 			ft_exit(ERR_MALLOCCRASH);
 		ft_strlcpy(*dest, line, line_len + 1);
 	}

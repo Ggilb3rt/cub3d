@@ -6,13 +6,11 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 08:56:17 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 19:51:07 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 20:02:36 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define ERR_MAP_HOLE "Hole in the map"
 
 void	check_char(t_map *map)
 {
@@ -103,36 +101,6 @@ void	hole_finder(t_map *map)
 	}
 }
 
-void	pi_by_two_pivote_map(t_map *map, t_map *new)
-{
-	int		x;
-	int		y;
-
-	x = -1;
-	new->width = map->height;
-	new->height = map->width;
-	new->map = malloc(sizeof(new->map) * new->height);
-	if (new->map == NULL)
-		ft_exit(ERR_MALLOCCRASH);
-	while (++x < (int)new->height)
-	{
-		if (!(new->map[x] = malloc(sizeof(*new->map) * new->width + 1)))
-			ft_exit(ERR_MALLOCCRASH);
-		ft_memset(new->map[x], ' ', new->width);
-	}
-	x = -1;
-	while (++x < (int)map->height)
-	{
-		y = 0;
-		while (map->map[x][y] != '\0')
-		{
-			ft_memcpy(&new->map[(-y + map->width) - 1][x], &map->map[x][y], 1);
-			y++;
-		}
-		new->map[x][new->width + 1] = '\0';
-	}
-}
-
 void	check_map_integrity(t_map *map)
 {
 	size_t	x;
@@ -143,6 +111,7 @@ void	check_map_integrity(t_map *map)
 	y = 0;
 	check_char(map);
 	hole_finder(map);
+	empty_pivoted_map(map, &rotated_map);
 	pi_by_two_pivote_map(map, &rotated_map);
 	hole_finder(&rotated_map);
 	while (x < rotated_map.height)

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 11:43:16 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/26 23:00:29 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@
 # include <string.h>
 # include "../lib/libft/libft.h"
 
-#define ERR_MALLOCCRASH "Crash of malloc"
-#define ERR_GNL "Can't read next line"
-#define PI 3.14159265
-#define MAX_X 1920
-#define MAX_Y 1080
+# define	ERR_MALLOCCRASH "Crash of malloc"
+# define	ERR_GNL "Can't read next line"
+# define	ERR_MAP_HOLE "Hole in the map"
+# define	PI 3.14159265
+# define	MAX_X 1920
+# define	MAX_Y 1080
 
-typedef struct		s_color
+typedef struct s_color
 {
 	unsigned char	red;
 	unsigned char	green;
 	unsigned char	blue;
 }					t_color;
 
-typedef struct		s_player
+typedef struct s_player
 {
 	float			pos_x;
 	float			pos_y;
@@ -40,7 +41,7 @@ typedef struct		s_player
 	float			pos_delta_y;
 }					t_player;
 
-typedef struct		s_parser_valid
+typedef struct s_parser_valid
 {
 	int				resolution;
 	int				floor;
@@ -52,7 +53,7 @@ typedef struct		s_parser_valid
 	int				texture_sp;
 }					t_parser_valid;
 
-typedef struct		s_params
+typedef struct s_params
 {
 	unsigned int	res_x;
 	unsigned int	res_y;
@@ -67,7 +68,7 @@ typedef struct		s_params
 	t_parser_valid	unique;
 }					t_params;
 
-typedef struct		s_map
+typedef struct s_map
 {
 	char			**map;
 	size_t			width;
@@ -90,6 +91,8 @@ void				split_parse_text_path(t_params *params, char *line);
 char				**reallocmap(char **map, size_t map_size, size_t new_size);
 void				parse_map(t_map *map, t_player *player);
 void				check_map_integrity(t_map *map);
+void				empty_pivoted_map(t_map *map, t_map *new);
+void				pi_by_two_pivote_map(t_map *map, t_map *new);
 void				check_params_integrity(t_params *params);
 /*
 **	Clean quit
