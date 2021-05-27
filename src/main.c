@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 11:40:09 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:20:51 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ int	main(int ac, char **av)
 	else
 		ft_exit("Bad number of arguments\n");
 
-
 	printf("\n\nREGLAGES INFORMATIONS\n*****\n");
 	printf("RESOLUTION : X:%d\tY:%d\n", params.res_x, params.res_y);
 	printf("CEILLING COLOR TAB : %d, %d, %d\n", params.ceiling_color[0], params.ceiling_color[1], params.ceiling_color[2]);
 	printf("FLOOR COLOR TAB : %d, %d, %d\n", params.floor_color[0], params.floor_color[1], params.floor_color[2]);
 	printf("PATHS :\n%s\n%s\n%s\n%s\n%s", params.path_texture_sp, params.path_texture_no, params.path_texture_so, params.path_texture_ea, params.path_texture_we);
-
 	printf("\n\nMAP INFORMATIONS\n******\n");
 	printf("Player orientation %c, angle : %f\ndeltaX %f, deltaY %f\npos_x %f, pos_y %f\n", player.orientation, player.angle, player.pos_delta_x, player.pos_delta_y, player.pos_x, player.pos_y);
 	printf("Map Width %zu\nMap Height %zu\n\nPrint map.map\n", map.width, map.height);

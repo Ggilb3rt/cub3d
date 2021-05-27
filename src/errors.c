@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 18:41:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/03/25 11:58:39 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:27:03 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	ft_exit(char *context)
 {
 	ft_putstr_fd("ERROR : \n", 1);
 	ft_putstr_fd(context, 1);
-	exit(0);
+	exit(-1);
 }
