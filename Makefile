@@ -9,7 +9,7 @@ include sources.mk
 OBJ = $(SRC:$S%.c=$O%.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 INCFLAGS = -I$I
 LDFLAGS = 
 
@@ -47,10 +47,10 @@ fclean: clean
 
 re: fclean all
 
-fcleanlift:
+fcleanlibft:
 	make fclean -C lib/libft/
 
-fcleanall: fclean fcleanlift
+fcleanall: fclean fcleanlibft
 
 test:
 	./cub3d assets/maps/l.cub

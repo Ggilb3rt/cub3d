@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 11:44:11 by ggilbert         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:33:28 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parse_parameters(t_params *params, char *line)
 	return (1);
 }
 
-int	is_id_valid (char *line)
+int	is_id_valid(char *line)
 {
 	if (line[0] == 'R' || line[0] == 'F' || line[0] == 'C'
 		|| line[0] == 'S'
