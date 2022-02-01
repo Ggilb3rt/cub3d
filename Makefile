@@ -1,15 +1,15 @@
+#Hello
+
 O = obj/
 I = inc/
 S = src/
 L = lib/
 
-#SRC2 = $(patsubst %.c,%.o,$(wildcard ./src/*.c))
-#SRC = $(wildcard ./src/*.c)
 include sources.mk
 OBJ = $(SRC:$S%.c=$O%.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 INCFLAGS = -I$I
 LDFLAGS = 
 
@@ -27,15 +27,10 @@ $(OBJ): | $O
 
 $O%.o: $S%.c | $O
 	$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
-	# $< reference to the first prerequisite
 
 $(NAME): $(OBJ)
 	make bonus -C lib/libft/
-	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -o $@
-	# $^ reference to all the prerequisites of the rule here is $(OBJ)
-	# $@ reference to the name of the rule here is $(NAME)
-	#./$(NAME)
-	test
+	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -lm -o $@
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))
@@ -53,4 +48,25 @@ fcleanlift:
 fcleanall: fclean fcleanlift
 
 test:
-	./cub3d assets/maps/l.cub
+	@printf "\033[0;32m\n\n#TEST EMPTY\n\033[0m"
+	./$(NAME) assets/maps/vide.cub
+	@printf "\033[0;32m#TEST ANOTHER FILE\n\033[0m"
+	./$(NAME) assets/textures/greystone.xpm
+	@printf "\033[0;32m\n\n#TEST ERR WRONG PARAM\n\033[0m"
+	./$(NAME) assets/maps/err_wrong_param.cub
+	@printf "\033[0;32m\n\n#TEST ERR COLOR\n\033[0m"
+	./$(NAME) assets/maps/err_color.cub
+	@printf "\033[0;32m\n\n#TEST ERR MULTIPLES PARAMS\n\033[0m"
+	./$(NAME) assets/maps/err_multi_param.cub
+	@printf "\033[0;32m\n\n#TEST ERR MAP\n\033[0m"
+	./$(NAME) assets/maps/err_map.cub
+	@printf "\033[0;32m\n\n#TEST ERR WRONG CHAR IN MAP\n\033[0m"
+	./$(NAME) assets/maps/err_wrong_char_map.cub
+	@printf "\033[0;32m\n\nTEST OK big\n\033[0m"
+	./$(NAME) assets/maps/l.cub
+	@printf "\033[0;32m\n\n#TEST OK little\n\033[0m"
+	./$(NAME) assets/maps/little.cub
+	
+
+leaks_test: all
+	valgrind --leak-check=full ./$(NAME) assets/maps/l.cub

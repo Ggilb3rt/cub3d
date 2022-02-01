@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 08:56:17 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 20:02:36 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 12:47:07 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	check_map_integrity(t_map *map)
 
 	x = 0;
 	y = 0;
+	(void)y;
 	check_char(map);
 	hole_finder(map);
 	empty_pivoted_map(map, &rotated_map);

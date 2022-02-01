@@ -5,13 +5,14 @@ Makefile have some troubles with 'make re'
 #List of errors
 - Bad number of arguments OK
 - Not a .cub file OK
-- Can't find file
+- Can't find file OK
 
-- Invalid parameters
-- Invalid map
+- Invalid parameters OK
+- Invalid map OK
 
 - System can't allocate memory, try again
 
 
 #To check
-- same paramater define multiples times
+- same paramater define multiples times (works with floor, textures path)
+- conditionnal jump problem with the pivoted map when check holes (check rabbit's paws in l.cub)

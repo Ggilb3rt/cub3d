@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 23:00:29 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 11:11:04 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <string.h>
 # include "../lib/libft/libft.h"
 
-# define	ERR_MALLOCCRASH "Crash of malloc"
-# define	ERR_GNL "Can't read next line"
-# define	ERR_MAP_HOLE "Hole in the map"
-# define	PI 3.14159265
-# define	MAX_X 1920
-# define	MAX_Y 1080
+# define ERR_MALLOCCRASH "Crash of malloc"
+# define ERR_GNL "Can't read next line"
+# define ERR_MAP_HOLE "Hole in the map"
+# define PI 3.14159265
+# define MAX_X 1920
+# define MAX_Y 1080
 
 typedef struct s_color
 {
