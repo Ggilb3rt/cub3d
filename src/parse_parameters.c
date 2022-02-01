@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 17:36:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 20:07:09 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:01:37 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,35 @@ int	ft_str_is_digitspace(char *str)
 	return (1);
 }
 
-void	parse_res(t_params *params, char *line)
+char	**check_number_param(size_t nb_par, char *line, char split, char *print)
 {
-	size_t			i;
+	size_t			splitted_l;
 	char			**splitted;
 
-	i = 0;
-	splitted = ft_split(++line, ' ');
-	i = ft_splitted_length(splitted);
-	if (i != 2)
-		error_init("Resolution must have 2 values");
+	splitted_l = 0;
+	splitted = ft_split(++line, split);
+	splitted_l = ft_splitted_length(splitted);
+	if (splitted_l != nb_par)
+	{
+		print_error(print);
+		ft_split_free((void **)splitted);
+		free(--line);
+		line = NULL;
+		return (NULL);
+	}
+	return (splitted);
+}
+
+void	parse_res(t_params *params, char *line)
+{
+	char	**splitted;
+
+	splitted = check_number_param(2, line, ' ', ERR_PARAMS_RES);
+	if (splitted == NULL)
+	{
+		free_params(params);
+		exit(0);
+	}
 	if (ft_str_is_digitspace(splitted[0]) && ft_str_is_digitspace(splitted[1]))
 	{
 		params->res_x = ft_atoi(splitted[0]);
@@ -66,7 +85,6 @@ void	parse_color(t_params *params, char *line, int *color)
 			color[splitted_l] = ft_atoi(s[splitted_l]);
 		else
 			ft_exit("Colors must be numbers");
-		printf("%d\n", color[splitted_l]);
 	}
 	ft_split_free((void **)s);
 	params->nb_valid_param++;
@@ -95,7 +113,7 @@ void	parse_text_path(char **dest, char *line, int remove_id)
 		ft_strlcpy(*dest, line, line_len + 1);
 	}
 	else
-		ft_exit("Le chemin d'une texture doit commencer par \"./\"");
+		ft_exit("Texture path must start with \"./\"");
 }
 
 void	split_parse_text_path(t_params *params, char *line)

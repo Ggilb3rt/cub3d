@@ -72,3 +72,5 @@ test:
 
 leaks_test: all
 	valgrind --leak-check=full ./$(NAME) assets/maps/l.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full ./$(NAME) assets/maps/err_wrong_param.cub

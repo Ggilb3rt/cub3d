@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 20:01:50 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 12:42:16 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:02:52 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	pi_by_two_pivote_map(t_map *map, t_map *new)
 		new->map[x][new->width + 0] = '\0';
 		x++;
 	}
-	// for (size_t z = 0; z < new->height; z++)
-	// {
-	// 	printf("%ld\t|%s|\n", z, new->map[z]);
-	// }
+	for (size_t z = 0; z < new->height; z++)
+	{
+		// for(size_t a = 0; a < map->width && map->map[z][a] != '\0'; a++)
+		// {
+		// 	printf("%c", new->map[z][a]);
+		// }
+	}
 }

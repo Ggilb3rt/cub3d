@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 11:11:04 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:01:21 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define ERR_MALLOCCRASH "Crash of malloc"
 # define ERR_GNL "Can't read next line"
 # define ERR_MAP_HOLE "Hole in the map"
+# define ERR_PARAMS_RES "Resolution must have 2 values"
+# define NB_PARAMS_PARSE 8
 # define PI 3.14159265
 # define MAX_X 1920
 # define MAX_Y 1080
@@ -78,6 +80,7 @@ typedef struct s_map
 /*
 **	Errors
 */
+void				print_error(char *context);
 void				error_init(char *context);
 void				ft_exit(char *context);
 /*
@@ -97,4 +100,7 @@ void				check_params_integrity(t_params *params);
 /*
 **	Clean quit
 */
+void				free_params(t_params *params);
+void				free_map(t_map *map);
+
 #endif

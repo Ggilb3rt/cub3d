@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 18:41:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 12:53:14 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:01:02 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 void	ft_check_errors(t_params *params)
 {
 	(void)params;
+}
+
+void	print_error(char *context)
+{
+	ft_putstr_fd("ERROR : \n", 1);
+	ft_putstr_fd(context, 1);
 }
 
 void	error_init(char *context)
@@ -27,7 +33,6 @@ void	error_init(char *context)
 
 void	ft_exit(char *context)
 {
-	ft_putstr_fd("ERROR : \n", 1);
-	ft_putstr_fd(context, 1);
+	print_error(context);
 	exit(0);
 }

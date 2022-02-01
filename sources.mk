@@ -7,4 +7,5 @@ SRC = $Smain.c \
 		$Scheck_map.c \
 		$Scheck_map_pivoted.c\
 		$Scheck_parameters.c \
-		$Serrors.c
+		$Serrors.c \
+		$Sfree.c

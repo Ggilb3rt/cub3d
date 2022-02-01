@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/12/06 15:33:28 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:01:23 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	init_param(t_params *params, int *fd)
 
 	ret = 1;
 	line = NULL;
-	while (ret != 0 && params->nb_valid_param < 8)
+	while (ret != 0 && params->nb_valid_param < NB_PARAMS_PARSE)
 	{
 		ret = get_next_line(*fd, &line);
 		if (!line)
@@ -106,7 +106,7 @@ int	init_param(t_params *params, int *fd)
 			ft_exit("Find invalid parameter");
 		}
 	}
-	if (params->nb_valid_param != 8)
+	if (params->nb_valid_param != NB_PARAMS_PARSE)
 		error_init("Invalid quantity of parameters in .cub file");
 	return (1);
 }
