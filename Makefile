@@ -54,6 +54,8 @@ test:
 	./$(NAME) assets/textures/greystone.xpm
 	@printf "\033[0;32m\n\n#TEST ERR WRONG PARAM\n\033[0m"
 	./$(NAME) assets/maps/err_wrong_param.cub
+	@printf "\033[0;32m\n\n#TEST ERR NOT XPM FILE\n\033[0m"
+	./$(NAME) assets/maps/err_not_xpm.cub
 	@printf "\033[0;32m\n\n#TEST ERR COLOR\n\033[0m"
 	./$(NAME) assets/maps/err_color.cub
 	@printf "\033[0;32m\n\n#TEST ERR MULTIPLES PARAMS\n\033[0m"

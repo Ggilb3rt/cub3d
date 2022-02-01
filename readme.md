@@ -8,11 +8,11 @@ Makefile have some troubles with 'make re'
 - Can't find file OK
 
 - Invalid parameters OK
+- same paramater define multiples times (works with floor, textures path, res)
 - Invalid map OK
 
 - System can't allocate memory, try again
 
 
 #To check
-- same paramater define multiples times (works with floor, textures path)
 - conditionnal jump problem with the pivoted map when check holes (check rabbit's paws in l.cub)

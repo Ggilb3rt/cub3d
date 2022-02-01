@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:39:55 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 22:27:10 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:07:24 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	valid_path(char *path)
 			return (0);
 		i++;
 	}
+	if (!ft_check_file_extention(path, ".xpm"))
+		return (0);
 	return (1);
 }
 

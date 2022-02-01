@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 08:56:17 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 12:47:07 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:42:10 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	check_char(t_map *map)
 		{
 			if (map->map[x][y] != '0'
 					&& map->map[x][y] != '1'
-					&& map->map[x][y] != '2'
 					&& map->map[x][y] != ' ')
 				ft_exit("Unknow char in map");
 			y++;

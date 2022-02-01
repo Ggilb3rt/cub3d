@@ -1,14 +1,14 @@
 R 1000 800
 
-NO ./assets/textures/north_texture
-SO ./assets/textures/south_texture
+NO ./assets/textures/north_texture.xpm
+SO ./assets/textures/south_texture.xpm
 
 C 225, 30, 0
 
-WE ./assets/textures/west_texture
+WE ./assets/textures/west_texture.xpm
 F 220,100,0
-EA ./assets/textures/east_texture
-S ./assets/sprites/sprite_texture
+EA ./assets/textures/east_texture.xpm
+S ./assets/sprites/sprite_texture.xpm
 
  1
 1111
