@@ -16,6 +16,7 @@
 # include <math.h>
 # include <string.h>
 # include "../lib/libft/libft.h"
+# include "../mlx/mlx.h"
 
 # define ERR_MALLOCCRASH "Crash of malloc"
 # define ERR_GNL "Can't read next line"
@@ -23,6 +24,22 @@
 # define PI 3.14159265
 # define MAX_X 1920
 # define MAX_Y 1080
+
+typedef struct s_point {
+	int	x;
+	int	y;
+}				t_point;
+
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		init;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}		t_data;
 
 typedef struct s_color
 {
@@ -35,6 +52,11 @@ typedef struct s_player
 {
 	float			pos_x;
 	float			pos_y;
+	int				going_up;
+	int				going_down;
+	int				going_left;
+	int				going_right;
+	size_t			is_moving;
 	char			orientation;
 	float			angle;
 	float			pos_delta_x;
@@ -75,14 +97,39 @@ typedef struct s_map
 	size_t			height;
 }					t_map;
 
+typedef struct s_base {
+	void		*mlx;
+	void		*win;
+	t_map		*map;
+	t_params	*params;
+	t_color		*colors;
+	t_data		*img;
+	t_data		*north;
+	t_data		*east;
+	t_data		*south;
+	t_data		*west;
+	t_data		*minime;
+	t_player	*player;
+}		t_base;
+
 /*
 **	Errors
 */
 void				error_init(char *context);
 void				ft_exit(char *context);
+
+/*
+**	MLX and images
+*/
+void	put_img(t_base *base);
+void	init_tiles(t_base *base);
+int		key_press(int keycode, t_base *base);
+int		key_release(int keycode, t_base *base);
+int		close_win(t_base *base);
 /*
 **	Initialisations and parsing
 */
+t_base				*init_base(t_params *params, t_map *map, t_player *player);
 int					init_param(t_params *pa, int *fd);
 int					init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
 void				parse_res(t_params *params, char *line);

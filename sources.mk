@@ -7,4 +7,7 @@ SRC = $Smain.c \
 		$Scheck_map.c \
 		$Scheck_map_pivoted.c\
 		$Scheck_parameters.c \
-		$Serrors.c
+		$Serrors.c \
+		$Sput_img.c \
+		$Shooks.c \
+		$Sinit_base.c \

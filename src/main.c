@@ -31,6 +31,7 @@ void	set_zero(t_params *params, t_player *player, t_map *map)
 
 int	main(int ac, char **av)
 {
+	t_base			*base;
 	t_params		params;
 	t_player		player;
 	t_map			map;
@@ -63,6 +64,16 @@ int	main(int ac, char **av)
 	printf("\n\nMAP INFORMATIONS\n******\n");
 	printf("Player orientation %c, angle : %f\ndeltaX %f, deltaY %f\npos_x %f, pos_y %f\n", player.orientation, player.angle, player.pos_delta_x, player.pos_delta_y, player.pos_x, player.pos_y);
 	printf("Map Width %zu\nMap Height %zu\n\nPrint map.map\n", map.width, map.height);
+	
+	// MLX LOOP
+	base = init_base(&params, &map, &player);
+	mlx_hook(base->win, 17, 1L << 17, close_win, base);
+	mlx_hook(base->win, 2, 1L << 0, key_press, base);
+	mlx_hook(base->win, 3, 1L << 1, key_release, base);
+	put_img(base);
+	mlx_loop(base->mlx);
+
+
 	for (size_t i = 0; i < map.height; i++)
 	{
 		if (i == player.pos_y)

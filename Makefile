@@ -9,11 +9,12 @@ include sources.mk
 OBJ = $(SRC:$S%.c=$O%.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 INCFLAGS = -I$I
 LDFLAGS = 
-
+LIBS		= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft -lm
 RM = /bin/rm -f
+MLX		= mlx/libmlx.a
 
 .PHONY: all clean fclean re
 
@@ -28,9 +29,13 @@ $(OBJ): | $O
 $O%.o: $S%.c | $O
 	$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(MLX) $(OBJ)
 	make bonus -C lib/libft/
-	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -lm -o $@
+	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
+
+$(MLX):
+				@$(MAKE) -C mlx
+				@echo "mlx compiled"
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))
