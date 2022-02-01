@@ -42,10 +42,10 @@ fclean: clean
 
 re: fclean all
 
-fcleanlift:
+fcleanlibft:
 	make fclean -C lib/libft/
 
-fcleanall: fclean fcleanlift
+fcleanall: fclean fcleanlibft
 
 test:
 	@printf "\033[0;32m\n\n#TEST EMPTY\n\033[0m"
