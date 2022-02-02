@@ -9,8 +9,6 @@ WE ./assets/path_to_the_west_texture.xpm
 EA ./assets/path_to_the_east_texture.xpm
 F 220,100,0
 F 10,10,10
-S ./assets/path_to_the_sprite_texture.xpm
-
 
 
 

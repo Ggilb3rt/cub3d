@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:04:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 17:27:58 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:22:24 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	free_params(t_params *params)
 		free(params->path_texture_so);
 	if (params->unique.texture_no)
 		free(params->path_texture_no);
-	if (params->unique.texture_sp)
-		free(params->path_texture_sp);
 }
 
 void	free_map(t_map *map)

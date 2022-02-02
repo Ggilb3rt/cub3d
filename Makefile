@@ -30,7 +30,8 @@ $O%.o: $S%.c | $O
 
 $(NAME): $(OBJ)
 	make bonus -C lib/libft/
-	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -lm -o $@
+	#$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -lm -o $@
+	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -o $@
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))

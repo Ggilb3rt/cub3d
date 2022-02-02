@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:39:55 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 16:07:24 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:21:50 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,4 @@ void	check_params_integrity(t_params *params)
 		ft_exit("Invalid west texture path");
 	if (!valid_path(params->path_texture_so))
 		ft_exit("Invalid south texture path");
-	if (!valid_path(params->path_texture_sp))
-		ft_exit("Invalid sprite texture path");
 }

@@ -103,12 +103,9 @@ void	hole_finder(t_map *map)
 void	check_map_integrity(t_map *map)
 {
 	size_t	x;
-	size_t	y;
 	t_map	rotated_map;
 
 	x = 0;
-	y = 0;
-	(void)y;
 	check_char(map);
 	hole_finder(map);
 	empty_pivoted_map(map, &rotated_map);

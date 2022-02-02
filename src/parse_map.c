@@ -79,7 +79,7 @@ void	convert_orientation(t_player *player)
 	else if (player->orientation == 'W')
 		player->angle = PI;
 	else
-		ft_exit("How can you be here ?");
+		player->angle = 0.00;
 	player->pos_delta_x = cos(player->angle);
 	player->pos_delta_y = sin(player->angle);
 }

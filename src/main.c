@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 18:55:29 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:22:49 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	debug_print_params(t_params params)
 		params.ceiling_color[2]);
 	printf("FLOOR COLOR TAB : %d, %d, %d\n",
 		params.floor_color[0], params.floor_color[1], params.floor_color[2]);
-	printf("PATHS :\n%s\n%s\n%s\n%s\n%s",
-		params.path_texture_sp, params.path_texture_no, params.path_texture_so,
+	printf("PATHS :\n%s\n%s\n%s\n%s",
+		params.path_texture_no, params.path_texture_so,
 		params.path_texture_ea, params.path_texture_we);
 }
 
@@ -66,21 +66,37 @@ void	set_zero(t_params *params, t_player *player, t_map *map)
 	params->unique.texture_so = 0;
 	params->unique.texture_ea = 0;
 	params->unique.texture_we = 0;
-	params->unique.texture_sp = 0;
 	player->orientation = '0';
 	map->height = 0;
 	map->width = 0;
 	map->map = NULL;
 }
 
-void	parse(char *av, t_params *params, t_map *map, t_player *player)
+int	parse(char *av, t_params *params, t_map *map, t_player *player)
 {
-	int	fd;
+	int		fd;
+	int		ret;
 
 	fd = open(av, O_RDONLY);
-	init_param(params, &fd);
-	init_map(params, map, player, &fd);
+	ret = init_param(params, &fd);
+	if (ret > -1)
+	{
+		print_error("param pouet", ret);
+		close(fd);
+		free_params(params);
+		return (0);
+	}
+	ret = init_map(params, map, player, &fd);
+	if (ret > -1)
+	{
+		print_error("map pouet", ret);
+		close(fd);
+		free_params(params);
+		free_map(map);
+		return (0);
+	}
 	close(fd);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -94,10 +110,11 @@ int	main(int ac, char **av)
 	{
 		if (!ft_check_file_extention(av[1], ".cub"))
 		{
-			ft_putstr_fd("Error : provide file must be a .cub file", 1);
+			print_error("debut", e_cub_file);
 			return (0);
 		}
-		parse(av[1], &params, &map, &player);
+		if (!parse(av[1], &params, &map, &player))
+			return (0);
 		check_params_integrity(&params);
 		check_map_integrity(&map);
 	}
