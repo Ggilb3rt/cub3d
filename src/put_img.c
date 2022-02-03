@@ -79,7 +79,7 @@ void	put_map(t_base *base)
 			printf("\n\n--- j[%d]i[%d] == |%c| ---\n\n", j, i, base->map->map[j][i]);
 			if (base->map->map[j][i] == '1')
 				draw_tile(base, start, base->north);
-			else if (base->map->map[j][i] == 'N')
+			else if (j == base->player->pos_x && i == base->player->pos_y == j)
 			{
 				draw_tile(base, start, base->north);
 				draw_tile(base, start, base->minime);

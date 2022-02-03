@@ -22,7 +22,7 @@ int	key_press(int keycode, t_base *base)
 			base->player->going_left = 1;
 		if (keycode == 100)
 			base->player->going_right = 1;
-		//update(base);
+		update(base);
 	}
 	return (0);
 }
