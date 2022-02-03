@@ -9,4 +9,5 @@ SRC = $Smain.c \
 		$Scheck_parameters.c \
 		$Serrors.c \
 		$Sfree.c \
-		$Sparse_param_utils.c
+		$Sparse_param_utils.c \
+		$Scheck_map_utils.c

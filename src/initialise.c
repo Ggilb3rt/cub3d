@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 14:37:43 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:37:07 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	init_param(t_params *params, int *fd)
 		}
 		else
 		{
-			free(line);
+			free(line); // the free here leaks...
 			return (e_wrong_param);
 		}
 	}

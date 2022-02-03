@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 18:01:07 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:35:13 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,16 @@ int					ft_str_is_digitspace(char *str);
 // parse_map.c
 char				**reallocmap(char **map, size_t map_size, size_t new_size);
 void				parse_map(t_map *map, t_player *player);
-//check_parameters.c
+// check_parameters.c
 int					check_params_integrity(t_params *params);
-//check_map.c
+// check_map.c
 int					map_ok_or_quit(t_map *map);
-//check_map_pivoted.c
+// check_map_pivoted.c
 int					empty_pivoted_map(t_map *map, t_map *new);
 void				pi_by_two_pivote_map(t_map *map, t_map *new);
+// check_map_utils.c
+int					check_char(t_map *map);
+int					hole_finder(t_map *map);
 
 /*
 **	Errors
