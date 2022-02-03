@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/02 19:22:49 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:05:39 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	debug_print_params(t_params params)
 void	debug_print_map(t_map map, t_player player)
 {
 	size_t	i;
+	size_t	y;
 
 	printf("\n\nMAP INFORMATIONS\n******\n");
 	printf("Player orientation %c, angle : %f\ndeltaX %f, deltaY %f\n",
@@ -41,16 +42,12 @@ void	debug_print_map(t_map map, t_player player)
 	i = 0;
 	while (i < map.height)
 	{
-		//printf("%ld|\t", ft_strlen(map.map[i]));
-		for(size_t y = 0; y < map.width && map.map[i][y] != '\0'; y++)
+		y = 0;
+		while (y < map.width && map.map[i][y] != '\0')
 		{
 			printf("%c", map.map[i][y]);
+			y++;
 		}
-		// if (i == player.pos_y)
-		// 	printf("\033[0;33m");
-		// printf("%s\n", map.map[i]);
-		// if (i == player.pos_y)
-		// 	printf("\033[0m");
 		printf("\n");
 		i++;
 	}
@@ -72,31 +69,28 @@ void	set_zero(t_params *params, t_player *player, t_map *map)
 	map->map = NULL;
 }
 
-int	parse(char *av, t_params *params, t_map *map, t_player *player)
+int	err_in_file(char **av, t_params *params, t_player *player, t_map *map)
 {
-	int		fd;
-	int		ret;
-
-	fd = open(av, O_RDONLY);
-	ret = init_param(params, &fd);
-	if (ret > -1)
+	if (!ft_check_file_extention(av[1], ".cub"))
 	{
-		print_error("param pouet", ret);
-		close(fd);
-		free_params(params);
-		return (0);
+		print_error(e_cub_file);
+		return (1);
 	}
-	ret = init_map(params, map, player, &fd);
-	if (ret > -1)
+	if (!parse_root(av[1], params, map, player))
+		return (1);
+	if (check_params_integrity(params) != -1)
 	{
-		print_error("map pouet", ret);
-		close(fd);
 		free_params(params);
 		free_map(map);
-		return (0);
+		return (1);
 	}
-	close(fd);
-	return (1);
+	if (map_ok_or_quit(map) != -1)
+	{
+		free_params(params);
+		free_map(map);
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -108,15 +102,8 @@ int	main(int ac, char **av)
 	set_zero(&params, &player, &map);
 	if (ac == 2 || (ac == 3 && !ft_strncmp(av[2], "--save", 6)))
 	{
-		if (!ft_check_file_extention(av[1], ".cub"))
-		{
-			print_error("debut", e_cub_file);
+		if (err_in_file(av, &params, &player, &map))
 			return (0);
-		}
-		if (!parse(av[1], &params, &map, &player))
-			return (0);
-		check_params_integrity(&params);
-		check_map_integrity(&map);
 	}
 	else
 		ft_exit("Bad number of arguments\n");

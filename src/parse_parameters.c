@@ -6,54 +6,19 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 17:36:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/02 19:29:40 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:55:57 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_str_is_digitspace(char *str)
-{
-	while (*str != '\0')
-	{
-		if (!ft_isdigit(*str) && *str != ' ')
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-// need to check with valgrind before removing legacy code
-char	**check_number_param(size_t nb_par, char *line, char split, char *print)
-{
-	size_t			splitted_l;
-	char			**splitted;
-
-	splitted_l = 0;
-	splitted = ft_split(++line, split);
-	splitted_l = ft_splitted_length(splitted);
-	if (splitted_l != nb_par)
-	{
-		(void)print;
-		//print_error(print, 7);
-		ft_split_free((void **)splitted);
-		//free(--line);
-		//line = NULL;
-		return (NULL);
-	}
-	return (splitted);
-}
-
 int	parse_res(t_params *params, char *line)
 {
 	char	**splitted;
 
-	splitted = check_number_param(2, line, ' ', ERR_PARAMS_RES);
+	splitted = check_number_param(2, line, ' ');
 	if (splitted == NULL)
-	{
-		//free_params(params);
 		return (e_param_qt);
-	}
 	if (ft_str_is_digitspace(splitted[0]) && ft_str_is_digitspace(splitted[1]))
 	{
 		params->res_x = ft_atoi(splitted[0]);
@@ -64,7 +29,7 @@ int	parse_res(t_params *params, char *line)
 			params->res_y = MAX_Y;
 	}
 	else
-		return(e_param_type);
+		return (e_param_type);
 	ft_split_free((void **)splitted);
 	params->nb_valid_param++;
 	return (-1);
@@ -72,14 +37,10 @@ int	parse_res(t_params *params, char *line)
 
 int	parse_color(t_params *params, char *line, int *color)
 {
-	// put checking in check sould be better
 	char			**splitted;
 	size_t			splitted_l;
 
-	line++;
-	while (*line == ' ')
-		line++;
-	splitted = check_number_param(3, line, ',', "+color must be 3 values");
+	splitted = check_number_param(3, line, ',');
 	if (splitted == NULL)
 		return (e_param_qt);
 	splitted_l = ft_splitted_length(splitted);
@@ -88,8 +49,10 @@ int	parse_color(t_params *params, char *line, int *color)
 		if (ft_str_is_digitspace(splitted[splitted_l]))
 			color[splitted_l] = ft_atoi(splitted[splitted_l]);
 		else
-			return(e_param_type);
-			// return without free is bad
+		{
+			ft_split_free((void **)splitted);
+			return (e_param_type);
+		}
 	}
 	ft_split_free((void **)splitted);
 	params->nb_valid_param++;
@@ -136,5 +99,32 @@ int	split_parse_text_path(t_params *params, char *line)
 		&& params->unique.texture_ea++ == 0)
 		return (parse_text_path(&(params->path_texture_ea), line, 2));
 	else
-		return (e_param_multi_times);
+		return (e_wrong_param);
+}
+
+int	parse_root(char *av, t_params *params, t_map *map, t_player *player)
+{
+	int		fd;
+	int		ret;
+
+	fd = open(av, O_RDONLY);
+	ret = init_param(params, &fd);
+	if (ret > -1)
+	{
+		print_error(ret);
+		close(fd);
+		free_params(params);
+		return (0);
+	}
+	ret = init_map(params, map, player, &fd);
+	if (ret > -1)
+	{
+		print_error(ret);
+		close(fd);
+		free_params(params);
+		free_map(map);
+		return (0);
+	}
+	close(fd);
+	return (1);
 }

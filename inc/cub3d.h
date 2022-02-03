@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/02 19:29:47 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:01:07 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ enum e_err {
 	e_param_qt,
 	e_param_type,
 	e_param_path,
-	e_param_multi_times
+	e_param_color,
+	e_map_char,
+	e_map_hole
 };
 
 typedef struct s_color
@@ -90,24 +92,37 @@ typedef struct s_map
 }					t_map;
 
 /*
-**	Errors
-*/
-void				print_error(char *context, int err_nb);
-void				ft_exit(char *context);
-/*
 **	Initialisations and parsing
 */
+// initialise.c
 int					init_param(t_params *pa, int *fd);
 int					init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
+// parse_parameters.c
+int					parse_root(char *av, t_params *params, t_map *map,
+						t_player *player);
 int					parse_res(t_params *params, char *line);
 int					parse_color(t_params *params, char *line, int *color);
 int					split_parse_text_path(t_params *params, char *line);
+// parse_param_utils.c
+char				**check_number_param(size_t nb_par, char *line, char split);
+int					ft_str_is_digitspace(char *str);
+// parse_map.c
 char				**reallocmap(char **map, size_t map_size, size_t new_size);
 void				parse_map(t_map *map, t_player *player);
-void				check_map_integrity(t_map *map);
-void				empty_pivoted_map(t_map *map, t_map *new);
+//check_parameters.c
+int					check_params_integrity(t_params *params);
+//check_map.c
+int					map_ok_or_quit(t_map *map);
+//check_map_pivoted.c
+int					empty_pivoted_map(t_map *map, t_map *new);
 void				pi_by_two_pivote_map(t_map *map, t_map *new);
-void				check_params_integrity(t_params *params);
+
+/*
+**	Errors
+*/
+void				print_error(int err_nb);
+void				ft_exit(char *context);
+
 /*
 **	Clean quit
 */

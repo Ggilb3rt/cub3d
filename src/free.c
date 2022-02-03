@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:04:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/02 19:22:24 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 16:51:23 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_map(t_map *map)
 	size_t	x;
 
 	x = 0;
+	if (map->map == NULL)
+		return ;
 	while (x < map->height)
 	{
 		free(map->map[x]);

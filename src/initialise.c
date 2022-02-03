@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/02 19:24:22 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:37:43 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 	{
 		ret = get_next_line(*fd, &line);
 		if (!line)
-			return(e_gnl);
+			return (e_gnl);
 		if (line[0] == '\0' && map->map == NULL)
 			;
 		else if (par->nb_valid_param == NB_PARAMS_PARSE
@@ -75,17 +75,19 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 		else
 		{
 			free(line);
-			return(e_wrong_map); 
+			return (e_wrong_map);
 		}
 		free(line);
 	}
 	return (-1);
 }
 
+// un leak still reachable dans cette fonction en cas d'erreur, comprends pas pourquoi
 int	init_param(t_params *params, int *fd)
 {
 	char	*line;
 	int		ret;
+	int		parse_ret;
 
 	ret = 1;
 	line = NULL;
@@ -93,22 +95,22 @@ int	init_param(t_params *params, int *fd)
 	{
 		ret = get_next_line(*fd, &line);
 		if (!line)
-			return(e_gnl);
+			return (e_gnl);
 		if (is_id_valid(line) || line[0] == '\0')
 		{
-			int pret = parse_parameters(params, line);
+			parse_ret = parse_parameters(params, line);
 			free(line);
-			if (pret != -1)
-				return (pret);
+			if (parse_ret != -1)
+				return (parse_ret);
 			continue ;
 		}
 		else
 		{
 			free(line);
-			return(e_wrong_param);
+			return (e_wrong_param);
 		}
 	}
 	if (params->nb_valid_param != NB_PARAMS_PARSE)
-		return(e_qt_param);
+		return (e_qt_param);
 	return (-1);
 }

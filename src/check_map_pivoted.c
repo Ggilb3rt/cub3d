@@ -6,13 +6,13 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 20:01:50 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/02 18:24:04 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 18:02:01 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	empty_pivoted_map(t_map *map, t_map *new)
+int	empty_pivoted_map(t_map *map, t_map *new)
 {
 	int		x;
 
@@ -21,14 +21,15 @@ void	empty_pivoted_map(t_map *map, t_map *new)
 	new->height = map->width;
 	new->map = malloc(sizeof(new->map) * new->height);
 	if (new->map == NULL)
-		ft_exit(ERR_MALLOCCRASH);
+		return (e_malloc);
 	while (++x < (int)new->height)
 	{
 		new->map[x] = malloc(sizeof(*new->map) * new->width + 1);
 		if (new->map[x] == NULL)
-			ft_exit(ERR_MALLOCCRASH);
+			return (e_malloc);
 		ft_memset(new->map[x], ' ', new->width);
 	}
+	return (-1);
 }
 
 void	pi_by_two_pivote_map(t_map *map, t_map *new)

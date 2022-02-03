@@ -30,8 +30,8 @@ $O%.o: $S%.c | $O
 
 $(NAME): $(OBJ)
 	make bonus -C lib/libft/
-	#$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -lm -o $@
-	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -o $@
+	$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -lm -o $@
+	#$(CC) $(LDFLAGS) $^ -L./lib/libft -lft -o $@
 
 cleanobj:
 	$(RM) $(wildcard $(OBJ))
@@ -49,9 +49,11 @@ fcleanlibft:
 fcleanall: fclean fcleanlibft
 
 test:
+	@printf "\033[0;32m\n#TEST BAD ARG QT\n\033[0m"
+	./$(NAME)
 	@printf "\033[0;32m\n\n#TEST EMPTY\n\033[0m"
 	./$(NAME) assets/maps/vide.cub
-	@printf "\033[0;32m#TEST ANOTHER FILE\n\033[0m"
+	@printf "\033[0;32m\n#TEST ANOTHER FILE\n\033[0m"
 	./$(NAME) assets/textures/greystone.xpm
 	@printf "\033[0;32m\n\n#TEST ERR WRONG PARAM\n\033[0m"
 	./$(NAME) assets/maps/err_wrong_param.cub
@@ -61,10 +63,10 @@ test:
 	./$(NAME) assets/maps/err_color.cub
 	@printf "\033[0;32m\n\n#TEST ERR MULTIPLES PARAMS\n\033[0m"
 	./$(NAME) assets/maps/err_multi_param.cub
-	@printf "\033[0;32m\n\n#TEST ERR MAP\n\033[0m"
+	@printf "\033[0;32m\n\n#TEST ERR MAP WRONG CHAR\n\033[0m"
+	./$(NAME) assets/maps/err_map_char.cub
+	@printf "\033[0;32m\n\n#TEST ERR MAP HOLE\n\033[0m"
 	./$(NAME) assets/maps/err_map.cub
-	@printf "\033[0;32m\n\n#TEST ERR WRONG CHAR IN MAP\n\033[0m"
-	./$(NAME) assets/maps/err_wrong_char_map.cub
 	@printf "\033[0;32m\n\nTEST OK big\n\033[0m"
 	./$(NAME) assets/maps/l.cub
 	@printf "\033[0;32m\n\n#TEST OK little\n\033[0m"
@@ -74,4 +76,4 @@ test:
 leaks_test: all
 	valgrind --leak-check=full ./$(NAME) assets/maps/l.cub
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
-	valgrind --leak-check=full ./$(NAME) assets/maps/err_wrong_param.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_wrong_param.cub

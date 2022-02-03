@@ -4,6 +4,7 @@ NO ./assets/path_to_the_north_texture.xpm
 SO ./assets/path_to_the_south_texture.xpm
 
 C 225,30,0
+C 255,22,22
 
 WE ./assets/path_to_the_west_texture.xpm
 EA ./assets/path_to_the_east_texture.xpm
