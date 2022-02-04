@@ -4,6 +4,7 @@ Makefile have some troubles with 'make re'
 
 
 #Done
+- remove sprites ; parsing and tests
 ##List of errors
 - Bad number of arguments OK
 - Not a .cub file OK
@@ -12,6 +13,13 @@ Makefile have some troubles with 'make re'
 - same paramater define multiples times (works with floor, textures, res) OK
 - Invalid map OK
 - Texture path without extention OK
+- Malloc err OK
+##Cleaning
+- remove all exit() (exception in main because no malloc)
+- find why some still reachable leaks in init_param() and init_map() ==> GNL when quit before EOF
+##Engine
+###Player
+###Raycaster
 
 
 
@@ -21,12 +29,9 @@ Makefile have some troubles with 'make re'
 - remove -g from flags (at the end)
 
 #To do
-- remove sprites parsing and tests
-- verifier que les paths pointent vers de vrais fichiers
-##List of errors
-- System can't allocate memory, try again
+- verifier que les paths pointent vers de vrais fichiers .xpm
+##Cleaning
+- Change GNL
 
 #Doing
-- clean quit (free all params and map). Il faut que je remplace les exit() du parser. Ou que j'ajoute les free directement dans les fonction avant de quit.
 
-ft_exit(*t_params, *t_map)

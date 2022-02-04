@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 18:41:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 17:31:01 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:13:39 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ char	**init_tab_err(void)
 {
 	char	**tab;
 
-	tab = malloc(sizeof(tab) * 13);
-	tab[0] = ft_strdup(ERR_GNL);
-	tab[1] = ft_strdup(ERR_MALLOCCRASH);
+	tab = malloc(sizeof(tab) * 14);
+	tab[0] = ft_strdup("Can't read next line");
+	tab[1] = ft_strdup("Crash of malloc");
 	tab[2] = ft_strdup("Find invalid parameter or same multiple times");
 	tab[3] = ft_strdup("Invalid quantity of parameters");
 	tab[4] = ft_strdup("Provided file must be a .cub file");
@@ -29,7 +29,8 @@ char	**init_tab_err(void)
 	tab[9] = ft_strdup("Invalid ceiling or floor color value [0 - 255]");
 	tab[10] = ft_strdup("Unknow char in map");
 	tab[11] = ft_strdup("Hole in map");
-	tab[12] = NULL;
+	tab[12] = ft_strdup("Find multiple players");
+	tab[13] = NULL;
 	return (tab);
 }
 

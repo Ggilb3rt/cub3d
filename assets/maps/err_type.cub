@@ -1,4 +1,4 @@
-R 1920           1080
+R 19R20           1080
 
 NO ./assets/path_to_the_north_texture.xpm
 SO ./assets/path_to_the_south_texture.xpm
@@ -6,7 +6,7 @@ SO ./assets/path_to_the_south_texture.xpm
 C 12,RR,44
 
 WE ./assets/path_to_the_west_texture.xpm
-F 220,100,22222
+F 220,100,222
 EA ./assets/path_to_the_east_texture.xpm
 
 

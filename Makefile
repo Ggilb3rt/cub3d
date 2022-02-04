@@ -48,7 +48,7 @@ fcleanlibft:
 
 fcleanall: fclean fcleanlibft
 
-test:
+test: all
 	@printf "\033[0;32m\n#TEST BAD ARG QT\n\033[0m"
 	./$(NAME)
 	@printf "\033[0;32m\n\n#TEST EMPTY\n\033[0m"
@@ -59,12 +59,16 @@ test:
 	./$(NAME) assets/maps/err_wrong_param.cub
 	@printf "\033[0;32m\n\n#TEST ERR NOT XPM FILE\n\033[0m"
 	./$(NAME) assets/maps/err_not_xpm.cub
-	@printf "\033[0;32m\n\n#TEST ERR COLOR\n\033[0m"
-	./$(NAME) assets/maps/err_color.cub
+	@printf "\033[0;32m\n\n#TEST ERR TYPE\n\033[0m"
+	./$(NAME) assets/maps/err_type.cub
+	@printf "\033[0;32m\n\n#TEST ERR COLOR VALUE\n\033[0m"
+	./$(NAME) assets/maps/err_color_val.cub
 	@printf "\033[0;32m\n\n#TEST ERR MULTIPLES PARAMS\n\033[0m"
 	./$(NAME) assets/maps/err_multi_param.cub
 	@printf "\033[0;32m\n\n#TEST ERR MAP WRONG CHAR\n\033[0m"
 	./$(NAME) assets/maps/err_map_char.cub
+	@printf "\033[0;32m\n\n#TEST ERR MAP MULTI PLAYERS\n\033[0m"
+	./$(NAME) assets/maps/err_map_multi_players.cub
 	@printf "\033[0;32m\n\n#TEST ERR MAP HOLE\n\033[0m"
 	./$(NAME) assets/maps/err_map.cub
 	@printf "\033[0;32m\n\nTEST OK big\n\033[0m"

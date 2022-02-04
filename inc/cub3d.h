@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 18:35:13 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:14:18 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 # include <string.h>
 # include "../lib/libft/libft.h"
 
-# define ERR_MALLOCCRASH "Crash of malloc"
-# define ERR_GNL "Can't read next line"
-# define ERR_MAP_HOLE "Hole in the map"
-# define ERR_PARAMS_RES "Resolution must have 2 values"
 # define NB_PARAMS_PARSE 7
 # define PI 3.14159265
 # define MAX_X 1920
@@ -38,7 +34,8 @@ enum e_err {
 	e_param_path,
 	e_param_color,
 	e_map_char,
-	e_map_hole
+	e_map_hole,
+	e_map_multi_pl
 };
 
 typedef struct s_color
@@ -108,7 +105,7 @@ char				**check_number_param(size_t nb_par, char *line, char split);
 int					ft_str_is_digitspace(char *str);
 // parse_map.c
 char				**reallocmap(char **map, size_t map_size, size_t new_size);
-void				parse_map(t_map *map, t_player *player);
+int					parse_map(t_map *map, t_player *player);
 // check_parameters.c
 int					check_params_integrity(t_params *params);
 // check_map.c

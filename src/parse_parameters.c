@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 17:36:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 17:55:57 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:42:25 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	parse_res(t_params *params, char *line)
 			params->res_y = MAX_Y;
 	}
 	else
+	{
+		ft_split_free((void **)splitted);
 		return (e_param_type);
+	}
 	ft_split_free((void **)splitted);
 	params->nb_valid_param++;
 	return (-1);
@@ -109,7 +112,7 @@ int	parse_root(char *av, t_params *params, t_map *map, t_player *player)
 
 	fd = open(av, O_RDONLY);
 	ret = init_param(params, &fd);
-	if (ret > -1)
+	if (ret != -1)
 	{
 		print_error(ret);
 		close(fd);
@@ -117,7 +120,7 @@ int	parse_root(char *av, t_params *params, t_map *map, t_player *player)
 		return (0);
 	}
 	ret = init_map(params, map, player, &fd);
-	if (ret > -1)
+	if (ret != -1)
 	{
 		print_error(ret);
 		close(fd);

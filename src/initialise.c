@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 18:37:07 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:07:20 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	parse_parameters(t_params *params, char *line)
 int	is_id_valid(char *line)
 {
 	if (line[0] == 'R' || line[0] == 'F' || line[0] == 'C'
-		|| line[0] == 'S'
 		|| (line[0] == 'N' && line[1] == 'O')
 		|| (line[0] == 'S' && line[1] == 'O')
 		|| (line[0] == 'W' && line[1] == 'E')
@@ -48,17 +47,28 @@ int	is_id_valid(char *line)
 		return (0);
 }
 
-void	add_line_map(t_map *map, char *line, t_player *pl)
+int	add_line_map(t_map *map, char *line, t_player *pl)
 {
 	map->map = reallocmap(map->map, map->height, (map->height) + 1);
+	if (map->map == NULL)
+		return (e_malloc);
 	map->map[map->height] = ft_strdup(line);
-	parse_map(map, pl);
+	if (parse_map(map, pl) != -1)
+	{
+		free(map->map[map->height]);
+		return (e_map_multi_pl);
+	}
+	return (-1);
 }
 
+// meme probleme que init_param depuis que add_line_map peu quit
+//! le probleme vient du GNL qui ne free pas la static quand on quit
+//! sans finir de lire le fichier
 int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 {
 	char	*line;
 	int		ret;
+	int		is_add;
 
 	line = NULL;
 	ret = 1;
@@ -71,7 +81,14 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 			;
 		else if (par->nb_valid_param == NB_PARAMS_PARSE
 			&& (line[0] == ' ' || line[0] == '1'))
-			add_line_map(map, line, pl);
+		{
+			is_add = add_line_map(map, line, pl);
+			if (is_add != -1)
+			{
+				free(line);
+				return (is_add);
+			}
+		}
 		else
 		{
 			free(line);
@@ -82,7 +99,7 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 	return (-1);
 }
 
-// un leak still reachable dans cette fonction en cas d'erreur, comprends pas pourquoi
+// un leak still reachable dans cette fonction en cas d'erreur
 int	init_param(t_params *params, int *fd)
 {
 	char	*line;
@@ -106,9 +123,10 @@ int	init_param(t_params *params, int *fd)
 		}
 		else
 		{
-			free(line); // the free here leaks...
+			free(line);
 			return (e_wrong_param);
 		}
+		free(line);
 	}
 	if (params->nb_valid_param != NB_PARAMS_PARSE)
 		return (e_qt_param);
