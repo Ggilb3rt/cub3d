@@ -22,6 +22,7 @@
 # define ERR_GNL "Can't read next line"
 # define ERR_MAP_HOLE "Hole in the map"
 # define PI 3.14159265
+# define PI2
 # define MAX_X 1920
 # define MAX_Y 1080
 
