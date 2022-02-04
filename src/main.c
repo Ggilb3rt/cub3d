@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 13:07:30 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:09:20 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int ac, char **av)
 	t_map			map;
 
 	set_zero(&params, &player, &map);
-	if (ac == 2 || (ac == 3 && !ft_strncmp(av[2], "--save", 6)))
+	if (ac == 2)
 	{
 		if (err_in_file(av, &params, &player, &map))
 			return (0);

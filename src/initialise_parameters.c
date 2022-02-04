@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 13:07:20 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:05:38 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,59 +47,25 @@ int	is_id_valid(char *line)
 		return (0);
 }
 
-int	add_line_map(t_map *map, char *line, t_player *pl)
+int	basic_check_param_line(t_params *params, char *line)
 {
-	map->map = reallocmap(map->map, map->height, (map->height) + 1);
-	if (map->map == NULL)
-		return (e_malloc);
-	map->map[map->height] = ft_strdup(line);
-	if (parse_map(map, pl) != -1)
-	{
-		free(map->map[map->height]);
-		return (e_map_multi_pl);
-	}
-	return (-1);
-}
+	int	parse_ret;
 
-// meme probleme que init_param depuis que add_line_map peu quit
-//! le probleme vient du GNL qui ne free pas la static quand on quit
-//! sans finir de lire le fichier
-int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
-{
-	char	*line;
-	int		ret;
-	int		is_add;
-
-	line = NULL;
-	ret = 1;
-	while (ret != 0)
+	if (is_id_valid(line) || line[0] == '\0')
 	{
-		ret = get_next_line(*fd, &line);
-		if (!line)
-			return (e_gnl);
-		if (line[0] == '\0' && map->map == NULL)
-			;
-		else if (par->nb_valid_param == NB_PARAMS_PARSE
-			&& (line[0] == ' ' || line[0] == '1'))
-		{
-			is_add = add_line_map(map, line, pl);
-			if (is_add != -1)
-			{
-				free(line);
-				return (is_add);
-			}
-		}
-		else
-		{
-			free(line);
-			return (e_wrong_map);
-		}
+		parse_ret = parse_parameters(params, line);
 		free(line);
+		if (parse_ret != -1)
+			return (parse_ret);
+		return (-1);
 	}
-	return (-1);
+	else
+	{
+		free(line);
+		return (e_wrong_param);
+	}
 }
 
-// un leak still reachable dans cette fonction en cas d'erreur
 int	init_param(t_params *params, int *fd)
 {
 	char	*line;
@@ -113,19 +79,11 @@ int	init_param(t_params *params, int *fd)
 		ret = get_next_line(*fd, &line);
 		if (!line)
 			return (e_gnl);
-		if (is_id_valid(line) || line[0] == '\0')
-		{
-			parse_ret = parse_parameters(params, line);
-			free(line);
-			if (parse_ret != -1)
-				return (parse_ret);
-			continue ;
-		}
+		parse_ret = basic_check_param_line(params, line);
+		if (parse_ret != -1)
+			return (parse_ret);
 		else
-		{
-			free(line);
-			return (e_wrong_param);
-		}
+			continue ;
 		free(line);
 	}
 	if (params->nb_valid_param != NB_PARAMS_PARSE)
