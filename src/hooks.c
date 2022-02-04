@@ -13,17 +13,19 @@ int	key_press(int keycode, t_base *base)
 		base->player->rotate_left = 1;
 	if (keycode == R_RIGHT)
 		base->player->rotate_right = 1;
-	if (keycode == ESC )
+	if (keycode == ESC)
 		close_win(base);
-	if (keycode == W )
+	if (keycode == W)
 		base->player->going_up = 1;
-	if (keycode == S )
+	if (keycode == S)
 		base->player->going_down = 1;
-	if (keycode == Q )
+	if (keycode == Q)
 		base->player->going_left = 1;
-	if (keycode == D )
+	if (keycode == D)
 		base->player->going_right = 1;
 	update(base);
+	printf("player\tx : %f\ty : %f\tangle : %f\n",
+		base->player->pos_x, base->player->pos_y, base->player->angle);
 	return (0);
 }
 
@@ -33,11 +35,11 @@ int	key_release(int keycode, t_base *base)
 		base->player->rotate_left = 0;
 	if (keycode == R_RIGHT)
 		base->player->rotate_right = 0;
-	if (keycode == W )
+	if (keycode == W)
 		base->player->going_up = 0;
-	else if (keycode == S )
+	else if (keycode == S)
 		base->player->going_down = 0;
-	else if (keycode == Q )
+	else if (keycode == Q)
 		base->player->going_left = 0;
 	else
 		base->player->going_right = 0;

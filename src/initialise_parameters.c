@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialise.c                                       :+:      :+:    :+:   */
+/*   initialise_parameters.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/12/06 15:33:28 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:31:09 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,29 @@
 int	parse_parameters(t_params *params, char *line)
 {
 	if (line[0] == 'R' && params->unique.resolution++ == 0)
-		parse_res(params, line);
+		return (parse_res(params, line));
 	else if (line[0] == 'F' || (line[0] == 'C' && params->unique.ceiling == 0))
 	{
 		if (line[0] == 'F' && params->unique.floor == 0)
-			parse_color(params, line, params->floor_color);
+			return (parse_color(params, line, params->floor_color));
 		else if (line[0] == 'C' && params->unique.ceiling == 0)
-			parse_color(params, line, params->ceiling_color);
+			return (parse_color(params, line, params->ceiling_color));
 		else
-			ft_exit("Multiple color parameters");
+			return (e_qt_param);
 	}
-	else if ((line[0] == 'S' && line[1] == ' ')
-		|| (line[0] == 'N' && line[1] == 'O')
+	else if ((line[0] == 'N' && line[1] == 'O')
 		|| (line[0] == 'S' && line[1] == 'O')
 		|| (line[0] == 'W' && line[1] == 'E')
 		|| (line[0] == 'E' && line[1] == 'A'))
-		split_parse_text_path(params, line);
+		return (split_parse_text_path(params, line));
 	else if (!(line[0] == ' ' || line[0] == '\n' || line[0] == '\0'))
-		error_init("Find parameters with wrong ID");
-	return (1);
+		return (e_wrong_param);
+	return (-1);
 }
 
 int	is_id_valid(char *line)
 {
 	if (line[0] == 'R' || line[0] == 'F' || line[0] == 'C'
-		|| line[0] == 'S'
 		|| (line[0] == 'N' && line[1] == 'O')
 		|| (line[0] == 'S' && line[1] == 'O')
 		|| (line[0] == 'W' && line[1] == 'E')
@@ -49,64 +47,49 @@ int	is_id_valid(char *line)
 		return (0);
 }
 
-void	add_line_map(t_map *map, char *line, t_player *pl)
+int	basic_check_param_line(t_params *params, char *line)
 {
-	map->map = reallocmap(map->map, map->height, (map->height) + 1);
-	map->map[map->height] = ft_strdup(line);
-	parse_map(map, pl);
-}
+	int	parse_ret;
 
-int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
-{
-	char	*line;
-	int		ret;
-
-	line = NULL;
-	ret = 1;
-	while (ret != 0)
+	if (is_id_valid(line) || line[0] == '\0')
 	{
-		ret = get_next_line(*fd, &line);
-		if (!line)
-			ft_exit(ERR_GNL);
-		if (line[0] == '\0' && map->map == NULL)
-			;
-		else if (par->nb_valid_param == 8 && (line[0] == ' ' || line[0] == '1'))
-			add_line_map(map, line, pl);
-		else
-		{
-			free(line);
-			ft_exit("Find somthing wrong in the map.");
-		}
+		parse_ret = parse_parameters(params, line);
 		free(line);
+		if (parse_ret != -1)
+			return (parse_ret);
+		return (-1);
 	}
-	return (1);
+	else
+	{
+		free(line);
+		return (e_wrong_param);
+	}
 }
 
 int	init_param(t_params *params, int *fd)
 {
 	char	*line;
 	int		ret;
+	int		parse_ret;
 
 	ret = 1;
 	line = NULL;
-	while (ret != 0 && params->nb_valid_param < 8)
+	while (ret != 0 && params->nb_valid_param < NB_PARAMS_PARSE)
 	{
-		ret = get_next_line(*fd, &line);
+		ret = get_next_line(*fd, &line, 0);
 		if (!line)
-			ft_exit(ERR_GNL);
-		if (is_id_valid(line) || line[0] == '\0')
+			return (e_gnl);
+		parse_ret = basic_check_param_line(params, line);
+		if (parse_ret != -1)
 		{
-			parse_parameters(params, line);
-			free(line);
-			continue ;
+			get_next_line(*fd, &line, 1);
+			return (parse_ret);
 		}
 		else
-		{
-			free(line);
-			ft_exit("Find invalid parameter");
-		}
+			continue ;
+		free(line);
 	}
-	if (params->nb_valid_param != 8)
-		error_init("Invalid quantity of parameters in .cub file");
-	return (1);
+	if (params->nb_valid_param != NB_PARAMS_PARSE)
+		return (e_qt_param);
+	return (-1);
 }

@@ -1,4 +1,4 @@
-R 1000 800
+R            1000     800
 
 NO ./assets/textures/eagle.xpm
 SO ./assets/textures/greystone.xpm
@@ -8,7 +8,6 @@ C 225, 30, 0
 WE ./assets/textures/purplestone.xpm
 F 220,100,0
 EA ./assets/textures/red.xpm
-S ./assets/sprites/sprite_texture
 
  1
 1111

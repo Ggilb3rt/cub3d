@@ -1,7 +1,7 @@
 NAME = cub3d
 
 SRC = $Smain.c \
-		$Sinitialise.c \
+		$Sinitialise_parameters.c \
 		$Sparse_parameters.c \
 		$Sparse_map.c \
 		$Scheck_map.c \
@@ -14,3 +14,7 @@ SRC = $Smain.c \
 		$Supdate.c \
 		$Smoves.c \
 		$Sdestroy.c \
+		$Sfree.c \
+		$Sparse_param_utils.c \
+		$Scheck_map_utils.c \
+		$Sinitialise_map.c

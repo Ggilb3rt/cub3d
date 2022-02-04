@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:39:55 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 22:27:10 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:32:32 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,33 @@ int	valid_path(char *path)
 			return (0);
 		i++;
 	}
+	if (!ft_check_file_extention(path, ".xpm"))
+		return (0);
 	return (1);
 }
 
-void	check_params_integrity(t_params *params)
+int	check_params_integrity(t_params *params)
 {
+	int	ret;
+
+	ret = -1;
 	if (params->res_x > MAX_X)
 		params->res_x = MAX_X;
 	if (params->res_y > MAX_Y)
 		params->res_y = MAX_Y;
 	if (!valid_color(params->ceiling_color))
-		ft_exit("Invalid ceiling color value");
+		ret = e_param_color;
 	if (!valid_color(params->floor_color))
-		ft_exit("Invalid floor color value");
+		ret = e_param_color;
 	if (!valid_path(params->path_texture_ea))
-		ft_exit("Invalid east texture path");
+		ret = e_param_path;
 	if (!valid_path(params->path_texture_no))
-		ft_exit("Invalid north texture path");
+		ret = e_param_path;
 	if (!valid_path(params->path_texture_we))
-		ft_exit("Invalid west texture path");
+		ret = e_param_path;
 	if (!valid_path(params->path_texture_so))
-		ft_exit("Invalid south texture path");
-	if (!valid_path(params->path_texture_sp))
-		ft_exit("Invalid sprite texture path");
+		ret = e_param_path;
+	if (ret != -1)
+		print_error(ret);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:24:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/05/26 22:31:38 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:15:56 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**reallocmap(char **map, size_t map_size, size_t new_size)
 		return (map);
 	nmap = malloc(sizeof(nmap) * new_size);
 	if (nmap == NULL)
-		ft_exit(ERR_MALLOCCRASH);
+		return (NULL);
 	while (i < map_size)
 	{
 		*(nmap + i) = ft_strdup(*(map + i));
@@ -55,7 +55,7 @@ char	*find_player_orientation(t_map *map)
 	return (0);
 }
 
-void	find_pos(t_map *map, t_player *player, size_t line_l, char *or)
+int	find_pos(t_map *map, t_player *player, size_t line_l, char *or)
 {
 	if (or && player->orientation == '0')
 	{
@@ -65,7 +65,8 @@ void	find_pos(t_map *map, t_player *player, size_t line_l, char *or)
 		or[0] = '0';
 	}
 	else if (or && player->orientation != '0')
-		ft_exit("Find multiple players");
+		return (e_map_multi_pl);
+	return (-1);
 }
 
 void	convert_orientation(t_player *player)
@@ -79,12 +80,12 @@ void	convert_orientation(t_player *player)
 	else if (player->orientation == 'W')
 		player->angle = PI;
 	else
-		ft_exit("How can you be here ?");
+		player->angle = 0.00;
 	player->pos_delta_x = cos(player->angle) / 8;
 	player->pos_delta_y = sin(player->angle) / 8;
 }
 
-void	parse_map(t_map *map, t_player *player)
+int	parse_map(t_map *map, t_player *player)
 {
 	char	*find_orientation;
 	size_t	line_length;
@@ -95,8 +96,10 @@ void	parse_map(t_map *map, t_player *player)
 	find_orientation = find_player_orientation(map);
 	if (find_orientation)
 	{
-		find_pos(map, player, line_length, find_orientation);
+		if (find_pos(map, player, line_length, find_orientation) != -1)
+			return (e_map_multi_pl);
 		convert_orientation(player);
 	}
 	map->height++;
+	return (-1);
 }
