@@ -25,6 +25,16 @@
 # define MAX_X 1920
 # define MAX_Y 1080
 
+# define ESC 65307
+# define R_LEFT 65361
+# define R_RIGHT 65363
+# define W 119
+# define S 115
+# define D 100
+# define Q 97
+# define TRUE 0
+# define FALSE 1
+
 typedef struct s_point {
 	int	x;
 	int	y;
@@ -56,6 +66,8 @@ typedef struct s_player
 	int				going_down;
 	int				going_left;
 	int				going_right;
+	int				rotate_left;
+	int				rotate_right;
 	size_t			is_moving;
 	char			orientation;
 	float			angle;
@@ -121,11 +133,22 @@ void				ft_exit(char *context);
 /*
 **	MLX and images
 */
+void    destroy_base(t_base *base, char *err);
 void	put_img(t_base *base);
 void	init_tiles(t_base *base);
+int		close_win(t_base *base);
+void	update(t_base *base);
+/*
+**	Moves
+*/
 int		key_press(int keycode, t_base *base);
 int		key_release(int keycode, t_base *base);
-int		close_win(t_base *base);
+void	look_right(t_base *base);
+void	look_left(t_base *base);
+void	move_up(t_base *base);
+void	move_down(t_base *base);
+void	move_right(t_base *base);
+void	move_left(t_base *base);
 /*
 **	Initialisations and parsing
 */

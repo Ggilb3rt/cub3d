@@ -60,8 +60,8 @@ void	find_pos(t_map *map, t_player *player, size_t line_l, char *or)
 	if (or && player->orientation == '0')
 	{
 		player->orientation = or[0];
-		player->pos_y = map->height;
-		player->pos_x = line_l - ft_strlen(or);
+		player->pos_y = map->height + 0.125;
+		player->pos_x = line_l - ft_strlen(or) + 0.125;
 		or[0] = '0';
 	}
 	else if (or && player->orientation != '0')
@@ -80,8 +80,8 @@ void	convert_orientation(t_player *player)
 		player->angle = PI;
 	else
 		ft_exit("How can you be here ?");
-	player->pos_delta_x = cos(player->angle);
-	player->pos_delta_y = sin(player->angle);
+	player->pos_delta_x = cos(player->angle) / 8;
+	player->pos_delta_y = sin(player->angle) / 8;
 }
 
 void	parse_map(t_map *map, t_player *player)

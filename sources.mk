@@ -11,3 +11,6 @@ SRC = $Smain.c \
 		$Sput_img.c \
 		$Shooks.c \
 		$Sinit_base.c \
+		$Supdate.c \
+		$Smoves.c \
+		$Sdestroy.c \

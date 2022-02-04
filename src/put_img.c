@@ -62,6 +62,15 @@ void	draw_tile(t_base *base, t_point start, t_data *tile)
 	}
 }
 
+void	draw_player(t_base *base)
+{
+	t_point	start;
+
+	start.x = base->player->pos_x * 64;
+	start.y = base->player->pos_y * 64;
+	draw_tile(base, start, base->minime);
+}
+
 void	put_map(t_base *base)
 {
 	unsigned int	i;
@@ -76,14 +85,13 @@ void	put_map(t_base *base)
 		{
 			start.y = j * 64;
 			start.x = i * 64;
-			printf("\n\n--- j[%d]i[%d] == |%c| ---\n\n", j, i, base->map->map[j][i]);
 			if (base->map->map[j][i] == '1')
 				draw_tile(base, start, base->north);
-			else if (j == base->player->pos_x && i == base->player->pos_y == j)
-			{
-				draw_tile(base, start, base->north);
-				draw_tile(base, start, base->minime);
-			}
+			else if (base->map->map[j][i] == '0')
+				draw_tile(base, start, base->south);
+			else if (base->map->map[j][i] == ' ')
+				draw_tile(base, start, base->east);
+			draw_player(base);
 		}
 	}
 }

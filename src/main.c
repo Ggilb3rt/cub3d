@@ -65,6 +65,8 @@ int	main(int ac, char **av)
 	printf("Player orientation %c, angle : %f\ndeltaX %f, deltaY %f\npos_x %f, pos_y %f\n", player.orientation, player.angle, player.pos_delta_x, player.pos_delta_y, player.pos_x, player.pos_y);
 	printf("Map Width %zu\nMap Height %zu\n\nPrint map.map\n", map.width, map.height);
 	
+
+	(void)base;
 	// MLX LOOP
 	base = init_base(&params, &map, &player);
 	mlx_hook(base->win, 17, 1L << 17, close_win, base);
@@ -72,7 +74,6 @@ int	main(int ac, char **av)
 	mlx_hook(base->win, 3, 1L << 1, key_release, base);
 	put_img(base);
 	mlx_loop(base->mlx);
-
 
 	for (size_t i = 0; i < map.height; i++)
 	{
@@ -83,6 +84,7 @@ int	main(int ac, char **av)
 			printf("\033[0m");
 		free(map.map[i]);
 	}
+	
 	free(map.map);
 	map.map = NULL;
 	printf("\n");
