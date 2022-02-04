@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:04:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 16:04:12 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:37:25 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 	ret = 1;
 	while (ret != 0)
 	{
-		ret = get_next_line(*fd, &line);
+		ret = get_next_line(*fd, &line, 0);
 		if (!line)
 			return (e_gnl);
 		is_add = basic_check_map_line(par, map, pl, line);
 		if (is_add != -1)
+		{
+			get_next_line(*fd, &line, 1);
 			return (is_add);
+		}
 		free(line);
 	}
 	return (-1);

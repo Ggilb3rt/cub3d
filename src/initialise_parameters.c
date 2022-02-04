@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialise.c                                       :+:      :+:    :+:   */
+/*   initialise_parameters.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 16:05:38 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 16:31:09 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,15 @@ int	init_param(t_params *params, int *fd)
 	line = NULL;
 	while (ret != 0 && params->nb_valid_param < NB_PARAMS_PARSE)
 	{
-		ret = get_next_line(*fd, &line);
+		ret = get_next_line(*fd, &line, 0);
 		if (!line)
 			return (e_gnl);
 		parse_ret = basic_check_param_line(params, line);
 		if (parse_ret != -1)
+		{
+			get_next_line(*fd, &line, 1);
 			return (parse_ret);
+		}
 		else
 			continue ;
 		free(line);
