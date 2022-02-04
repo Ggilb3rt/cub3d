@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 17:14:34 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:52:02 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ int	main(int ac, char **av)
 	}
 	else
 		ft_exit("Bad number of arguments\n");
+	// DEBUG
+	debug_print_params(params);
+	debug_print_map(map, player);
 	(void)base;
 	// MLX LOOP
 	base = init_base(&params, &map, &player);
@@ -117,9 +120,6 @@ int	main(int ac, char **av)
 	put_img(base);
 	mlx_loop(base->mlx);
 
-	// DEBUG
-	debug_print_params(params);
-	debug_print_map(map, player);
 	// CLEAN
 	free_map(&map);
 	free_params(&params);
