@@ -100,19 +100,23 @@ int	draw_line(t_base *base, int startX, int startY, int endX, int endY, int colo
 {
 	double dX = endX - startX;
 	double dY = endY - startY;
-	int pixels = sqrt((dX * dX) + (dY * dY));
-
-	dX /= pixels;
-	dY /= pixels;
-
-	double pixelX = startX;
-	double pixelY = startY;
-	while (pixels)
+	double pente = dY / dX;
+	unsigned int x, y;
+	x = startX;
+	y = startY;
+	printf("je suis ici\n");
+	while (y < base->params->res_y)
 	{
-		mlx_pixel_put(base->mlx, base->win, pixelX, pixelY, color);
-		pixelX += dX;
-		pixelY += dY;
-		pixels--;
+		while (x < base->params->res_x)
+		{
+			if (y == pente * x + startY)
+			{
+				printf("je suis ici\n");
+				my_mlx_pixel_put(base->img, x, y, color);
+			}
+			x++;
+		}
+		y++;
 	}
 	return (1);
 }
@@ -146,7 +150,6 @@ void	put_map(t_base *base)
 void	put_img(t_base *base)
 {
 	printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
-	printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
 	put_map(base);
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }

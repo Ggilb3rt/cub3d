@@ -176,6 +176,7 @@ void	move_down(t_base *base);
 void	move_right(t_base *base);
 void	move_left(t_base *base);
 void	move_chased_step(t_base *base, char left_or_right);
+void	rotations(t_base *base, float angle);
 /*
 **	Initialisations and parsing
 */
