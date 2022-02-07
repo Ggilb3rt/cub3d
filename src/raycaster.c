@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:24:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/07 19:42:24 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 20:13:32 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	to_wall(t_base *base)
 	int		hit;
 
 	// get ray pos and dir
-	float	cameraX = 0;
+	float	cameraX = base->player->pos_x + base->player->dir_v.x;
 	float	ray_dir_x = base->player->dir_v.x + base->player->cam_v.x * cameraX;
 	float	ray_dir_y = base->player->dir_v.y + base->player->cam_v.y * cameraX;
 	
@@ -26,13 +26,11 @@ void	to_wall(t_base *base)
 	ray.map_x = (int)base->player->pos_x;
 	ray.map_y = (int)base->player->pos_y;
 	if (ray_dir_x != 0)
-		//ray.delta_length_x = fabs(1 / ray_dir_x);
-		ray.delta_length_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
+		ray.delta_length_x = fabs(1 / ray_dir_x);
 	else
 		ray.delta_length_x = 1e30;
 	if (ray_dir_y != 0)
-		//ray.delta_length_y = fabs(1 / ray_dir_y);
-		ray.delta_length_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
+		ray.delta_length_y = fabs(1 / ray_dir_y);
 	else
 		ray.delta_length_y = 1e30;
 	printf("raydeltaDir x %f, y %f\n", ray.delta_length_x, ray.delta_length_y);
@@ -76,8 +74,11 @@ void	to_wall(t_base *base)
 			ray.map_y += ray.step_y;
 			ray.side = 1;
 		}
-		if (base->map->map[ray.map_x][ray.map_y] == '1')
+		if (base->map->map[ray.map_y][ray.map_x] == '1')
+        {
+            printf("map[%d][%d] == %c\n",ray.map_x, ray.map_y, base->map->map[ray.map_y][ray.map_x]);
 			hit = 1;
+        }
 	}
 	printf("hit wall at %d, %d\n", ray.map_x, ray.map_y);
 	draw_line(base,
