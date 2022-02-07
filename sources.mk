@@ -14,4 +14,5 @@ SRC = $Smain.c \
 		$Supdate.c \
 		$Smoves.c \
 		$Sdestroy.c \
-		$Sdraw_rays.c
+		$Sdraw_rays.c \
+		$Srotations.c

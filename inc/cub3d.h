@@ -156,6 +156,7 @@ void	update(t_base *base);
 */
 int		key_press(int keycode, t_base *base);
 int		key_release(int keycode, t_base *base);
+void	rotations(t_base *base, float angle);
 void	look_right(t_base *base);
 void	look_left(t_base *base);
 void	move_up(t_base *base);

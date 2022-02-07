@@ -23,8 +23,9 @@ void	look_left(t_base *base)
 	base->player->angle -= 0.125;
 	if (base->player->angle < 0)
 		base->player->angle += 2 * PI;
-	base->player->pos_delta_x = cos(base->player->angle) / 16;
-	base->player->pos_delta_y = sin(base->player->angle) / 16;
+	base->player->pos_delta_x = cos(base->player->angle) / 8;
+	base->player->pos_delta_y = sin(base->player->angle) / 8;
+	rotations(base, -0.125);
 }
 
 void	look_right(t_base *base)
@@ -34,9 +35,10 @@ void	look_right(t_base *base)
 		base->player->angle -= 2 * PI;
 	base->player->pos_delta_x = cos(base->player->angle) / 8;
 	base->player->pos_delta_y = sin(base->player->angle) / 8;
+	rotations(base, 0.125);
 }
 
-void	move_up(t_base *base)
+void	move_down(t_base *base)
 {
 	float	x;
 	float	y;
@@ -50,7 +52,7 @@ void	move_up(t_base *base)
 	}
 }
 
-void	move_down(t_base *base)
+void	move_up(t_base *base)
 {
 	float	x;
 	float	y;
