@@ -2,22 +2,22 @@
 
 void	get_initial_camera(t_base *base)
 {
-	if (base->player->angle == PI / 2)
+	if (base->player->orientation == 'N')
 	{
 		base->player->cam_v.x = base->player->dir_v.x + 0.66;
 		base->player->cam_v.y = base->player->dir_v.y;
 	}
-	else if (base->player->angle == 3 * PI / 2)
+	else if (base->player->orientation == 'S')
 	{
 		base->player->cam_v.x = base->player->dir_v.x - 0.66;
 		base->player->cam_v.y = base->player->dir_v.y;
 	}
-	else if (base->player->angle == 0)
+	else if (base->player->orientation == 'E')
 	{
 		base->player->cam_v.x = base->player->dir_v.x ;
 		base->player->cam_v.y = base->player->dir_v.y + 0.66;
 	}
-	else if (base->player->angle == PI)
+	else if (base->player->orientation == 'W')
 	{
 		base->player->cam_v.x = base->player->dir_v.x ;
 		base->player->cam_v.y = base->player->dir_v.y - 0.66;

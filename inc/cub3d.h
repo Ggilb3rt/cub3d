@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/07 15:42:01 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:17:02 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,21 @@ typedef struct s_player
 	t_vector		cam_v;
 }					t_player;
 
+typedef struct s_ray
+{
+	int				map_x;
+	int				map_y;
+	float			length_x;
+	float			length_y;
+	float			delta_length_x;
+	float			delta_length_y;
+	float			wall_dist;
+	int				step_x;
+	int				step_y;
+	int				side;
+}					t_ray;
+
+
 typedef struct s_parser_valid
 {
 	int				resolution;
@@ -164,6 +179,8 @@ void	init_tiles(t_base *base);
 int		close_win(t_base *base);
 int		draw_line(t_base *base, int startX, int startY, int endX, int endY, int color);
 void	update(t_base *base);
+
+void	to_wall(t_base *base);
 /*
 **	Moves
 */

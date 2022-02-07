@@ -90,9 +90,10 @@ void	draw_player(t_base *base)
 	draw_tile(base, start, base->minime);
 	draw_line(base,
 		base->player->pos_x * 64, base->player->pos_y * 64,
-		base->player->dir_v.x * 64,
-		base->player->dir_v.y * 64,
+		base->player->dir_v.x + base->player->pos_x * 64,
+		base->player->dir_v.y + base->player->pos_y * 64,
 		0xFF00FF);
+	to_wall(base);
 	// draw_rays(base, start);
 }
 
@@ -109,7 +110,7 @@ int	draw_line(t_base *base, int startX, int startY, int endX, int endY, int colo
 	double pixelY = startY;
 	while (pixels)
 	{
-		mlx_pixel_put(base->mlx, base->win, pixelX, pixelY, color);
+		my_mlx_pixel_put(base->img, pixelX, pixelY, color);
 		pixelX += dX;
 		pixelY += dY;
 		pixels--;

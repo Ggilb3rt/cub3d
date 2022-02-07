@@ -19,6 +19,7 @@ void	move_player(t_base *base)
 void	update(t_base *base)
 {
 	move_player(base);
+	//to_wall(base);
 	base->player->is_moving = 0;
 	put_img(base);
 }
