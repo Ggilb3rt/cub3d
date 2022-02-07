@@ -93,3 +93,34 @@ void	move_left(t_base *base)
 		base->player->pos_y += sin(base->player->angle - (PI / 2)) / 16;
 	}
 }
+
+
+void	stay_in_two_pi(float *angle)
+{
+	if (*angle < 0)
+		*angle += 2 * PI;
+	else if (*angle > 2 * PI)
+		*angle -= 2 * PI;
+}
+
+void	move_chased_step(t_base *base, char left_or_right)
+{
+	float	dx;
+	float	dy;
+	float	new_angle;
+
+	if (left_or_right == 'l')
+		new_angle = base->player->angle + M_PI_2;
+	else if (left_or_right == 'r')
+		new_angle = base->player->angle - M_PI_2;
+	else
+		new_angle = 0;
+	stay_in_two_pi(new_angle);
+	dx = cos(new_angle) / 16;
+	dy = sin(new_angle) / 16;
+	if (check_wall(base, base->player->pos_x + dx, base->player->pos_y + dy) == TRUE)
+	{
+		base->player->pos_x += dx;
+		base->player->pos_y += dy;
+	}
+}
