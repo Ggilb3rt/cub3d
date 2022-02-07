@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/01 11:11:04 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:56:20 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void    destroy_base(t_base *base, char *err);
 void	put_img(t_base *base);
 void	init_tiles(t_base *base);
 int		close_win(t_base *base);
+int		draw_line(t_base *base, int startX, int startY, int endX, int endY, int color);
 void	update(t_base *base);
 /*
 **	Moves

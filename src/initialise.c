@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 15:13:34 by ggilbert          #+#    #+#             */
-/*   Updated: 2021/12/06 15:33:28 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:55:06 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 	ret = 1;
 	while (ret != 0)
 	{
-		ret = get_next_line(*fd, &line);
+		ret = get_next_line(*fd, &line, 0);
 		if (!line)
 			ft_exit(ERR_GNL);
 		if (line[0] == '\0' && map->map == NULL)
@@ -91,7 +91,7 @@ int	init_param(t_params *params, int *fd)
 	line = NULL;
 	while (ret != 0 && params->nb_valid_param < 8)
 	{
-		ret = get_next_line(*fd, &line);
+		ret = get_next_line(*fd, &line, 0);
 		if (!line)
 			ft_exit(ERR_GNL);
 		if (is_id_valid(line) || line[0] == '\0')

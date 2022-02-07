@@ -88,8 +88,35 @@ void	draw_player(t_base *base)
 	start.x = base->player->pos_x * 64;
 	start.y = base->player->pos_y * 64;
 	draw_tile(base, start, base->minime);
+	draw_line(base,
+		base->player->pos_x * 64, base->player->pos_y * 64,
+		base->player->dir_v.x * 64,
+		base->player->dir_v.y * 64,
+		0xFF00FF);
 	// draw_rays(base, start);
 }
+
+int	draw_line(t_base *base, int startX, int startY, int endX, int endY, int color)
+{
+	double dX = endX - startX;
+	double dY = endY - startY;
+	int pixels = sqrt((dX * dX) + (dY * dY));
+
+	dX /= pixels;
+	dY /= pixels;
+
+	double pixelX = startX;
+	double pixelY = startY;
+	while (pixels)
+	{
+		mlx_pixel_put(base->mlx, base->win, pixelX, pixelY, color);
+		pixelX += dX;
+		pixelY += dY;
+		pixels--;
+	}
+	return (1);
+}
+
 
 void	put_map(t_base *base)
 {
@@ -118,6 +145,8 @@ void	put_map(t_base *base)
 
 void	put_img(t_base *base)
 {
+	printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
+	printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
 	put_map(base);
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }

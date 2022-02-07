@@ -9,43 +9,45 @@ void	get_initial_camera(t_base *base)
 	}
 	else if (base->player->angle == 3 * PI / 2)
 	{
-		base->player->cam_v.x = base->player->pos_x - 0.66;
-		base->player->cam_v.y = base->player->pos_y;
+		base->player->cam_v.x = base->player->dir_v.x - 0.66;
+		base->player->cam_v.y = base->player->dir_v.y;
 	}
 	else if (base->player->angle == 0)
 	{
-		base->player->cam_v.x = base->player->pos_x;
-		base->player->cam_v.y = base->player->pos_y + 0.66;
+		base->player->cam_v.x = base->player->dir_v.x ;
+		base->player->cam_v.y = base->player->dir_v.y + 0.66;
 	}
 	else if (base->player->angle == PI)
 	{
-		base->player->cam_v.x = base->player->pos_x;
-		base->player->cam_v.y = base->player->pos_y - 0.66;
+		base->player->cam_v.x = base->player->dir_v.x ;
+		base->player->cam_v.y = base->player->dir_v.y - 0.66;
 	}
 }
 
 void	get_initial_direction(t_base *base)
 {
-	if (base->player->angle == PI / 2)
+	if (base->player->orientation == 'N')
 	{
 		base->player->dir_v.x = base->player->pos_x;
 		base->player->dir_v.y = base->player->pos_y - 1;
+		printf("pouet\n");
 	}
-	else if (base->player->angle == 3 * PI / 2)
+	else if (base->player->orientation == 'S')
 	{
 		base->player->dir_v.x = base->player->pos_x;
 		base->player->dir_v.y = base->player->pos_y + 1;
 	}
-	else if (base->player->angle == 0)
+	else if (base->player->orientation == 'E')
 	{
 		base->player->dir_v.x = base->player->pos_x + 1;
 		base->player->dir_v.y = base->player->pos_y;
 	}
-	else if (base->player->angle == PI)
+	else if (base->player->orientation == 'W')
 	{
 		base->player->dir_v.x = base->player->pos_x - 1;
 		base->player->dir_v.y = base->player->pos_y;
 	}
+	printf("starting x %f\t y %f\n\n", base->player->pos_x, base->player->pos_y);
 }
 
 void	init_vars(t_base *base)
