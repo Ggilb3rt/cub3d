@@ -19,4 +19,5 @@ SRC = $Smain.c \
 		$Scheck_map_utils.c \
 		$Sinitialise_map.c \
 		$Sdraw_rays.c \
-		$Sraycaster.c
+		$Sraycaster.c \
+		$Srotations.c

@@ -32,6 +32,7 @@ void	look_left(t_base *base)
 	stay_in_two_pi(&base->player->angle);
 	base->player->pos_delta_x = cos(base->player->angle) / 16;
 	base->player->pos_delta_y = sin(base->player->angle) / 16;
+	rotations(base, -0.125);
 }
 
 void	look_right(t_base *base)
@@ -40,6 +41,7 @@ void	look_right(t_base *base)
 	stay_in_two_pi(&base->player->angle);
 	base->player->pos_delta_x = cos(base->player->angle) / 16;
 	base->player->pos_delta_y = sin(base->player->angle) / 16;
+	rotations(base, 0.125);
 }
 
 void	move_down(t_base *base)
@@ -51,9 +53,10 @@ void	move_down(t_base *base)
 	y = base->player->pos_y + base->player->pos_delta_y;
 	if (check_wall(base, x, y) == TRUE)
 	{
-		base->player->pos_x += base->player->pos_delta_x;
-		base->player->pos_y += base->player->pos_delta_y;
+		base->player->pos_x = x;
+		base->player->pos_y = y;
 	}
+\
 }
 
 void	move_up(t_base *base)
@@ -65,8 +68,8 @@ void	move_up(t_base *base)
 	y = base->player->pos_y - base->player->pos_delta_y;
 	if (check_wall(base, x, y) == TRUE)
 	{
-		base->player->pos_x -= base->player->pos_delta_x;
-		base->player->pos_y -= base->player->pos_delta_y;
+		base->player->pos_x = x;
+		base->player->pos_y = y;
 	}
 }
 
@@ -90,6 +93,8 @@ void	move_chased_step(t_base *base, char left_or_right)
 	{
 		base->player->pos_x += dx;
 		base->player->pos_y += dy;
+		base->player->dir_v.x += dx;
+		base->player->dir_v.y += dy;
 	}
 }
 
@@ -103,8 +108,10 @@ void	move_right(t_base *base)
 	y = base->player->pos_y + (sin(base->player->angle + PI / 2) / 16);
 	if (check_wall(base, x, y) == TRUE)
 	{
-		base->player->pos_x += cos(base->player->angle + PI / 2) / 16;
-		base->player->pos_y += sin(base->player->angle + PI / 2) / 16;
+		base->player->pos_x = x;
+		base->player->pos_y = y;
+		base->player->dir_v.x = x;
+		base->player->dir_v.y = y;
 	}
 }
 

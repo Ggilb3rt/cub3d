@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:24:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/07 19:24:49 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 19:42:24 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	to_wall(t_base *base)
 	ray.map_x = (int)base->player->pos_x;
 	ray.map_y = (int)base->player->pos_y;
 	if (ray_dir_x != 0)
-		ray.delta_length_x = fabs(1 / ray_dir_x);
-		//ray.delta_length_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
+		//ray.delta_length_x = fabs(1 / ray_dir_x);
+		ray.delta_length_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
 	else
 		ray.delta_length_x = 1e30;
 	if (ray_dir_y != 0)
-		ray.delta_length_y = fabs(1 / ray_dir_y);
-		//ray.delta_length_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
+		//ray.delta_length_y = fabs(1 / ray_dir_y);
+		ray.delta_length_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
 	else
 		ray.delta_length_y = 1e30;
 	printf("raydeltaDir x %f, y %f\n", ray.delta_length_x, ray.delta_length_y);
