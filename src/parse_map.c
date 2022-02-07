@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:24:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 17:59:21 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:10:22 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	convert_orientation(t_player *player)
 	else if (player->orientation == 'S')
 		player->angle = 3 * PI / 2;
 	else if (player->orientation == 'E')
-		player->angle = 0.00;
-	else if (player->orientation == 'W')
 		player->angle = PI;
+	else if (player->orientation == 'W')
+		player->angle = 0.00;
 	else
 		player->angle = 0.00;
 	player->pos_delta_x = cos(player->angle) / 8;

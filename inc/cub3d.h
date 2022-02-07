@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 17:18:12 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 12:55:58 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void	move_up(t_base *base);
 void	move_down(t_base *base);
 void	move_right(t_base *base);
 void	move_left(t_base *base);
+void	move_chased_step(t_base *base, char left_or_right);
 /*
 **	Initialisations and parsing
 */
