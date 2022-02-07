@@ -59,6 +59,12 @@ typedef struct s_color
 	unsigned char	blue;
 }					t_color;
 
+typedef struct	s_vector
+{
+	float	x;
+	float	y;
+}				t_vector;
+
 typedef struct s_player
 {
 	float			pos_x;
@@ -74,6 +80,8 @@ typedef struct s_player
 	float			angle;
 	float			pos_delta_x;
 	float			pos_delta_y;
+	t_vector		dir_v;
+	t_vector		cam_v;
 }					t_player;
 
 typedef struct s_parser_valid
@@ -130,7 +138,10 @@ typedef struct s_base {
 */
 void				error_init(char *context);
 void				ft_exit(char *context);
-
+/*
+**	RayCasting
+*/
+void	draw_ray(t_base *base);
 /*
 **	MLX and images
 */

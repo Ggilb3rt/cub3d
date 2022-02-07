@@ -62,6 +62,25 @@ void	draw_tile(t_base *base, t_point start, t_data *tile)
 	}
 }
 
+// void	draw_rays(t_base *base, t_point start)
+// {
+// 	float		x;
+// 	float		y;
+
+// 	x = 0;
+// 	while (x < 64)
+// 	{
+// 		y = 0;
+// 		while (y < 64)
+// 		{
+// 			if (x % base->player->dir_v.x == 0 && y % base->player->dir_v.y)
+// 				my_mlx_pixel_put(base->img, start.x + x, start.y + y, 0x00AB59);
+// 			y += 0.125;
+// 		}
+// 		x += 0.125;
+// 	}
+// }
+
 void	draw_player(t_base *base)
 {
 	t_point	start;
@@ -69,6 +88,7 @@ void	draw_player(t_base *base)
 	start.x = base->player->pos_x * 64;
 	start.y = base->player->pos_y * 64;
 	draw_tile(base, start, base->minime);
+	// draw_rays(base, start);
 }
 
 void	put_map(t_base *base)
