@@ -47,7 +47,6 @@ void	move_down(t_base *base)
 	float	x;
 	float	y;
 
-	printf("res = %f\n", base->player->pos_y - base->player->pos_delta_y);
 	x = base->player->pos_x + base->player->pos_delta_x;
 	y = base->player->pos_y + base->player->pos_delta_y;
 	if (check_wall(base, x, y) == TRUE)

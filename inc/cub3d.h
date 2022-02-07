@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/07 12:55:58 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/07 15:42:01 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ typedef struct s_color
 	unsigned char	blue;
 }					t_color;
 
+typedef struct	s_vector
+{
+	float	x;
+	float	y;
+}				t_vector;
+
 typedef struct s_player
 {
 	float			pos_x;
@@ -88,6 +94,8 @@ typedef struct s_player
 	float			angle;
 	float			pos_delta_x;
 	float			pos_delta_y;
+	t_vector		dir_v;
+	t_vector		cam_v;
 }					t_player;
 
 typedef struct s_parser_valid
@@ -143,7 +151,10 @@ typedef struct s_base {
 */
 void				error_init(char *context);
 void				ft_exit(char *context);
-
+/*
+**	RayCasting
+*/
+void	draw_ray(t_base *base);
 /*
 **	MLX and images
 */
@@ -151,6 +162,7 @@ void    destroy_base(t_base *base, char *err);
 void	put_img(t_base *base);
 void	init_tiles(t_base *base);
 int		close_win(t_base *base);
+int		draw_line(t_base *base, int startX, int startY, int endX, int endY, int color);
 void	update(t_base *base);
 /*
 **	Moves

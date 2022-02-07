@@ -5,7 +5,7 @@ SRC = $Smain.c \
 		$Sparse_parameters.c \
 		$Sparse_map.c \
 		$Scheck_map.c \
-		$Scheck_map_pivoted.c\
+		$Scheck_map_pivoted.c \
 		$Scheck_parameters.c \
 		$Serrors.c \
 		$Sput_img.c \
@@ -17,4 +17,5 @@ SRC = $Smain.c \
 		$Sfree.c \
 		$Sparse_param_utils.c \
 		$Scheck_map_utils.c \
-		$Sinitialise_map.c
+		$Sinitialise_map.c \
+		$Sdraw_rays.c

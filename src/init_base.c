@@ -1,5 +1,55 @@
 #include "../inc/cub3d.h"
 
+void	get_initial_camera(t_base *base)
+{
+	if (base->player->angle == PI / 2)
+	{
+		base->player->cam_v.x = base->player->dir_v.x + 0.66;
+		base->player->cam_v.y = base->player->dir_v.y;
+	}
+	else if (base->player->angle == 3 * PI / 2)
+	{
+		base->player->cam_v.x = base->player->dir_v.x - 0.66;
+		base->player->cam_v.y = base->player->dir_v.y;
+	}
+	else if (base->player->angle == 0)
+	{
+		base->player->cam_v.x = base->player->dir_v.x ;
+		base->player->cam_v.y = base->player->dir_v.y + 0.66;
+	}
+	else if (base->player->angle == PI)
+	{
+		base->player->cam_v.x = base->player->dir_v.x ;
+		base->player->cam_v.y = base->player->dir_v.y - 0.66;
+	}
+}
+
+void	get_initial_direction(t_base *base)
+{
+	if (base->player->orientation == 'N')
+	{
+		base->player->dir_v.x = base->player->pos_x;
+		base->player->dir_v.y = base->player->pos_y - 1;
+		printf("pouet\n");
+	}
+	else if (base->player->orientation == 'S')
+	{
+		base->player->dir_v.x = base->player->pos_x;
+		base->player->dir_v.y = base->player->pos_y + 1;
+	}
+	else if (base->player->orientation == 'E')
+	{
+		base->player->dir_v.x = base->player->pos_x + 1;
+		base->player->dir_v.y = base->player->pos_y;
+	}
+	else if (base->player->orientation == 'W')
+	{
+		base->player->dir_v.x = base->player->pos_x - 1;
+		base->player->dir_v.y = base->player->pos_y;
+	}
+	printf("starting x %f\t y %f\n\n", base->player->pos_x, base->player->pos_y);
+}
+
 void	init_vars(t_base *base)
 {
 	base->player->going_up = 0;
@@ -7,6 +57,8 @@ void	init_vars(t_base *base)
 	base->player->going_left = 0;
 	base->player->going_right = 0;
 	base->player->is_moving = 0;
+	get_initial_direction(base);
+	get_initial_camera(base);
 }
 
 t_data	*initialise_data(t_base *base, int i)
