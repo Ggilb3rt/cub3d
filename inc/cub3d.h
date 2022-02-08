@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/08 09:59:06 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:13:02 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 # include "../mlx/mlx.h"
 
 # define NB_PARAMS_PARSE 7
+# define TEX_SIZE 64
 # define PI 3.14159265
 # define PI2
 # define MAX_X 1920
 # define MAX_Y 1080
+# define MOVE_SPEED 0.125
 
 # define ESC 65307
 # define R_LEFT 65361
@@ -111,6 +113,7 @@ typedef struct s_ray
 	int				step_x;
 	int				step_y;
 	int				side;
+	char		wall_side;
 }					t_ray;
 
 
@@ -174,6 +177,8 @@ void	draw_ray(t_base *base);
 /*
 **	MLX and images
 */
+void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
+unsigned int	get_pixel(t_data *tile, int x, int y);
 void    destroy_base(t_base *base, char *err);
 void	put_img(t_base *base);
 void	init_tiles(t_base *base);
@@ -185,6 +190,8 @@ void	raycaster(t_base *base);
 /*
 **	Moves
 */
+t_vector	rot_quarter(t_vector dir);
+t_vector	rot_rev(t_vector dir);
 int		key_press(int keycode, t_base *base);
 int		key_release(int keycode, t_base *base);
 void	look_right(t_base *base);
@@ -193,7 +200,7 @@ void	move_up(t_base *base);
 void	move_down(t_base *base);
 void	move_right(t_base *base);
 void	move_left(t_base *base);
-void	move_chased_step(t_base *base, char left_or_right);
+void	move_chased_step(t_base *base, char lr);
 void	rotations(t_base *base, float angle);
 /*
 **	Initialisations and parsing

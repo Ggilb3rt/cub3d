@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:24:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/08 12:38:26 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:00:15 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	raycaster(t_base *base)
 	//printf("raydeltaDir x %f, y %f\n", ray.delta_length_x, ray.delta_length_y);
 	
 	// init step and initial ray.length
-	if (ray_dir_x < 0)
+	if (ray_dir_x > 0)
 	{
 		ray.step_x = -1;
 		ray.length_x = (base->player->pos_x - ray.map_x) * ray.delta_length_x;
@@ -51,7 +51,7 @@ void	raycaster(t_base *base)
 		ray.step_x = 1;
 		ray.length_x = (ray.map_x + 1.0 - base->player->pos_x) * ray.delta_length_x;
 	}
-	if (ray_dir_y < 0)
+	if (ray_dir_y > 0)
 	{
 		ray.step_y = -1;
 		ray.length_y = (base->player->pos_y - ray.map_y) * ray.delta_length_y;
@@ -66,7 +66,6 @@ void	raycaster(t_base *base)
 	hit = 0;
 	while (hit == 0)
 	{
-		//printf("ray length x %f, y %f\n", ray.length_x, ray.length_y);
 		if (ray.length_x < ray.length_y)
 		{
 			ray.length_x += ray.delta_length_x;
@@ -77,10 +76,27 @@ void	raycaster(t_base *base)
 		{
 			ray.length_y += ray.delta_length_y;
 			ray.map_y += ray.step_y;
-			ray.side = 1;
+			ray.side = 1 ;
 		}
 		if (base->map->map[ray.map_y][ray.map_x] == '1')
+		{
 			hit = 1;
+			// get_wall_orientation
+			if (ray.side == 0)
+			{
+				if (base->player->pos_x > ray.map_x)
+					ray.wall_side = 'E';// mur E
+				else
+					ray.wall_side = 'W';// mur W
+			}
+			else
+			{
+				if (base->player->pos_y > ray.map_y)
+					ray.wall_side = 'S';// mur S
+				else
+					ray.wall_side = 'N';// mur N
+			}
+		}
 	}
 	
 	// wallDist
@@ -95,15 +111,49 @@ void	raycaster(t_base *base)
 	int draw_end = (int)base->params->res_y / 2 + line_height / 2;
 	if (draw_end >= (int)base->params->res_y)
 		draw_end = (int)base->params->res_y - 1;
-	//printf("hit wall at %d, %d\n\n\n", ray.map_x, ray.map_y);
+		
+	// textures 1: get X
+	t_data	*tex;
+	double	wallX;
+	int		texX;
+	
+	if (ray.wall_side == 'N')
+		tex = base->north;
+	if (ray.wall_side == 'S')
+		tex = base->south;
+	if (ray.wall_side == 'E')
+		tex = base->east;
+	if (ray.wall_side == 'W')
+		tex = base->west;
 	if (ray.side == 0)
-		draw_line(base, pixx, draw_start, pixx, draw_end, 0x9830d9);
+	{
+		printf("pos_y == %f --- ray.dist == %f --- ray.dir_y == %f\nray.dist * ray_dir_y == %f\n", 
+		base->player->pos_y, ray.perp_wall_dist, ray_dir_y, ray.perp_wall_dist * ray_dir_y);
+		wallX = base->player->pos_y + ray.perp_wall_dist * ray_dir_y;
+	}
 	else
-		draw_line(base, pixx, draw_start, pixx, draw_end, 0xFF0000);
-	// draw_line(base,
-	// 	base->player->pos_x * 64, base->player->pos_y * 64,
-	// 	ray.map_x * 64,
-	// 	ray.map_y * 64,
-	// 	0x0000FF);
+		wallX = base->player->pos_x + ray.perp_wall_dist * ray_dir_x;
+	wallX -= floor(wallX);
+	texX = wallX * (double)TEX_SIZE;
+	if (ray.side == 0 && ray_dir_x > 0)
+		texX = TEX_SIZE - texX - 1;
+	if (ray.side == 1 && ray_dir_y < 0)
+		texX = TEX_SIZE - texX - 1;
+		
+	// textures 2: get Y
+	double	step = 1.0 * TEX_SIZE / line_height;
+	double	texPos = (draw_start - base->params->res_y / 2 + line_height / 2) * step;
+	int		y = draw_start;
+	int		texY;
+	unsigned int	color;
+	
+	while (y < draw_end)
+	{
+		texY = (int)texPos & (TEX_SIZE -1);
+		texPos += step;
+		color = get_pixel(tex, texX, texY);
+		my_mlx_pixel_put(base->img, pixx, y, color);
+		y++;
+	}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 17:52:02 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:17:52 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ int	main(int ac, char **av)
 	t_map			map;
 
 	set_zero(&params, &player, &map);
+	if (MOVE_SPEED > 1)
+	{
+		printf("Cannot go too fast\n");
+		exit(1);
+	}
 	if (ac == 2)
 	{
 		if (err_in_file(av, &params, &player, &map))

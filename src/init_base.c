@@ -12,12 +12,12 @@ void	get_initial_camera(t_base *base)
 		base->player->cam_v.x = -0.66;
 		base->player->cam_v.y = 0;
 	}
-	else if (base->player->orientation == 'E')
+	else if (base->player->orientation == 'W')
 	{
 		base->player->cam_v.x = 0;
 		base->player->cam_v.y = 0.66;
 	}
-	else if (base->player->orientation == 'W')
+	else if (base->player->orientation == 'E')
 	{
 		base->player->cam_v.x = 0;
 		base->player->cam_v.y = -0.66;
@@ -37,12 +37,12 @@ void	get_initial_direction(t_base *base)
 		base->player->dir_v.x = 0;
 		base->player->dir_v.y = 1;
 	}
-	else if (base->player->orientation == 'E')
+	else if (base->player->orientation == 'W')
 	{
 		base->player->dir_v.x = 1;
 		base->player->dir_v.y = 0;
 	}
-	else if (base->player->orientation == 'W')
+	else if (base->player->orientation == 'E')
 	{
 		base->player->dir_v.x = -1;
 		base->player->dir_v.y = 0;
