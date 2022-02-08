@@ -56,7 +56,6 @@ void	move_down(t_base *base)
 		base->player->pos_x = x;
 		base->player->pos_y = y;
 	}
-\
 }
 
 void	move_up(t_base *base)

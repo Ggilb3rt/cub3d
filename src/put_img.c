@@ -93,7 +93,11 @@ void	draw_player(t_base *base)
 		base->player->dir_v.x + base->player->pos_x * 64,
 		base->player->dir_v.y + base->player->pos_y * 64,
 		0xFF00FF);
-	to_wall(base);
+	// draw_line(base,
+	// 	base->player->pos_x * 64, base->player->pos_y * 64,
+	// 	base->player->pos_x * 64 + cos(base->player->angle) * 32,
+	// 	base->player->pos_y * 64 + sin(base->player->angle) * 32,
+	// 	0xFFFFFF);
 	// draw_rays(base, start);
 }
 
@@ -144,10 +148,38 @@ void	put_map(t_base *base)
 	}
 }
 
+void put_ceiling(t_base *base)
+{
+	unsigned int y;
+
+	y = 0;
+	while (y < base->params->res_y / 2)
+	{
+		draw_line(base, 0, y, base->params->res_x, y, 0xff00ff);
+		y++;
+	}
+}
+
+
+void put_floor(t_base *base)
+{
+	unsigned int y;
+
+	y = base->params->res_y / 2;
+	while (y < base->params->res_y)
+	{
+		draw_line(base, 0, y, base->params->res_x, y, 0x00FF00);
+		y++;
+	}
+}
+
 void	put_img(t_base *base)
 {
-	printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
-	printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
-	put_map(base);
+	//printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
+	//printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
+	//put_map(base);
+	put_ceiling(base);
+	put_floor(base);
+	raycaster(base);
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }
