@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 12:48:08 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:57:00 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_color
 	unsigned char	blue;
 }					t_color;
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	float	x;
 	float	y;
@@ -113,7 +113,7 @@ typedef struct s_ray
 	int				step_x;
 	int				step_y;
 	int				side;
-	char		wall_side;
+	char			wall_side;
 }					t_ray;
 
 
@@ -161,7 +161,6 @@ typedef struct s_base {
 	t_data		*east;
 	t_data		*south;
 	t_data		*west;
-	t_data		*minime;
 	t_player	*player;
 	int			can_move;
 }		t_base;
@@ -174,18 +173,19 @@ void				ft_exit(char *context);
 /*
 **	RayCasting
 */
-void	draw_ray(t_base *base);
+void				draw_ray(t_base *base);
 /*
 **	MLX and images
 */
-void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
-unsigned int	get_pixel(t_data *tile, int x, int y);
-void    destroy_base(t_base *base, char *err);
-void	put_img(t_base *base);
-void	init_tiles(t_base *base);
-int		close_win(t_base *base);
-int		draw_line(t_base *base, int startX, int startY, int endX, int endY, int color);
-void	update(t_base *base);
+void				my_mlx_pixel_put(t_data *img, int x, int y,
+						unsigned int color);
+unsigned int		get_pixel(t_data *tile, int x, int y);
+void    			destroy_base(t_base *base, char *err);
+void				put_img(t_base *base);
+int					init_tiles(t_base *base);
+int					close_win(t_base *base);
+int					draw_line(t_base *base, int startX, int startY, int endX, int endY, int color);
+void				update(t_base *base);
 
 void	raycaster(t_base *base);
 /*

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:24:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 12:42:05 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:05:21 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,16 @@ void	raycaster(t_base *base)
 				if (ray.side == 0)
 				{
 					if (base->player->pos_x > ray.map_x)
-						ray.wall_side = 'E';// mur E
+						ray.wall_side = 'E';
 					else
-						ray.wall_side = 'W';// mur W
+						ray.wall_side = 'W';
 				}
 				else
 				{
 					if (base->player->pos_y > ray.map_y)
-						ray.wall_side = 'S';// mur S
+						ray.wall_side = 'S';
 					else
-						ray.wall_side = 'N';// mur N
+						ray.wall_side = 'N';
 				}
 			}
 		}
@@ -110,7 +110,7 @@ void	raycaster(t_base *base)
 			draw_start = 0;
 		int draw_end = (int)base->params->res_y / 2 + line_height / 2;
 		if (draw_end >= (int)base->params->res_y)
-			draw_end = (int)base->params->res_y - 1;
+			draw_end = (int)base->params->res_y;
 			
 		// textures 1: get X
 		t_data	*tex;
@@ -127,18 +127,12 @@ void	raycaster(t_base *base)
 			tex = base->west;
 		if (ray.side == 0)
 		{
-			//printf("pos_y == %f --- ray.dist == %f --- ray.dir_y == %f\nray.dist * ray_dir_y == %f\n", 
-			//base->player->pos_y, ray.perp_wall_dist, ray_dir_y, ray.perp_wall_dist * ray_dir_y);
 			wallX = base->player->pos_y + ray.perp_wall_dist * ray_dir_y;
 		}
 		else
 			wallX = base->player->pos_x + ray.perp_wall_dist * ray_dir_x;
 		wallX -= floor(wallX);
 		wallX = fabs(wallX - 1);
-		if (ray.map_x == 12 && ray.map_y == 5 && ray.side == 0)
-			printf("WallX = %f\t perp_wall_dist %f\n", wallX, ray.perp_wall_dist);
-		//if (ray.map_x == 11 && ray.map_y == 4)
-		//	printf("wallXbriques = %f\t perp_dist %f\n", wallX, ray.perp_wall_dist);
 		texX = wallX * (double)TEX_SIZE;
 		if (ray.side == 0 && ray_dir_x > 0)
 			texX = TEX_SIZE - texX - 1;

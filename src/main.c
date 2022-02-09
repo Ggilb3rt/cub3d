@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/08 17:17:52 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:09:00 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (err_in_file(av, &params, &player, &map))
-			return (0);
+			exit(0);
 	}
 	else
 		ft_exit("Bad number of arguments\n");
@@ -119,14 +119,13 @@ int	main(int ac, char **av)
 	(void)base;
 	// MLX LOOP
 	base = init_base(&params, &map, &player);
+	if (base == NULL)
+		exit(0);
 	mlx_hook(base->win, 17, 1L << 17, close_win, base);
 	mlx_hook(base->win, 2, 1L << 0, key_press, base);
 	mlx_hook(base->win, 3, 1L << 1, key_release, base);
 	put_img(base);
 	mlx_loop(base->mlx);
 
-	// CLEAN
-	free_map(&map);
-	free_params(&params);
 	return (0);
 }

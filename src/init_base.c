@@ -92,13 +92,16 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	base->east = initialise_data(base, 1);
 	base->west = initialise_data(base, 1);
 	base->south = initialise_data(base, 1);
-	base->minime = initialise_data(base, 1);
 	base->img = 0;
 	init_vars(base);
 	base->mlx = mlx_init();
 	base->win = mlx_new_window(base->mlx, params->res_x,
 			params->res_y, "cube3d");
 	base->img = initialise_data(base, 0);
-	init_tiles(base);
+	if (!init_tiles(base))
+	{
+		destroy_base(base, "not real xpm file");
+		return (NULL);
+	}
 	return (base);
 }
