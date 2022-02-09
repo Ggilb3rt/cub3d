@@ -43,4 +43,5 @@ Makefile have some troubles with 'make re'
 
 # Doing
 - use two images to avoid blink when many moves
+- put raycaster to multiples functions
 

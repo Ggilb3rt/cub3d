@@ -1,13 +1,13 @@
 R            1000     800
 
-NO ./assets/textures/north_texture.xpm
-SO ./assets/textures/south_texture.xpm
+NO ./assets/textures/space_closet.xpm
+SO ./assets/textures/space_closet.xpm
 
 C 225, 30, 0
 
-WE ./assets/textures/west_texture.xpm
+WE ./assets/textures/space_closet.xpm
 F         220,100,0
-EA ./assets/textures/east_texture.xpm
+EA ./assets/textures/space_closet.xpm
 
  1
 1111

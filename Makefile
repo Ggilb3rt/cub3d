@@ -75,7 +75,7 @@ test: all
 	./$(NAME) assets/maps/err_map_multi_players.cub
 	@printf "\033[0;32m\n\n#TEST ERR MAP HOLE\n\033[0m"
 	./$(NAME) assets/maps/err_map.cub
-	@printf "\033[0;32m\n\n#FAKE XPM FILE\n\033[0m"
+	@printf "\033[0;32m\n\n#TEST ERR FAKE XPM FILE\n\033[0m"
 	./$(NAME) assets/maps/err_fake_xpm.cub
 	@printf "\033[0;32m\n\nTEST OK big\n\033[0m"
 	./$(NAME) assets/maps/l.cub
