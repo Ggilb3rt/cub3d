@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 19:24:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 13:05:21 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:41:22 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ void	raycaster(t_base *base)
 {
 	t_ray	ray;
 	int		hit;
+	// int		pixx;
+printf("\npouet\n");
 
+	// pixx = 0;
+	// while (pixx < (int)base->params->res_x)
 	for (int pixx = 0; pixx < (int)base->params->res_x; pixx++)
 	{
 		// get ray pos and dir
@@ -25,8 +29,10 @@ void	raycaster(t_base *base)
 		float	ray_dir_x = base->player->dir_v.x + base->player->cam_v.x * cameraX;
 		float	ray_dir_y = base->player->dir_v.y + base->player->cam_v.y * cameraX;
 		// float	ray_dir_x = 1 + 0 * cameraX;
-		// float	ray_dir_y = 0 + 0.66 * cameraX;
-		
+		// float	ray_dir_y = 0 + 0.66 * cameraX;	
+printf("[%f][%f]\n", ray_dir_x, ray_dir_y);
+if (ray_dir_y == 0)
+	ray_dir_y += 0.000001;
 		// init ray
 		ray.map_x = (int)base->player->pos_x;
 		ray.map_y = (int)base->player->pos_y;
@@ -61,7 +67,8 @@ void	raycaster(t_base *base)
 			ray.step_y = 1;
 			ray.length_y = (ray.map_y + 1.0 - base->player->pos_y) * ray.delta_length_y;
 		}
-		
+	
+printf("2[%f][%f]\n", ray_dir_x, ray_dir_y);
 		// DDA
 		hit = 0;
 		while (hit == 0)
@@ -98,7 +105,7 @@ void	raycaster(t_base *base)
 				}
 			}
 		}
-		
+// printf("pouet3 %d\n", pixx);
 		// wallDist
 		if (ray.side == 0)
 			ray.perp_wall_dist = ray.length_x - ray.delta_length_x;
@@ -136,23 +143,26 @@ void	raycaster(t_base *base)
 		texX = wallX * (double)TEX_SIZE;
 		if (ray.side == 0 && ray_dir_x > 0)
 			texX = TEX_SIZE - texX - 1;
-		if (ray.side == 1 && ray_dir_y < 0)
+		if (ray.side == 1 && ray_dir_y <= 0)
 			texX = TEX_SIZE - texX - 1;
-			
+// printf("pouet4 %d\n", pixx);
 		// textures 2: get Y
 		double	step = 1.0 * TEX_SIZE / line_height;
 		double	texPos = (draw_start - base->params->res_y / 2 + line_height / 2) * step;
 		int		y = draw_start;
 		int		texY;
 		unsigned int	color;
-		
+// printf("pouet5 %d\n", pixx);
 		while (y < draw_end)
 		{
 			texY = (int)texPos & (TEX_SIZE -1);
 			texPos += step;
 			color = get_pixel(tex, texX, texY);
+			// printf("lol %d, %d\n", pixx, y);
 			my_mlx_pixel_put(base->img, pixx, y, color);
+			// printf("lol2 %d %d\n", pixx, y);
 			y++;
 		}
+	printf("pouet fin\n");
 	}
 }

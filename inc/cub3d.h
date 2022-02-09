@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 15:57:00 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 19:12:49 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ typedef struct s_parser_valid
 	int				texture_so;
 	int				texture_we;
 	int				texture_ea;
-	int				texture_sp;
 }					t_parser_valid;
 
 typedef struct s_params
@@ -161,6 +160,7 @@ typedef struct s_base {
 	t_data		*east;
 	t_data		*south;
 	t_data		*west;
+	// t_data		*minime;
 	t_player	*player;
 	int			can_move;
 }		t_base;

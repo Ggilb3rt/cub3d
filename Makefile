@@ -12,7 +12,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 INCFLAGS = -I$I
 LDFLAGS = 
-LIBS		= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft
+LIBS		= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft -lm
 RM = /bin/rm -f
 MLX		= mlx/libmlx.a
 

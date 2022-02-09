@@ -65,6 +65,8 @@ int	init_tiles(t_base *base)
 		return (0);
 	if (!put_tiles(base, base->params->path_texture_we, base->west))
 		return (0);
+	// if (!put_tiles(base, "./assets/textures/antouine.xpm", base->minime))
+	// 	return (0);
 	return (1);
 }
 
@@ -136,5 +138,6 @@ void	put_img(t_base *base)
 	put_ceiling(base);
 	put_floor(base);
 	raycaster(base);
+	dprintf(2, "sortie ray\n");
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }

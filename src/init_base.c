@@ -83,6 +83,7 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	t_base	*base;
 
 	base = (struct s_base *)malloc(sizeof(t_base));
+	ft_bzero(base, sizeof(t_base));
 	base->player = player;
 	base->params = params;
 	base->mlx = 0;
@@ -92,6 +93,7 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	base->east = initialise_data(base, 1);
 	base->west = initialise_data(base, 1);
 	base->south = initialise_data(base, 1);
+	// base->minime = initialise_data(base, 1);
 	base->img = 0;
 	init_vars(base);
 	base->mlx = mlx_init();
