@@ -20,5 +20,7 @@ void	update(t_base *base)
 {
 	move_player(base);
 	base->player->is_moving = 0;
-	put_img(base);
+	if (base->can_move == TRUE)
+		put_img(base);
+	base->can_move = TRUE;
 }

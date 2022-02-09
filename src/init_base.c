@@ -2,22 +2,22 @@
 
 void	get_initial_camera(t_base *base)
 {
-	if (base->player->orientation == 'N')
+	if (base->player->orientation == 'S')
 	{
 		base->player->cam_v.x = 0.66;
 		base->player->cam_v.y = 0;
 	}
-	else if (base->player->orientation == 'S')
+	else if (base->player->orientation == 'N')
 	{
 		base->player->cam_v.x = -0.66;
 		base->player->cam_v.y = 0;
 	}
-	else if (base->player->orientation == 'W')
+	else if (base->player->orientation == 'E')
 	{
 		base->player->cam_v.x = 0;
 		base->player->cam_v.y = 0.66;
 	}
-	else if (base->player->orientation == 'E')
+	else if (base->player->orientation == 'W')
 	{
 		base->player->cam_v.x = 0;
 		base->player->cam_v.y = -0.66;
@@ -26,23 +26,22 @@ void	get_initial_camera(t_base *base)
 
 void	get_initial_direction(t_base *base)
 {
-	if (base->player->orientation == 'N')
+	if (base->player->orientation == 'S')
 	{
 		base->player->dir_v.x = 0;
 		base->player->dir_v.y = -1;
-		printf("pouet\n");
 	}
-	else if (base->player->orientation == 'S')
+	else if (base->player->orientation == 'N')
 	{
 		base->player->dir_v.x = 0;
 		base->player->dir_v.y = 1;
 	}
-	else if (base->player->orientation == 'W')
+	else if (base->player->orientation == 'E')
 	{
 		base->player->dir_v.x = 1;
 		base->player->dir_v.y = 0;
 	}
-	else if (base->player->orientation == 'E')
+	else if (base->player->orientation == 'W')
 	{
 		base->player->dir_v.x = -1;
 		base->player->dir_v.y = 0;
@@ -57,6 +56,7 @@ void	init_vars(t_base *base)
 	base->player->going_left = 0;
 	base->player->going_right = 0;
 	base->player->is_moving = 0;
+	base->can_move = TRUE;
 	get_initial_direction(base);
 	get_initial_camera(base);
 }

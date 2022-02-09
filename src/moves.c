@@ -44,7 +44,7 @@ void	look_right(t_base *base)
 	rotations(base, MOVE_SPEED);
 }
 
-void	move_up(t_base *base)
+void	move_down(t_base *base)
 {
 	float	x;
 	float	y;
@@ -56,9 +56,11 @@ void	move_up(t_base *base)
 		base->player->pos_x = x;
 		base->player->pos_y = y;
 	}
+	else
+		base->can_move = FALSE;
 }
 
-void	move_down(t_base *base)
+void	move_up(t_base *base)
 {
 	float	x;
 	float	y;
@@ -70,6 +72,8 @@ void	move_down(t_base *base)
 		base->player->pos_x = x;
 		base->player->pos_y = y;
 	}
+	else
+		base->can_move = FALSE;
 }
 
 void	move_chased_step(t_base *base, char lr)
@@ -78,7 +82,7 @@ void	move_chased_step(t_base *base, char lr)
 	float		x;
 	float		y;
 
-	if (lr == 'l')
+	if (lr == 'r')
 		vec = rot_quarter(base->player->dir_v);
 	else
 		vec = rot_rev(base->player->dir_v);
@@ -88,7 +92,9 @@ void	move_chased_step(t_base *base, char lr)
 	{
 		base->player->pos_x = x;
 		base->player->pos_y = y;
-	}	
+	}
+	else
+		base->can_move = FALSE;	
 }
 
 

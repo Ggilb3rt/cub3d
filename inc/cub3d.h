@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/08 17:13:02 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:48:08 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ typedef struct s_base {
 	t_data		*west;
 	t_data		*minime;
 	t_player	*player;
+	int			can_move;
 }		t_base;
 
 /*
