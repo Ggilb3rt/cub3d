@@ -10,6 +10,15 @@ WE ./assets/textures/space_win.xpm
 F 64,73,89
 EA ./assets/textures/space_cmd.xpm
 
+
+
+
+
+
+
+
+
+
     11111    
   110000011  
  11000000011 
@@ -23,3 +32,7 @@ EA ./assets/textures/space_cmd.xpm
  11000000011 
   110000011  
     11111
+    1
+        1
+    1
+    1

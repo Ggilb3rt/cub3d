@@ -10,6 +10,7 @@ Makefile have some troubles with 'make re'
 - conditionnal jump problem with the pivoted map when check holes
 ## List of errors
 - Bad number of arguments OK
+- check open directory
 - Not a .cub file OK
 - Can't find file OK
 - Invalid parameters OK
@@ -25,6 +26,7 @@ Makefile have some troubles with 'make re'
 - remove all exit() (exception in main because no malloc)
 - find why some still reachable leaks in init_param() and init_map() ==> GNL when quit before EOF
 ## Engine
+- use two images to avoid blink when many moves
 ### Player
 - player move and rotate
 ### Raycaster
@@ -41,11 +43,9 @@ Makefile have some troubles with 'make re'
 - integrer libft sans submodules
 - probleme libft relink
 - encore N-S inverse.....
-- check open directory
 ## Errors parsing
 - find new errors to check
 
 # Doing
-- use two images to avoid blink when many moves
-- si fichier enregistre avec vi ou nano ==> devient inutilisable... WTF ?!
+- si fichier enregistre avec vi ou nano ==> devient inutilisable... WTF ?! **==> vi et nano ajoutent un \n a la fin du fichier, peut se defendre si on considere que la map doit est strictement la derniere chose du fichier**
 

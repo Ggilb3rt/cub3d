@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:04:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 16:51:23 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 18:30:27 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	free_params(t_params *params)
 {
-	printf("unique == %d\n", params->unique.texture_ea);
 	if (params->unique.texture_ea == 1)
 		free(params->path_texture_ea);
 	if (params->unique.texture_we)
