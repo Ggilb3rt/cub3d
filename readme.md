@@ -7,6 +7,7 @@ Makefile have some troubles with 'make re'
 - remove sprites ; parsing and tests
 - Change GNL
 - put fanncy textures
+- conditionnal jump problem with the pivoted map when check holes
 ## List of errors
 - Bad number of arguments OK
 - Not a .cub file OK
@@ -29,11 +30,10 @@ Makefile have some troubles with 'make re'
 - raycaster prints images 
 - works with textures
 - floor and ceilling with values from params
+- put raycaster to multiples functions
 
 
 # To check
-- conditionnal jump problem with the pivoted map when check holes (check rabbit's paws in l.cub)
-- probleme de parsing de map, je devrai mettre des /0 sur toute la longueur de la map quand les tailles sont differentes. **apres moultes reflexions/recherches, il suffit de parcourir chaque ligne jusa'au \0 plutot que de la taille max de la map**
 - remove -g from flags (at the end)
 
 # To do
@@ -45,5 +45,4 @@ Makefile have some troubles with 'make re'
 
 # Doing
 - use two images to avoid blink when many moves
-- put raycaster to multiples functions
 
