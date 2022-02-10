@@ -55,6 +55,8 @@ fcleanall: fclean fcleanlibft
 test: all
 	@printf "\033[0;32m\n#TEST BAD ARG QT\n\033[0m"
 	./$(NAME)
+	@printf "\033[0;32m\n\n#TEST DIRECTORY\n\033[0m"
+	./$(NAME) assets/maps/err_dir.cub
 	@printf "\033[0;32m\n\n#TEST EMPTY\n\033[0m"
 	./$(NAME) assets/maps/vide.cub
 	@printf "\033[0;32m\n#TEST ANOTHER FILE\n\033[0m"
@@ -112,3 +114,5 @@ leaks_test_err:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_fake_xpm.cub
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_no_player.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_dir.cub

@@ -20,6 +20,7 @@ Makefile have some troubles with 'make re'
 - verifier que les paths pointent vers de vrais fichiers .xpm
 - if .xpm name but not xpm file
 - quit when no player
+- av[1] is a directory
 ## Cleaning
 - remove all exit() (exception in main because no malloc)
 - find why some still reachable leaks in init_param() and init_map() ==> GNL when quit before EOF
@@ -40,9 +41,11 @@ Makefile have some troubles with 'make re'
 - integrer libft sans submodules
 - probleme libft relink
 - encore N-S inverse.....
+- check open directory
 ## Errors parsing
 - find new errors to check
 
 # Doing
 - use two images to avoid blink when many moves
+- si fichier enregistre avec vi ou nano ==> devient inutilisable... WTF ?!
 

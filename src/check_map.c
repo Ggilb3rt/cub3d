@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 08:56:17 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 18:33:04 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:33:04 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	check_map_integrity(t_map *map)
 int	map_ok_or_quit(t_map *map)
 {
 	int	quit;
-	
 	quit = check_map_integrity(map);
 	if (quit != -1)
 	{
