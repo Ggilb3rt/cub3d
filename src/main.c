@@ -101,31 +101,15 @@ int	main(int ac, char **av)
 	t_map			map;
 
 	set_zero(&params, &player, &map);
-	if (MOVE_SPEED > 1)
-	{
-		printf("Cannot go too fast\n");
-		exit(1);
-	}
-	if (ac == 2)
-	{
-		if (err_in_file(av, &params, &player, &map))
-			return (0);
-	}
-	else
-		ft_exit("Bad number of arguments\n");
-	// DEBUG
+	handle_errs(ac, av, &params, &player, &map);
 	debug_print_params(params);
 	debug_print_map(map, player);
-	(void)base;
-	// MLX LOOP
 	base = init_base(&params, &map, &player);
 	mlx_hook(base->win, 17, 1L << 17, close_win, base);
 	mlx_hook(base->win, 2, 1L << 0, key_press, base);
 	mlx_hook(base->win, 3, 1L << 1, key_release, base);
 	put_img(base);
 	mlx_loop(base->mlx);
-
-	// CLEAN
 	free_map(&map);
 	free_params(&params);
 	return (0);

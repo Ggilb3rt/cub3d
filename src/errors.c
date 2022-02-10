@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+void	handle_errs(int ac, char **av, t_params *params,
+	t_player *player, t_map *map)
+{
+	if (MOVE_SPEED > 1)
+	{
+		printf("Cannot go too fast\n");
+		exit(1);
+	}
+	if (ac == 2)
+	{
+		if (err_in_file(av, params, player, map))
+			exit(0);
+	}
+	else
+		ft_exit("Bad number of arguments\n");
+}
+
 char	**init_tab_err(void)
 {
 	char	**tab;

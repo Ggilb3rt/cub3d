@@ -1,191 +1,106 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_img.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptroger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 11:41:12 by ptroger           #+#    #+#             */
+/*   Updated: 2022/02/10 11:41:14 by ptroger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
-unsigned int	get_pixel(t_data *tile, int x, int y)
+int	trgb_to_hex(int t, int r, int g, int b)
 {
-	return (*(unsigned int *)(tile->addr + (y
-			* tile->line_length + x * (tile->bits_per_pixel / 8))));
-}
+	int	trgb[4];
+	int	i;
 
-void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	put_tiles(t_base *base, char *path, t_data *tile)
-{
-	void	*img;
-	int		width;
-	int		height;
-
-	img = mlx_xpm_file_to_image(base->mlx, path, &width, &height);
-	tile->img = img;
-	tile->addr = mlx_get_data_addr(tile->img, &tile->bits_per_pixel,
-			&tile->line_length, &tile->endian);
-	// if (tile->img == 0)
-	// 	destroy_base(base, "mlx failed");
+	trgb[0] = t;
+	trgb[1] = r;
+	trgb[2] = g;
+	trgb[3] = b;
+	i = 0;
+	while (i < 4)
 	{
-		tile->width = width;
-		tile->height = height;
-		tile->init = 1;
+		if (trgb[i] < 0)
+			trgb[i] = 0;
+		if (trgb[i] > 255)
+			trgb[i] = 255;
+		i++;
 	}
+	return (trgb[0] << 24 | trgb[1] << 16 | trgb[2] << 8 | trgb[3]);
 }
 
-void	init_tiles(t_base *base)
+int	draw_line(t_base *base, t_point start, t_point end, int color)
 {
-	put_tiles(base, base->params->path_texture_no, base->north);
-	put_tiles(base, base->params->path_texture_so, base->south);
-	put_tiles(base, base->params->path_texture_ea, base->east);
-	put_tiles(base, base->params->path_texture_we, base->west);
-	put_tiles(base, "./assets/textures/antouine.xpm", base->minime);
-}
+	t_vector	d;
+	t_vector	pixel;
+	int			pixels;
 
-void	draw_tile(t_base *base, t_point start, t_data *tile)
-{
-	int				x;
-	int				y;
-	unsigned int	color;
-
-	x = -1;
-	while (++x < 64)
-	{
-		y = -1;
-		while (++y < 64)
-		{
-			color = get_pixel(tile, x, y);
-			if (color != 0x000000)
-				my_mlx_pixel_put(base->img, (start.x) + x,
-					(start.y) + y, color);
-		}
-	}
-}
-
-// void	draw_rays(t_base *base, t_point start)
-// {
-// 	float		x;
-// 	float		y;
-
-// 	x = 0;
-// 	while (x < 64)
-// 	{
-// 		y = 0;
-// 		while (y < 64)
-// 		{
-// 			if (x % base->player->dir_v.x == 0 && y % base->player->dir_v.y)
-// 				my_mlx_pixel_put(base->img, start.x + x, start.y + y, 0x00AB59);
-// 			y += 0.125;
-// 		}
-// 		x += 0.125;
-// 	}
-// }
-
-void	draw_player(t_base *base)
-{
-	t_point	start;
-
-	start.x = base->player->pos_x * 64;
-	start.y = base->player->pos_y * 64;
-	draw_tile(base, start, base->minime);
-	// draw_line(base,
-	// 	base->player->pos_x * 64, base->player->pos_y * 64,
-	// 	base->player->dir_v.x + base->player->pos_x * 64,
-	// 	base->player->dir_v.y + base->player->pos_y * 64,
-		// 0xFF00FF);
-	draw_line(base,
-		base->player->pos_x * 64, base->player->pos_y * 64,
-		base->player->pos_x * 64 + cos(base->player->angle) * 32,
-		base->player->pos_y * 64 + sin(base->player->angle) * 32,
-		0xFFFFFF);
-	// draw_rays(base, start);
-}
-
-int	draw_line(t_base *base, int startX, int startY, int endX, int endY, int color)
-{
-	// raydir[0]
-	// float x = base->player->dir_v.x - base->player->cam_v.x;
-	// float y = base->player->dir_v.y - base->player->cam_v.y;
-	// //raydir[799]
-	// float x = base->player->dir_v.x + base->player->cam_v.x;
-	// float y = base->player->dir_v.y + base->player->cam_v.y;
-	double dX = endX - startX;
-	double dY = endY - startY;
-	int pixels = sqrt((dX * dX) + (dY * dY));
-
-	dX /= pixels;
-	dY /= pixels;
-
-	double pixelX = startX;
-	double pixelY = startY;
+	d.x = end.x - start.x;
+	d.y = end.y - start.y;
+	pixels = sqrt((d.x * d.x) + (d.y * d.y));
+	d.x /= pixels;
+	d.y /= pixels;
+	pixel.x = start.x;
+	pixel.y = start.y;
 	while (pixels)
 	{
-		my_mlx_pixel_put(base->img, pixelX, pixelY, color);
-		pixelX += dX;
-		pixelY += dY;
+		my_mlx_pixel_put(base->img, pixel.x, pixel.y, color);
+		pixel.x += d.x;
+		pixel.y += d.y;
 		pixels--;
 	}
 	return (1);
 }
 
-
-void	put_map(t_base *base)
+void	put_ceiling(t_base *base)
 {
-	unsigned int	i;
-	unsigned int	j;
-	t_point			start;
+	t_point	start;
+	t_point	end;
 
-	j = -1;
-	while (++j < base->map->height && base->map->map[j])
+	start.y = 0;
+	start.x = 0;
+	end.x = base->params->res_x;
+	while ((unsigned int)start.y < base->params->res_y / 2)
 	{
-		i = -1;
-		while (++i < base->map->width && base->map->map[j][i])
-		{
-			start.y = j * 64;
-			start.x = i * 64;
-			if (base->map->map[j][i] == '1')
-				draw_tile(base, start, base->north);
-			else if (base->map->map[j][i] == '0')
-				draw_tile(base, start, base->south);
-			else if (base->map->map[j][i] == ' ')
-				draw_tile(base, start, base->east);
-			draw_player(base);
-		}
+		end.y = start.y;
+		draw_line(base, start, end,
+			trgb_to_hex(0,
+				base->params->ceiling_color[0],
+				base->params->ceiling_color[1],
+				base->params->ceiling_color[2]));
+		start.y++;
 	}
 }
 
-void put_ceiling(t_base *base)
+void	put_floor(t_base *base)
 {
-	unsigned int y;
+	t_point	start;
+	t_point	end;
 
-	y = 0;
-	while (y < base->params->res_y / 2)
+	start.y = base->params->res_y / 2;
+	start.x = 0;
+	end.x = base->params->res_x;
+	while ((unsigned int)start.y < base->params->res_y)
 	{
-		draw_line(base, 0, y, base->params->res_x, y, 0xff00ff);
-		y++;
-	}
-}
-
-
-void put_floor(t_base *base)
-{
-	unsigned int y;
-
-	y = base->params->res_y / 2;
-	while (y < base->params->res_y)
-	{
-		draw_line(base, 0, y, base->params->res_x, y, 0x00FF00);
-		y++;
+		end.y = start.y;
+		draw_line(base, start, end,
+			trgb_to_hex(0,
+				base->params->floor_color[0],
+				base->params->floor_color[1],
+				base->params->floor_color[2]));
+		start.y++;
 	}
 }
 
 void	put_img(t_base *base)
 {
-	//printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
-	//printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
-	//put_map(base);
 	put_ceiling(base);
 	put_floor(base);
 	raycaster(base);
+	dprintf(2, "sortie ray\n");
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }

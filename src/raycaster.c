@@ -135,8 +135,6 @@ void	raycaster(t_base *base)
 			wallX = base->player->pos_x + ray.perp_wall_dist * ray_dir_x;
 		wallX -= floor(wallX);
 		wallX = fabs(wallX - 1);
-		if (ray.map_x == 12 && ray.map_y == 5 && ray.side == 0)
-			printf("WallX = %f\t perp_wall_dist %f\n", wallX, ray.perp_wall_dist);
 		//if (ray.map_x == 11 && ray.map_y == 4)
 		//	printf("wallXbriques = %f\t perp_dist %f\n", wallX, ray.perp_wall_dist);
 		texX = wallX * (double)TEX_SIZE;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotations.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptroger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 11:36:05 by ptroger           #+#    #+#             */
+/*   Updated: 2022/02/10 11:36:07 by ptroger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 t_vector	rot_quarter(t_vector dir)
@@ -33,10 +45,6 @@ void	rotations(t_base *base, float angle)
 	vec = base->player->dir_v;
 	x = vec.x * cos(angle) - vec.y * sin(angle);
 	y = vec.x * sin(angle) + vec.y * cos(angle);
-	//printf("\n--------------\n");
-	//	printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
-	//printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
-
 	base->player->dir_v.x = x;
 	base->player->dir_v.y = y;
 	vec = base->player->cam_v;

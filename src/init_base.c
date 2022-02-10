@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_base.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ptroger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/10 11:37:20 by ptroger           #+#    #+#             */
+/*   Updated: 2022/02/10 11:37:21 by ptroger          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 void	get_initial_camera(t_base *base)
@@ -92,13 +104,13 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	base->east = initialise_data(base, 1);
 	base->west = initialise_data(base, 1);
 	base->south = initialise_data(base, 1);
-	base->minime = initialise_data(base, 1);
 	base->img = 0;
 	init_vars(base);
 	base->mlx = mlx_init();
 	base->win = mlx_new_window(base->mlx, params->res_x,
 			params->res_y, "cube3d");
 	base->img = initialise_data(base, 0);
+	base->img_win = initialise_data(base, 0);
 	init_tiles(base);
 	return (base);
 }
