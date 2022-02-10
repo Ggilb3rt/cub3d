@@ -9,14 +9,14 @@ include sources.mk
 OBJ = $(SRC:$S%.c=$O%.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 INCFLAGS = -I$I
 LDFLAGS = 
 LIBS		= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft -lm
 RM = /bin/rm -f
 MLX		= mlx/libmlx.a
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test leaks_test_err leaks_test_map
 
 all : $(NAME)
 
@@ -55,6 +55,8 @@ fcleanall: fclean fcleanlibft
 test: all
 	@printf "\033[0;32m\n#TEST BAD ARG QT\n\033[0m"
 	./$(NAME)
+	@printf "\033[0;32m\n\n#TEST DIRECTORY\n\033[0m"
+	./$(NAME) assets/maps/err_dir.cub
 	@printf "\033[0;32m\n\n#TEST EMPTY\n\033[0m"
 	./$(NAME) assets/maps/vide.cub
 	@printf "\033[0;32m\n#TEST ANOTHER FILE\n\033[0m"
@@ -75,13 +77,42 @@ test: all
 	./$(NAME) assets/maps/err_map_multi_players.cub
 	@printf "\033[0;32m\n\n#TEST ERR MAP HOLE\n\033[0m"
 	./$(NAME) assets/maps/err_map.cub
+	@printf "\033[0;32m\n\n#TEST ERR MAP NO PLAYER\n\033[0m"
+	./$(NAME) assets/maps/err_map_no_player.cub
+	@printf "\033[0;32m\n\n#TEST ERR FAKE XPM FILE\n\033[0m"
+	./$(NAME) assets/maps/err_fake_xpm.cub
 	@printf "\033[0;32m\n\nTEST OK big\n\033[0m"
 	./$(NAME) assets/maps/l.cub
-	@printf "\033[0;32m\n\n#TEST OK little\n\033[0m"
-	./$(NAME) assets/maps/little.cub
-	
 
-leaks_test: all
-	valgrind --leak-check=full ./$(NAME) assets/maps/l.cub
+leaks_test_map: all
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/little.cub
+
+leaks_test_err:
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_color_val.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_char.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_multi_players.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_multi_param.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_not_xpm.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_path.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_qt.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_type.cub
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_wrong_param.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/vide.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_fake_xpm.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_no_player.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_dir.cub

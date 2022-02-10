@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 11:39:55 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 17:32:32 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:20:49 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	valid_color(int color[3])
 int	valid_path(char *path)
 {
 	int		i;
+	int		fd;
 
 	i = 0;
 	while (path[i] != '\0')
@@ -39,6 +40,10 @@ int	valid_path(char *path)
 	}
 	if (!ft_check_file_extention(path, ".xpm"))
 		return (0);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	close (fd);
 	return (1);
 }
 

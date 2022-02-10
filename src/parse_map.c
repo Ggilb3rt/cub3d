@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/25 12:24:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/08 15:45:29 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:57:07 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	find_pos(t_map *map, t_player *player, size_t line_l, char *or)
 	if (or && player->orientation == '0')
 	{
 		player->orientation = or[0];
-		player->pos_y = map->height + 0.125;
-		player->pos_x = line_l - ft_strlen(or) + 0.125;
+		player->pos_y = map->height + MOVE_SPEED;
+		player->pos_x = line_l - ft_strlen(or) + MOVE_SPEED;
 		or[0] = '0';
 	}
 	else if (or && player->orientation != '0')

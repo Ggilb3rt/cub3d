@@ -17,17 +17,17 @@ int	empty_pivoted_map(t_map *map, t_map *new)
 	int		x;
 
 	x = -1;
-	new->width = map->height;
-	new->height = map->width;
-	new->map = malloc(sizeof(new->map) * new->height);
+	new->width = map->width;
+	new->height = map->height;
+	new->map = malloc(sizeof(new->map) * map->width);
 	if (new->map == NULL)
 		return (e_malloc);
-	while (++x < (int)new->height)
+	while (++x < (int)map->width)
 	{
-		new->map[x] = malloc(sizeof(*new->map) * new->width + 1);
+		new->map[x] = malloc(sizeof(*new->map) * map->height + 1);
 		if (new->map[x] == NULL)
 			return (e_malloc);
-		ft_memset(new->map[x], ' ', new->width);
+		ft_memset(new->map[x], ' ', map->height);
 	}
 	return (-1);
 }
@@ -46,16 +46,7 @@ void	pi_by_two_pivote_map(t_map *map, t_map *new)
 			ft_memcpy(&new->map[(-y + map->width) - 1][x], &map->map[x][y], 1);
 			y++;
 		}
-		new->map[x][new->width] = '\0';
+		new->map[x][new->height] = '\0';
 		x++;
 	}
 }
-	// for (size_t z = 0; z < new->height; z++)
-	// {
-	// 	//printf("%s\n", new->map[z]);
-	// 	for(size_t a = 0; new->map[z][a] != '\0'; a++)
-	// 	{
-	// 		printf("%c", new->map[z][a]);
-	// 	}
-	// 	printf("\n");
-	// }

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/08 17:17:52 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:58:41 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ void	set_zero(t_params *params, t_player *player, t_map *map)
 	player->orientation = '0';
 	map->height = 0;
 	map->width = 0;
+	map->rotated = FALSE;
 	map->map = NULL;
 }
 
 int	err_in_file(char **av, t_params *params, t_player *player, t_map *map)
 {
-	if (!ft_check_file_extention(av[1], ".cub"))
+	if (!ft_check_file_extention(av[1], ".cub")
+		|| open(av[1], O_DIRECTORY) != -1)
 	{
 		print_error(e_cub_file);
 		return (1);
@@ -105,12 +107,12 @@ int	main(int ac, char **av)
 	debug_print_params(params);
 	debug_print_map(map, player);
 	base = init_base(&params, &map, &player);
+	if (base == NULL)
+		exit(0);
 	mlx_hook(base->win, 17, 1L << 17, close_win, base);
 	mlx_hook(base->win, 2, 1L << 0, key_press, base);
 	mlx_hook(base->win, 3, 1L << 1, key_release, base);
 	put_img(base);
 	mlx_loop(base->mlx);
-	free_map(&map);
-	free_params(&params);
 	return (0);
 }

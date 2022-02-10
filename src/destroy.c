@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptroger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 11:36:25 by ptroger           #+#    #+#             */
-/*   Updated: 2022/02/10 11:36:26 by ptroger          ###   ########.fr       */
+/*   Created: 2022/02/09 13:34:12 by ggilbert          #+#    #+#             */
+/*   Updated: 2022/02/09 18:20:00 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ void	destroy_mlx(void *mlx)
 
 void	destroy_base(t_base *base, char *err)
 {
+	free_params(base->params);
 	if (base != 0)
 	{
+		if (base->map->rotated == FALSE)
+			free_map(base->map);
+		else
+			free_map_rotated(base->map);
 		if (base->north != 0)
 			destroy_image(base->mlx, base->north, err);
 		if (base->south != 0)
@@ -53,6 +58,6 @@ void	destroy_base(t_base *base, char *err)
 		free(base);
 	}
 	if (ft_strncmp(err, "finished", 8))
-		error(err);
+		print_error(e_param_path);
 	exit(0);
 }

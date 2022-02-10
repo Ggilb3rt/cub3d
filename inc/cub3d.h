@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 12:48:08 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:00:53 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_ray
 	int				map_y;
 	float			length_x;
 	float			length_y;
+	float			ray_dir_x;
+	float			ray_dir_y;
 	float			delta_length_x;
 	float			delta_length_y;
 	float			perp_wall_dist;
@@ -115,6 +117,19 @@ typedef struct s_ray
 	int				side;
 	char			wall_side;
 }					t_ray;
+
+typedef struct s_ray_sceen
+{
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	float			wall_x;
+	int				tex_x;
+	int				tex_y;
+	float			step;
+	float			tex_pos;
+	unsigned int	color;
+}					t_ray_screen;
 
 typedef struct s_parser_valid
 {
@@ -146,6 +161,7 @@ typedef struct s_map
 	char			**map;
 	size_t			width;
 	size_t			height;
+	int				rotated;
 }					t_map;
 
 typedef struct s_base {
@@ -172,35 +188,37 @@ void			ft_exit(char *context);
 /*
 **	RayCasting
 */
+void				draw_ray(t_base *base);
 /*
 **	MLX and images
 */
-void			my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
-unsigned int	get_pixel(t_data *tile, int x, int y);
-void			destroy_base(t_base *base, char *err);
-void			put_img(t_base *base);
-void			init_tiles(t_base *base);
-int				close_win(t_base *base);
-int	draw_line(t_base *base, t_point start, t_point end, int color);
-void			update(t_base *base);
-void			raycaster(t_base *base);
+void				my_mlx_pixel_put(t_data *img, int x, int y,
+						unsigned int color);
+unsigned int		get_pixel(t_data *tile, int x, int y);
+void				destroy_base(t_base *base, char *err);
+void				put_img(t_base *base);
+void				init_tiles(t_base *base);
+int					close_win(t_base *base);
+int					draw_line(t_base *base, t_point start, t_point end, int color);
+void				update(t_base *base);
+
 /*
 **	Moves
 */
-t_vector		rot_quarter(t_vector dir);
-t_vector		rot_rev(t_vector dir);
-int				key_press(int keycode, t_base *base);
-int				key_release(int keycode, t_base *base);
-void			look_right(t_base *base);
-void			look_left(t_base *base);
-void			move_up(t_base *base);
-void			move_down(t_base *base);
-void			move_right(t_base *base);
-void			move_left(t_base *base);
-void			move_chased_step(t_base *base, char lr);
-void			rotations(t_base *base, float angle);
-void			stay_in_two_pi(float *angle);
-int				check_wall(t_base *base, float x, float y);
+t_vector			rot_quarter(t_vector dir);
+t_vector			rot_rev(t_vector dir);
+int					check_wall(t_base *base, float x, float y);
+void				stay_in_two_pi(float *angle);
+int					key_press(int keycode, t_base *base);
+int					key_release(int keycode, t_base *base);
+void				look_right(t_base *base);
+void				look_left(t_base *base);
+void				move_up(t_base *base);
+void				move_down(t_base *base);
+void				move_right(t_base *base);
+void				move_left(t_base *base);
+void				move_chased_step(t_base *base, char lr);
+void				rotations(t_base *base, float angle);
 
 /*
 **	Initialisations and parsing
@@ -233,6 +251,15 @@ int				check_char(t_map *map);
 int				hole_finder(t_map *map);
 
 /*
+**	Raycaster
+*/
+void				init_ray(t_base *base, t_ray *ray, float camera_x);
+void				find_closest_wall(t_base *base, t_ray *ray);
+t_data				*find_texture_side(t_base *base, t_ray *ray);
+void				set_texture_pos(t_ray *ray, t_ray_screen *line, int res_y);
+void				raycaster(t_base *base);
+
+/*
 **	Errors
 */
 void			handle_errs(int ac, char **av, t_params *params,
@@ -243,6 +270,7 @@ void			ft_exit(char *context);
 /*
 **	Clean quit
 */
+void			free_map_rotated(t_map *map);
 void			free_params(t_params *params);
 void			free_map(t_map *map);
 int				err_in_file(char **av, t_params *params,

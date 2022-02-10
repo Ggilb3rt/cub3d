@@ -21,4 +21,7 @@ SRC = $Smain.c \
 		$Sraycaster.c \
 		$Srotations.c \
 		$Sutils_moves.c \
-		$Sutils_mlx.c
+		$Sutils_mlx.c \
+		$Sraycaster_init.c \
+		$Sraycaster_dda.c \
+		$Sraycaster_texture.c

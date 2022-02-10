@@ -1,7 +1,7 @@
 R            1000     800
 
 NO ./assets/textures/eagle.xpm
-SO ./assets/textures/greystone.xpm
+SO ./assets/textures/fake_xpm.xpm
 
 C 137, 31, 30
 

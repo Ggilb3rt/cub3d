@@ -1,13 +1,13 @@
 R 1920           1080
 
-NO ./assets/path_to_the_north_texture.xpm
-SO ./assets/path_to_the_south_texture.xpm
+NO ./assets/textures/space_closet.xpm
+SO ./assets/textures/space_closet.xpm
 
 C 12,11,44,34
 
-WE ./assets/path_to_the_west_texture.xpm
+WE ./assets/textures/space_closet.xpm
 F 220,100,22
-EA ./assets/path_to_the_east_texture.xpm
+EA ./assets/textures/space_closet.xpm
 
 
 

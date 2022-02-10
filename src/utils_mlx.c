@@ -34,10 +34,10 @@ void	put_tiles(t_base *base, char *path, t_data *tile)
 
 	img = mlx_xpm_file_to_image(base->mlx, path, &width, &height);
 	tile->img = img;
-	tile->addr = mlx_get_data_addr(tile->img, &tile->bits_per_pixel,
-			&tile->line_length, &tile->endian);
 	if (tile->img == 0)
 		destroy_base(base, "mlx failed");
+	tile->addr = mlx_get_data_addr(tile->img, &tile->bits_per_pixel,
+			&tile->line_length, &tile->endian);
 	{
 		tile->width = width;
 		tile->height = height;

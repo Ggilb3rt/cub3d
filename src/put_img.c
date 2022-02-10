@@ -101,6 +101,5 @@ void	put_img(t_base *base)
 	put_ceiling(base);
 	put_floor(base);
 	raycaster(base);
-	dprintf(2, "sortie ray\n");
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }

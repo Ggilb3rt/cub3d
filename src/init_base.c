@@ -63,11 +63,19 @@ void	get_initial_direction(t_base *base)
 
 void	init_vars(t_base *base)
 {
+	int	tmp;
+
+	tmp = base->map->height;
+	base->map->height = base->map->width;
+	base->map->width = tmp;
+	base->map->rotated = TRUE;
 	base->player->going_up = 0;
 	base->player->going_down = 0;
 	base->player->going_left = 0;
 	base->player->going_right = 0;
 	base->player->is_moving = 0;
+	base->player->rotate_left = 0;
+	base->player->rotate_right = 0;
 	base->can_move = TRUE;
 	get_initial_direction(base);
 	get_initial_camera(base);
@@ -95,10 +103,9 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	t_base	*base;
 
 	base = (struct s_base *)malloc(sizeof(t_base));
+	ft_bzero(base, sizeof(t_base));
 	base->player = player;
 	base->params = params;
-	base->mlx = 0;
-	base->win = 0;
 	base->map = map;
 	base->north = initialise_data(base, 1);
 	base->east = initialise_data(base, 1);
@@ -110,7 +117,6 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	base->win = mlx_new_window(base->mlx, params->res_x,
 			params->res_y, "cube3d");
 	base->img = initialise_data(base, 0);
-	base->img_win = initialise_data(base, 0);
 	init_tiles(base);
 	return (base);
 }
