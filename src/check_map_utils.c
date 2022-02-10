@@ -73,7 +73,7 @@ int	open_or_not(t_map *map, size_t *x, size_t *y)
 	{
 		while (map->map[*x][*y] != '\0' && map->map[*x][*y] != ' '
 				&& map->map[*x][*y] != '1')
-			*y += 1;
+					*y += 1;
 		if (map->map[*x][*y] == '1')
 			return (0);
 		if (map->map[*x][*y] == ' ' || map->map[*x][*y] == '\0')

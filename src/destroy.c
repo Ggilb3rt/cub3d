@@ -35,9 +35,12 @@ void	destroy_mlx(void *mlx)
 void	destroy_base(t_base *base, char *err)
 {
 	free_params(base->params);
-	free_map(base->map);
 	if (base != 0)
 	{
+		if (base->map->rotated == FALSE)
+			free_map(base->map);
+		else
+			free_map_rotated(base->map);
 		if (base->north != 0)
 			destroy_image(base->mlx, base->north, err);
 		if (base->south != 0)

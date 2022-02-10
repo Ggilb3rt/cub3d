@@ -28,7 +28,7 @@ int	check_map_integrity(t_map *map)
 		return (e_malloc);
 	pi_by_two_pivote_map(map, &rotated_map);
 	hole_in_rotated = hole_finder(&rotated_map);
-	while (x < rotated_map.height)
+	while (x < rotated_map.width)
 	{
 		free(rotated_map.map[x]);
 		x++;
@@ -42,7 +42,7 @@ int	check_map_integrity(t_map *map)
 int	map_ok_or_quit(t_map *map)
 {
 	int	quit;
-
+	
 	quit = check_map_integrity(map);
 	if (quit != -1)
 	{

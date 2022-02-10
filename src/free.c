@@ -39,3 +39,19 @@ void	free_map(t_map *map)
 	free(map->map);
 	map->map = NULL;
 }
+
+void	free_map_rotated(t_map *map)
+{
+	size_t	x;
+
+	x = 0;
+	if (map->map == NULL)
+		return ;
+	while (x < map->width)
+	{
+		free(map->map[x]);
+		x++;
+	}
+	free(map->map);
+	map->map = NULL;
+}

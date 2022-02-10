@@ -161,6 +161,7 @@ typedef struct s_map
 	char			**map;
 	size_t			width;
 	size_t			height;
+	int				rotated;
 }					t_map;
 
 typedef struct s_base {
@@ -265,6 +266,7 @@ void				ft_exit(char *context);
 /*
 **	Clean quit
 */
+void				free_map_rotated(t_map *map);
 void				free_params(t_params *params);
 void				free_map(t_map *map);
 

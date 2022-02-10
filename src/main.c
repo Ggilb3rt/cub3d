@@ -66,6 +66,7 @@ void	set_zero(t_params *params, t_player *player, t_map *map)
 	player->orientation = '0';
 	map->height = 0;
 	map->width = 0;
+	map->rotated = FALSE;
 	map->map = NULL;
 }
 
