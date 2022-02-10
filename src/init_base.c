@@ -93,7 +93,6 @@ t_base	*init_base(t_params *params, t_map *map, t_player *player)
 	base->east = initialise_data(base, 1);
 	base->west = initialise_data(base, 1);
 	base->south = initialise_data(base, 1);
-	// base->minime = initialise_data(base, 1);
 	base->img = 0;
 	init_vars(base);
 	base->mlx = mlx_init();

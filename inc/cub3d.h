@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 19:12:49 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 10:47:19 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_ray
 	int				map_y;
 	float			length_x;
 	float			length_y;
+	float			ray_dir_x;
+	float			ray_dir_y;
 	float			delta_length_x;
 	float			delta_length_y;
 	float			perp_wall_dist;
@@ -115,7 +117,6 @@ typedef struct s_ray
 	int				side;
 	char			wall_side;
 }					t_ray;
-
 
 typedef struct s_parser_valid
 {
@@ -160,7 +161,6 @@ typedef struct s_base {
 	t_data		*east;
 	t_data		*south;
 	t_data		*west;
-	// t_data		*minime;
 	t_player	*player;
 	int			can_move;
 }		t_base;

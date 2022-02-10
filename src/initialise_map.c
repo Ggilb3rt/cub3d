@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 16:04:03 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/04 16:37:25 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:27:06 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ int	init_map(t_params *par, t_map *map, t_player *pl, int *fd)
 		}
 		free(line);
 	}
+	if (pl->orientation == '0')
+		return (e_map_multi_pl);
 	return (-1);
 }

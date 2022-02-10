@@ -18,6 +18,7 @@ Makefile have some troubles with 'make re'
 - Malloc err OK
 - verifier que les paths pointent vers de vrais fichiers .xpm
 - if .xpm name but not xpm file
+- quit when no player
 ## Cleaning
 - remove all exit() (exception in main because no malloc)
 - find why some still reachable leaks in init_param() and init_map() ==> GNL when quit before EOF
@@ -38,7 +39,8 @@ Makefile have some troubles with 'make re'
 # To do
 - integrer libft sans submodules
 - probleme libft relink
-## Errors
+- encore N-S inverse.....
+## Errors parsing
 - find new errors to check
 
 # Doing

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 18:41:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 16:08:42 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/10 11:10:55 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**init_tab_err(void)
 	tab[9] = ft_strdup("Invalid ceiling or floor color value [0 - 255]");
 	tab[10] = ft_strdup("Unknow char in map");
 	tab[11] = ft_strdup("Hole in map");
-	tab[12] = ft_strdup("Find multiple players");
+	tab[12] = ft_strdup("It's a single player game");
 	tab[13] = NULL;
 	return (tab);
 }

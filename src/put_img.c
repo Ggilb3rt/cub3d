@@ -65,19 +65,11 @@ int	init_tiles(t_base *base)
 		return (0);
 	if (!put_tiles(base, base->params->path_texture_we, base->west))
 		return (0);
-	// if (!put_tiles(base, "./assets/textures/antouine.xpm", base->minime))
-	// 	return (0);
 	return (1);
 }
 
 int	draw_line(t_base *base, int startX, int startY, int endX, int endY, int color)
 {
-	// raydir[0]
-	// float x = base->player->dir_v.x - base->player->cam_v.x;
-	// float y = base->player->dir_v.y - base->player->cam_v.y;
-	// //raydir[799]
-	// float x = base->player->dir_v.x + base->player->cam_v.x;
-	// float y = base->player->dir_v.y + base->player->cam_v.y;
 	double dX = endX - startX;
 	double dY = endY - startY;
 	int pixels = sqrt((dX * dX) + (dY * dY));
