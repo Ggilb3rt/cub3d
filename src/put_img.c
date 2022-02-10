@@ -124,12 +124,8 @@ void put_floor(t_base *base)
 
 void	put_img(t_base *base)
 {
-	//printf("playX %f\t playY %f\n", base->player->pos_x, base->player->pos_y);
-	//printf("dirX %f\t dirY%f\n\n", base->player->dir_v.x, base->player->dir_v.y);
-	//put_map(base);
 	put_ceiling(base);
 	put_floor(base);
 	raycaster(base);
-	dprintf(2, "sortie ray\n");
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 0, 0);
 }
