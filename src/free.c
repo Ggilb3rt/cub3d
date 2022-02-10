@@ -14,7 +14,8 @@
 
 void	free_params(t_params *params)
 {
-	if (params->unique.texture_ea)
+	printf("unique == %d\n", params->unique.texture_ea);
+	if (params->unique.texture_ea == 1)
 		free(params->path_texture_ea);
 	if (params->unique.texture_we)
 		free(params->path_texture_we);

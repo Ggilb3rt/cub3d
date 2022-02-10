@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/07 15:42:01 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:48:08 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 # include "../mlx/mlx.h"
 
 # define NB_PARAMS_PARSE 7
+# define TEX_SIZE 64
 # define PI 3.14159265
 # define PI2
 # define MAX_X 1920
 # define MAX_Y 1080
+# define MOVE_SPEED 0.125
 
 # define ESC 65307
 # define R_LEFT 65361
@@ -73,7 +75,7 @@ typedef struct s_color
 	unsigned char	blue;
 }					t_color;
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	float	x;
 	float	y;
@@ -98,6 +100,22 @@ typedef struct s_player
 	t_vector		cam_v;
 }					t_player;
 
+typedef struct s_ray
+{
+	int				map_x;
+	int				map_y;
+	float			length_x;
+	float			length_y;
+	float			delta_length_x;
+	float			delta_length_y;
+	float			perp_wall_dist;
+	float			wall_dist;
+	int				step_x;
+	int				step_y;
+	int				side;
+	char			wall_side;
+}					t_ray;
+
 typedef struct s_parser_valid
 {
 	int				resolution;
@@ -107,7 +125,6 @@ typedef struct s_parser_valid
 	int				texture_so;
 	int				texture_we;
 	int				texture_ea;
-	int				texture_sp;
 }					t_parser_valid;
 
 typedef struct s_params
@@ -138,84 +155,96 @@ typedef struct s_base {
 	t_params	*params;
 	t_color		*colors;
 	t_data		*img;
+	t_data		*img_win;
 	t_data		*north;
 	t_data		*east;
 	t_data		*south;
 	t_data		*west;
-	t_data		*minime;
 	t_player	*player;
+	int			can_move;
 }		t_base;
 
 /*
 **	Errors
 */
-void				error_init(char *context);
-void				ft_exit(char *context);
+void			error_init(char *context);
+void			ft_exit(char *context);
 /*
 **	RayCasting
 */
-void	draw_ray(t_base *base);
 /*
 **	MLX and images
 */
-void    destroy_base(t_base *base, char *err);
-void	put_img(t_base *base);
-void	init_tiles(t_base *base);
-int		close_win(t_base *base);
-int		draw_line(t_base *base, int startX, int startY, int endX, int endY, int color);
-void	update(t_base *base);
+void			my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
+unsigned int	get_pixel(t_data *tile, int x, int y);
+void			destroy_base(t_base *base, char *err);
+void			put_img(t_base *base);
+void			init_tiles(t_base *base);
+int				close_win(t_base *base);
+int	draw_line(t_base *base, t_point start, t_point end, int color);
+void			update(t_base *base);
+void			raycaster(t_base *base);
 /*
 **	Moves
 */
-int		key_press(int keycode, t_base *base);
-int		key_release(int keycode, t_base *base);
-void	look_right(t_base *base);
-void	look_left(t_base *base);
-void	move_up(t_base *base);
-void	move_down(t_base *base);
-void	move_right(t_base *base);
-void	move_left(t_base *base);
-void	move_chased_step(t_base *base, char left_or_right);
+t_vector		rot_quarter(t_vector dir);
+t_vector		rot_rev(t_vector dir);
+int				key_press(int keycode, t_base *base);
+int				key_release(int keycode, t_base *base);
+void			look_right(t_base *base);
+void			look_left(t_base *base);
+void			move_up(t_base *base);
+void			move_down(t_base *base);
+void			move_right(t_base *base);
+void			move_left(t_base *base);
+void			move_chased_step(t_base *base, char lr);
+void			rotations(t_base *base, float angle);
+void			stay_in_two_pi(float *angle);
+int				check_wall(t_base *base, float x, float y);
+
 /*
 **	Initialisations and parsing
 */
-t_base				*init_base(t_params *params, t_map *map, t_player *player);
+t_base			*init_base(t_params *params, t_map *map, t_player *player);
 // initialise.c
-int					init_param(t_params *pa, int *fd);
-int					init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
+int				init_param(t_params *pa, int *fd);
+int				init_map(t_params *pa, t_map *map, t_player *pl, int *fd);
 // parse_parameters.c
-int					parse_root(char *av, t_params *params, t_map *map,
-						t_player *player);
-int					parse_res(t_params *params, char *line);
-int					parse_color(t_params *params, char *line, int *color);
-int					split_parse_text_path(t_params *params, char *line);
+int				parse_root(char *av, t_params *params, t_map *map,
+					t_player *player);
+int				parse_res(t_params *params, char *line);
+int				parse_color(t_params *params, char *line, int *color);
+int				split_parse_text_path(t_params *params, char *line);
 // parse_param_utils.c
-char				**check_number_param(size_t nb_par, char *line, char split);
-int					ft_str_is_digitspace(char *str);
+char			**check_number_param(size_t nb_par, char *line, char split);
+int				ft_str_is_digitspace(char *str);
 // parse_map.c
-char				**reallocmap(char **map, size_t map_size, size_t new_size);
-int					parse_map(t_map *map, t_player *player);
+char			**reallocmap(char **map, size_t map_size, size_t new_size);
+int				parse_map(t_map *map, t_player *player);
 // check_parameters.c
-int					check_params_integrity(t_params *params);
+int				check_params_integrity(t_params *params);
 // check_map.c
-int					map_ok_or_quit(t_map *map);
+int				map_ok_or_quit(t_map *map);
 // check_map_pivoted.c
-int					empty_pivoted_map(t_map *map, t_map *new);
-void				pi_by_two_pivote_map(t_map *map, t_map *new);
+int				empty_pivoted_map(t_map *map, t_map *new);
+void			pi_by_two_pivote_map(t_map *map, t_map *new);
 // check_map_utils.c
-int					check_char(t_map *map);
-int					hole_finder(t_map *map);
+int				check_char(t_map *map);
+int				hole_finder(t_map *map);
 
 /*
 **	Errors
 */
-void				print_error(int err_nb);
-void				ft_exit(char *context);
+void			handle_errs(int ac, char **av, t_params *params,
+					t_player *player, t_map *map);
+void			print_error(int err_nb);
+void			ft_exit(char *context);
 
 /*
 **	Clean quit
 */
-void				free_params(t_params *params);
-void				free_map(t_map *map);
-
+void			free_params(t_params *params);
+void			free_map(t_map *map);
+int				err_in_file(char **av, t_params *params,
+					t_player *player, t_map *map);
 #endif
