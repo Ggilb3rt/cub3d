@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/11 13:00:38 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:02:23 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	debug_print_params(t_params params)
 {
-	printf("\n\nREGLAGES INFORMATIONS\n*****\n");
+	printf("\n\nGAME INFORMATIONS\n*****\n");
 	printf("RESOLUTION : X:%d\tY:%d\n", params.res_x, params.res_y);
 	printf("CEILLING COLOR TAB : %d, %d, %d\n",
 		params.ceiling_color[0],

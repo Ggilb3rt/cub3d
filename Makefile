@@ -12,9 +12,9 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
 INCFLAGS = -I$I
 LDFLAGS = 
-LIBS		= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft -lm
+LIBS = -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft
 RM = /bin/rm -f
-MLX		= mlx/libmlx.a
+MLX	= mlx/libmlx.a
 
 .PHONY: all clean fclean re test leaks_test_err leaks_test_map
 
@@ -45,7 +45,8 @@ clean: cleanobj
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all
+re: fcleanall all
+
 
 fcleanlibft:
 	make fclean -C lib/libft/
@@ -84,10 +85,10 @@ test: all
 	@printf "\033[0;32m\n\n#TEST ERR FAKE XPM FILE\n\033[0m"
 	./$(NAME) assets/maps/err_fake_xpm.cub
 	@printf "\033[0;32m\n\nTEST OK big\n\033[0m"
-	./$(NAME) assets/maps/l.cub
+	./$(NAME) assets/maps/large.cub
 
 leaks_test_map: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/little.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/alone_in_space.cub
 
 leaks_test_err:
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"

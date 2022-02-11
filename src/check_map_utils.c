@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:38 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/11 11:03:45 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 16:10:20 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,13 @@ int	hole_finder(t_map *map)
 {
 	size_t	x;
 	size_t	y;
-	int		first_one;
 
 	x = -1;
 	y = 0;
 	while (++x < map->height)
 	{
-		first_one = 0;
 		while (map->map[x][y] != '\0')
 		{
-			if (first_but_hole(&first_one, map, &x, &y) != -1)
-				return (e_map_hole);
 			if (map->map[x][y] != '1')
 			{
 				if (open_or_not(map, &x, &y))

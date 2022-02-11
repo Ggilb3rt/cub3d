@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptroger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:36:31 by ptroger           #+#    #+#             */
-/*   Updated: 2022/02/10 11:36:32 by ptroger          ###   ########.fr       */
+/*   Updated: 2022/02/11 15:54:00 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	key_press(int keycode, t_base *base)
 	if (keycode == D)
 		base->player->going_right = 1;
 	update(base);
-	printf("player\tx : %f\ty : %f\tangle : %f\n",
-		base->player->pos_x, base->player->pos_y, base->player->angle);
 	return (0);
 }
 

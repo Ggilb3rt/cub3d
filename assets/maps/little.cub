@@ -1,11 +1,11 @@
 R            1000     800
 
 NO ./assets/textures/eagle.xpm
-SO ./assets/textures/greystone.xpm
+SO ./assets/textures/eagle.xpm
 
 C 137, 31, 30
 
-WE ./assets/textures/purplestone.xpm
+WE ./assets/textures/red.xpm
 F 107,31,30
 EA ./assets/textures/red.xpm
 
@@ -16,5 +16,5 @@ EA ./assets/textures/red.xpm
 1
 1
 1
-1
+ 1
 1

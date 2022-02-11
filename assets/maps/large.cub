@@ -6,9 +6,9 @@ NO ./assets/textures/space_closet.xpm
 C 122,   135,  159
 
 
-WE ./assets/textures/space_win.xpm
+EA ./assets/textures/space_win.xpm
 F 64,73,89
-EA ./assets/textures/space_cmd.xpm
+WE ./assets/textures/space_cmd.xpm
 
         11111          11111
     111111111       1111111111111
@@ -18,7 +18,7 @@ EA ./assets/textures/space_cmd.xpm
         10000111111111001111011111
         10E0000000000000000000001
         1001111001110000111100001
-        1001000000000000100100001
+        10010000000000001  100001
 111111111011000001110000111100001
 1000000000110000011101111111111111
 11110111111111011100000010001   1

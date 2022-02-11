@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 12:05:00 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/10 12:05:17 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 14:58:29 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ char	get_wall_orientation(t_base *base, t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (base->player->pos_x > ray->map_x)
-			return ('E');
-		else
 			return ('W');
+		else
+			return ('E');
 	}
 	else
 	{
 		if (base->player->pos_y > ray->map_y)
-			return ('S');
-		else
 			return ('N');
+		else
+			return ('S');
 	}
 }
 
