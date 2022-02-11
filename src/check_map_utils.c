@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 18:32:38 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/03 18:32:58 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:03:45 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	open_or_not(t_map *map, size_t *x, size_t *y)
 	{
 		while (map->map[*x][*y] != '\0' && map->map[*x][*y] != ' '
 				&& map->map[*x][*y] != '1')
-					*y += 1;
+			*y += 1;
 		if (map->map[*x][*y] == '1')
 			return (0);
 		if (map->map[*x][*y] == ' ' || map->map[*x][*y] == '\0')

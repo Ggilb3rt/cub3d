@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/10 14:00:53 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:16:40 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,37 +188,37 @@ void			ft_exit(char *context);
 /*
 **	RayCasting
 */
-void				draw_ray(t_base *base);
+void			draw_ray(t_base *base);
 /*
 **	MLX and images
 */
-void				my_mlx_pixel_put(t_data *img, int x, int y,
-						unsigned int color);
-unsigned int		get_pixel(t_data *tile, int x, int y);
-void				destroy_base(t_base *base, char *err);
-void				put_img(t_base *base);
-void				init_tiles(t_base *base);
-int					close_win(t_base *base);
-int					draw_line(t_base *base, t_point start, t_point end, int color);
-void				update(t_base *base);
+void			my_mlx_pixel_put(t_data *img, int x, int y,
+					unsigned int color);
+unsigned int	get_pixel(t_data *tile, int x, int y);
+void			destroy_base(t_base *base, char *err);
+void			put_img(t_base *base);
+void			init_tiles(t_base *base);
+int				close_win(t_base *base);
+int				draw_line(t_base *base, t_point start, t_point end, int color);
+void			update(t_base *base);
 
 /*
 **	Moves
 */
-t_vector			rot_quarter(t_vector dir);
-t_vector			rot_rev(t_vector dir);
-int					check_wall(t_base *base, float x, float y);
-void				stay_in_two_pi(float *angle);
-int					key_press(int keycode, t_base *base);
-int					key_release(int keycode, t_base *base);
-void				look_right(t_base *base);
-void				look_left(t_base *base);
-void				move_up(t_base *base);
-void				move_down(t_base *base);
-void				move_right(t_base *base);
-void				move_left(t_base *base);
-void				move_chased_step(t_base *base, char lr);
-void				rotations(t_base *base, float angle);
+t_vector		rot_quarter(t_vector dir);
+t_vector		rot_rev(t_vector dir);
+int				check_wall(t_base *base, float x, float y);
+void			stay_in_two_pi(float *angle);
+int				key_press(int keycode, t_base *base);
+int				key_release(int keycode, t_base *base);
+void			look_right(t_base *base);
+void			look_left(t_base *base);
+void			move_up(t_base *base);
+void			move_down(t_base *base);
+void			move_right(t_base *base);
+void			move_left(t_base *base);
+void			move_chased_step(t_base *base, char lr);
+void			rotations(t_base *base, float angle);
 
 /*
 **	Initialisations and parsing
@@ -253,11 +253,11 @@ int				hole_finder(t_map *map);
 /*
 **	Raycaster
 */
-void				init_ray(t_base *base, t_ray *ray, float camera_x);
-void				find_closest_wall(t_base *base, t_ray *ray);
-t_data				*find_texture_side(t_base *base, t_ray *ray);
-void				set_texture_pos(t_ray *ray, t_ray_screen *line, int res_y);
-void				raycaster(t_base *base);
+void			init_ray(t_base *base, t_ray *ray, float camera_x);
+void			find_closest_wall(t_base *base, t_ray *ray);
+t_data			*find_texture_side(t_base *base, t_ray *ray);
+void			set_texture_pos(t_ray *ray, t_ray_screen *line, int res_y);
+void			raycaster(t_base *base);
 
 /*
 **	Errors

@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 13:34:12 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/09 18:20:00 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:12:02 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ void	destroy_mlx(void *mlx)
 	free(mlx);
 }
 
+void	destroy_textures(t_base *base, char *err)
+{
+	if (base->north != 0)
+		destroy_image(base->mlx, base->north, err);
+	if (base->south != 0)
+		destroy_image(base->mlx, base->south, err);
+	if (base->east != 0)
+		destroy_image(base->mlx, base->east, err);
+	if (base->west != 0)
+		destroy_image(base->mlx, base->west, err);
+}
+
 void	destroy_base(t_base *base, char *err)
 {
 	free_params(base->params);
@@ -41,14 +53,7 @@ void	destroy_base(t_base *base, char *err)
 			free_map(base->map);
 		else
 			free_map_rotated(base->map);
-		if (base->north != 0)
-			destroy_image(base->mlx, base->north, err);
-		if (base->south != 0)
-			destroy_image(base->mlx, base->south, err);
-		if (base->east != 0)
-			destroy_image(base->mlx, base->east, err);
-		if (base->west != 0)
-			destroy_image(base->mlx, base->west, err);
+		destroy_textures(base, err);
 		if (base->img != 0)
 			destroy_image(base->mlx, base->img, err);
 		if (base->win != 0)
