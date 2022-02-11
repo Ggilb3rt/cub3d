@@ -8,23 +8,24 @@ Makefile have some troubles with 'make re'
 - Change GNL
 - put fanncy textures
 - conditionnal jump problem with the pivoted map when check holes
+- si fichier enregistre avec vi ou nano ==> devient inutilisable... WTF ?! **==> vi et nano ajoutent un \n a la fin du fichier, message d'erreur normal si on considere que la map doit est strictement la derniere chose du fichier**
 ## List of errors
-- Bad number of arguments OK
+- Bad number of arguments
 - check open directory
-- Not a .cub file OK
-- Can't find file OK
-- Invalid parameters OK
-- same paramater define multiples times (works with floor, textures, res) OK
-- Invalid map OK
-- Texture path without extention OK
-- Malloc err OK
+- Not a .cub file
+- Can't find file
+- Invalid parameters
+- same paramater define multiples times (works with floor, textures, res)
+- Invalid map
+- Texture path without extention
+- Malloc err
 - verifier que les paths pointent vers de vrais fichiers .xpm
 - if .xpm name but not xpm file
 - quit when no player
 - av[1] is a directory
 ## Cleaning
-- remove all exit() (exception in main because no malloc)
 - find why some still reachable leaks in init_param() and init_map() ==> GNL when quit before EOF
+- no leaks
 ## Engine
 - use two images to avoid blink when many moves
 ### Player
@@ -42,10 +43,8 @@ Makefile have some troubles with 'make re'
 # To do
 - integrer libft sans submodules
 - probleme libft relink
-- encore N-S inverse.....
 ## Errors parsing
 - find new errors to check
 
 # Doing
-- si fichier enregistre avec vi ou nano ==> devient inutilisable... WTF ?! **==> vi et nano ajoutent un \n a la fin du fichier, peut se defendre si on considere que la map doit est strictement la derniere chose du fichier**
 

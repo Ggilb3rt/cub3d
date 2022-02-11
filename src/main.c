@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/10 14:58:41 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:00:38 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	main(int ac, char **av)
 	t_map			map;
 
 	set_zero(&params, &player, &map);
-	handle_errs(ac, av, &params, &player, &map);
+	if (ac == 2)
+		handle_errs(av, &params, &player, &map);
+	else
+		ft_exit("Bad number of arguments\n");
 	debug_print_params(params);
 	debug_print_map(map, player);
 	base = init_base(&params, &map, &player);

@@ -76,7 +76,9 @@ test: all
 	@printf "\033[0;32m\n\n#TEST ERR MAP MULTI PLAYERS\n\033[0m"
 	./$(NAME) assets/maps/err_map_multi_players.cub
 	@printf "\033[0;32m\n\n#TEST ERR MAP HOLE\n\033[0m"
-	./$(NAME) assets/maps/err_map.cub
+	./$(NAME) assets/maps/err_map_hole_horizon.cub
+	@printf "\033[0;32m\n\n#TEST ERR MAP HOLE\n\033[0m"
+	./$(NAME) assets/maps/err_map_hole_vertical.cub
 	@printf "\033[0;32m\n\n#TEST ERR MAP NO PLAYER\n\033[0m"
 	./$(NAME) assets/maps/err_map_no_player.cub
 	@printf "\033[0;32m\n\n#TEST ERR FAKE XPM FILE\n\033[0m"
@@ -95,7 +97,9 @@ leaks_test_err:
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_multi_players.cub
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_hole_horizon.cub
+	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_map_hole_vertical.cub
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) assets/maps/err_multi_param.cub
 	@printf "\033[0;32m\n\n#EARLY QUIT\n\033[0m"

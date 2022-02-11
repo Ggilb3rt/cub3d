@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_base.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptroger <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:37:20 by ptroger           #+#    #+#             */
-/*   Updated: 2022/02/10 11:37:21 by ptroger          ###   ########.fr       */
+/*   Updated: 2022/02/11 13:05:25 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	get_initial_camera(t_base *base)
 {
-	if (base->player->orientation == 'S')
+	if (base->player->orientation == 'N')
 	{
 		base->player->cam_v.x = 0.66;
 		base->player->cam_v.y = 0;
 	}
-	else if (base->player->orientation == 'N')
+	else if (base->player->orientation == 'S')
 	{
 		base->player->cam_v.x = -0.66;
 		base->player->cam_v.y = 0;
@@ -38,12 +38,12 @@ void	get_initial_camera(t_base *base)
 
 void	get_initial_direction(t_base *base)
 {
-	if (base->player->orientation == 'S')
+	if (base->player->orientation == 'N')
 	{
 		base->player->dir_v.x = 0;
 		base->player->dir_v.y = -1;
 	}
-	else if (base->player->orientation == 'N')
+	else if (base->player->orientation == 'S')
 	{
 		base->player->dir_v.x = 0;
 		base->player->dir_v.y = 1;

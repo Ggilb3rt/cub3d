@@ -1,0 +1,22 @@
+R 1000           800
+
+NO ./assets/textures/space_closet.xpm
+SO ./assets/textures/space_closet.xpm
+
+C 225,   30,   0
+
+
+WE ./assets/textures/space_closet.xpm
+F 220,100,0
+EA ./assets/textures/space_closet.xpm
+
+    1111111111
+    100000011
+    11111001
+        1001
+        1000111111111111111111111
+        10N0000000110000000000001
+        0011000001110000111100001
+        10010000000000001  1000001
+111111111011000001110000111100001
+111111111111111111111111111111111

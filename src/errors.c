@@ -6,13 +6,13 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 18:41:23 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/10 11:10:55 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:00:11 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	handle_errs(int ac, char **av, t_params *params,
+void	handle_errs(char **av, t_params *params,
 	t_player *player, t_map *map)
 {
 	if (MOVE_SPEED > 1)
@@ -20,13 +20,8 @@ void	handle_errs(int ac, char **av, t_params *params,
 		printf("Cannot go too fast\n");
 		exit(1);
 	}
-	if (ac == 2)
-	{
-		if (err_in_file(av, params, player, map))
-			exit(0);
-	}
-	else
-		ft_exit("Bad number of arguments\n");
+	if (err_in_file(av, params, player, map))
+		exit(0);
 }
 
 char	**init_tab_err(void)

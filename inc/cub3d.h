@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:35 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/11 11:16:40 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:00:25 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ void			raycaster(t_base *base);
 /*
 **	Errors
 */
-void			handle_errs(int ac, char **av, t_params *params,
+void			handle_errs(char **av, t_params *params,
 					t_player *player, t_map *map);
 void			print_error(int err_nb);
 void			ft_exit(char *context);
