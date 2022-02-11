@@ -9,7 +9,7 @@ include sources.mk
 OBJ = $(SRC:$S%.c=$O%.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 INCFLAGS = -I$I
 LDFLAGS = 
 LIBS = -L ./mlx -lmlx -lXext -lX11 -lm -lbsd -L./lib/libft -lft
