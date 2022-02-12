@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 17:04:52 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/10 18:30:27 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:01:51 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	free_params(t_params *params)
 {
-	if (params->unique.texture_ea == 1)
+	if (params->path_texture_ea)
 		free(params->path_texture_ea);
-	if (params->unique.texture_we)
+	if (params->path_texture_we)
 		free(params->path_texture_we);
-	if (params->unique.texture_so)
+	if (params->path_texture_so)
 		free(params->path_texture_so);
-	if (params->unique.texture_no)
+	if (params->path_texture_no)
 		free(params->path_texture_no);
 }
 
