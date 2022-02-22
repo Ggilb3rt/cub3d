@@ -6,7 +6,7 @@
 /*   By: ggilbert <ggilbert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:29 by ggilbert          #+#    #+#             */
-/*   Updated: 2022/02/12 15:03:45 by ggilbert         ###   ########.fr       */
+/*   Updated: 2022/02/22 10:51:32 by ggilbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	set_zero(t_params *params, t_player *player, t_map *map)
 	params->unique.texture_so = 0;
 	params->unique.texture_ea = 0;
 	params->unique.texture_we = 0;
-	params->path_texture_ea == NULL;
-	params->path_texture_no == NULL;
-	params->path_texture_so == NULL;
-	params->path_texture_we == NULL;
+	params->path_texture_ea = NULL;
+	params->path_texture_no = NULL;
+	params->path_texture_so = NULL;
+	params->path_texture_we = NULL;
 	player->orientation = '0';
 	map->height = 0;
 	map->width = 0;
